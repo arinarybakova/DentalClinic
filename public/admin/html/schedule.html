@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" >
+    <title>DentalClinic</title>
+
+    <!--font awesome cdn link-->
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!--custom css file link-->
+   <link rel = "stylesheet" href = "../assets/css/style.css">
+</head>
+<body>
+        <input type ="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class = "sidebar-brand">
+                <h2><span class="fas fa-tooth"></span> <span>DentalClinic</span></h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="index.html"><span class = "fas fa-home"></span>
+                            <span>Pagrindinis</span></a>
+                    </li>
+
+                    <li>
+                        <a href="patients.html"><span class = "fas fa-users"></span>
+                            <span>Pacientai</span></a>
+                    </li>
+
+                    <li>
+                        <a href="doctors.html"><span class = "fas fa-user-md"></span>
+                            <span>Daktarai</span></a>
+                    </li>
+
+                    <li>
+                        <a href="appointments.html" ><span class = "fas fa-calendar-check"></span>
+                            <span>Vizitai</span></a>
+                    </li>
+
+                    <li>
+                        <a href="schedule.html"class="active"><span class = "fas fa-calendar-alt"></span>
+                            <span>Tvarkaraštis</span></a>
+                    </li>
+
+                    <li>
+                        <a href="procedures.html"><span class = "fas fa-hand-holding-medical"></span>
+                            <span>Procedūros</span></a>
+                    </li>
+
+                    <li>
+                        <a href="currentuser.html"><span class = "fas fa-user-cog"></span>
+                            <span>Paskyra</span></a>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+        <div class="main-content">
+            <header>
+                <h2>
+                    <label for="nav-toggle">
+                        <span class = "fas fa-bars"></span>
+                    </label>
+
+                    Tvarkaraštis
+                </h2>
+
+
+                <div class ="user-wrapper">
+                    <img src="../assets/images/image.jpg" width="35px" height="40px" alt="">
+                        <div>
+                            <h4> Agne Jonaitiene</h4>
+                            <small>Administratorius</small>
+                        </div>
+                </div>
+            </header>
+            <main>
+                <input type="date" id='date'/>
+                <input type="time" id='starttime'/>
+                <input type="time" id='endtime'/>
+                <button>Add</button>
+                <div class="calendar-container">
+                    <div class = "headerschedule">
+                        <ul class = "weekdays">
+                            <li>Sekmadienis</li>
+                            <li>Pirmadienis</li>
+                            <li>Antradienis</li>
+                            <li>Trečiadienis</li>
+                            <li>Ketvirtadienis</li>
+                            <li>Penktadienis</li>
+                            <li>Šeštadienis</li>
+                        </ul>
+                        <ul class="daynumbers">
+                            <li>20</li>
+                            <li>21</li>
+                            <li>22</li>
+                            <li>23</li>
+                            <li>24</li>
+                            <li>25</li>
+                            <li>26</li>
+                        </ul>
+                    </div>
+
+                    <div class = "timeslots-container">
+                        <ul class = "timeslots">
+                            <li>9<sup>00</sup></li>
+                            <li>10<sup>00</sup></li>
+                            <li>11<sup>00</sup></li>
+                            <li>12<sup>00</sup></li>
+                            <li>13<sup>00</sup></li>
+                            <li>14<sup>00</sup></li>
+                            <li>15<sup>00</sup></li>
+                            <li>16<sup>00</sup></li>
+                            <li>17<sup>00</sup></li>
+                            <li>18<sup>00</sup></li>
+                        </ul>
+                    </div>
+                    <div class="event-container">
+                       <!-- <div class="slot slot-1">
+                            <div class ="event-status"></div>
+                            <span>Event A</span>
+                        </div>-->
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- custom js file link-->
+<script src = "../assets/js/script.js"></script>
+</body>
+</html>

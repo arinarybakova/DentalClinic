@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" >
+    <title>DentalClinic</title>
+
+    <!--font awesome cdn link-->
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!--custom css file link-->
+   <link rel = "stylesheet" href = "../assets/css/style.css">
+</head>
+<body>
+        <input type ="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class = "sidebar-brand">
+                <h2><span class="fas fa-tooth"></span> <span>DentalClinic</span></h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li>   
+                         <a href="index.html"><span class = "fas fa-home"></span>
+                            <span>Pagrindinis</span></a>
+                    </li>
+
+                    <li>
+                        <a href="patients.html" class="active"><span class = "fas fa-users"></span>
+                             <span>Pacientai</span></a>
+                    </li>
+
+                    <li>
+                        <a href="doctors.html"><span class = "fas fa-user-md"></span>
+                            <span>Daktarai</span></a>
+                    </li>
+
+                    <li>
+                        <a href="appointments.html"><span class = "fas fa-calendar-check"></span>
+                            <span>Vizitai</span></a>
+                    </li>
+
+                    <li>
+                        <a href="schedule.html"><span class = "fas fa-calendar-alt"></span>
+                            <span>Tvarkaraštis</span></a>
+                    </li>
+
+                    <li>
+                        <a href="procedures.html"><span class = "fas fa-hand-holding-medical"></span>
+                            <span>Procedūros</span></a>
+                    </li>
+                    <li>
+                        <a href="currentuser.html"><span class = "fas fa-user-cog"></span>
+                            <span>Paskyra</span></a>
+                    </li>
+                </ul> 
+            </div>
+        </div>
+        <div class="main-content">
+            <header>
+                <h2>
+                    <label for="nav-toggle">
+                        <span class = "fas fa-bars"></span>
+                    </label>
+    
+                    Pacientai
+                </h2>
+                <div class ="user-wrapper">
+                    <img src="../assets/images/image.jpg" width="35px" height="40px" alt="">
+                        <div>
+                            <h4> Agne Jonaitiene</h4>
+                            <small>Administratorius</small>
+                        </div>
+                </div>
+            </header>
+            <main>
+                    <div class="search">
+                        <form class="search-form">
+                            <input type="text" placeholder="Įveskite paieškos raktažodį">
+                            <input type="submit" value="Ieškoti">
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                        <table class ="ptable" width = "100%">
+                            <thead>
+                                    <td> ID </td>
+                                    <td> Pacientas</a> </td>
+                                    <td> El.paštas </td>
+                                    <td> Tel. nr. </td>
+                                    <td> Vizitai </td>
+                                    <td> Registracijos data </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>P01</td>
+                                    <td><a href="patientview.html"> Petras Petraitis</td>
+                                    <td>petraspetraitis@gmail.com</td>
+                                    <td>+37067944563</td>
+                                    <td>0</td>
+                                    <td>YY-MM-DD</td>
+                                </tr> 
+                                <tr>
+                                    <td>P02</td>
+                                    <td>Petras Petraitis</td>
+                                    <td>petraspetraitis@gmail.com</td>
+                                    <td>+37067944563</td>
+                                    <td>0</td>
+                                    <td>YY-MM-DD</td>
+                                </tr>
+                                <tr>
+                                    <td>P03</td>
+                                    <td>Petras Petraitis</td>
+                                    <td>petraspetraitis@gmail.com</td>
+                                    <td>+37067944563</td>
+                                    <td>0</td>
+                                    <td>YY-MM-DD</td>
+                                </tr>
+                                <tr>
+                                    <td>P04</td>
+                                    <td>Petras Petraitis</td>
+                                    <td>petraspetraitis@gmail.com</td>
+                                    <td>+37067944563</td>
+                                    <td>0</td>
+                                    <td>YY-MM-DD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                </div>
+                </main>
+    </div>
+
+
+<!-- custom js file link-->
+<script src = "../assets/js/script.js"></script>
+</body>
+</html>
