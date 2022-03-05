@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('procedure', App\Http\Controllers\ProcedureController::class)->only(['index', 'store', 'update', 'show', 'destroy']);
+Route::resource('procedure', App\Http\Controllers\Admin\ProcedureController::class)->only(['index', 'store', 'update', 'show', 'destroy']);
