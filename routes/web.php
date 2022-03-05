@@ -27,9 +27,13 @@ Route::post('post-register', [AuthController::class, 'postRegister'])->name('reg
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::group(['middleware' => 'is.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
     Route::get('/procedure', [ProcedureController::class, 'index'])->name('admin.procedure');
+});
+
+Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'api'], function () {
+    Route::get('/procedures', [ProcedureController::class, 'procedures'])->name('api.admin.procedures');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);

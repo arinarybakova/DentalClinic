@@ -31,6 +31,11 @@ class ProcedureController extends Controller
         //
     }
 
+    public function procedures() {
+        $procedures = Procedure::all()->toArray();
+        return array_reverse($procedures);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
