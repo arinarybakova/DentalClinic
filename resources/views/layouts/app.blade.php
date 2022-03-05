@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!--custom css file link-->
-    <link rel="stylesheet" href="{{ mix('css/user.css') }}">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <a href="https://storyset.com/people">People illustrations by Storyset</a>
 
     <!-- Styles -->
