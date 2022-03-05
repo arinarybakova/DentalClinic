@@ -12,7 +12,7 @@
     <!--custom css file link-->
     <link rel = "stylesheet" href = "{{ asset('assets/css/admin_style.css') }}">
     
-    <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body>
         <input type ="checkbox" id="nav-toggle">
