@@ -3,6 +3,8 @@
 @section('title', 'Procedures')
 
 @section('content')
+
+    <procedure-table></procedure-table>
 <div class="search">
     <form class="search-form">
         <input type="text" placeholder="Įveskite paieškos raktažodį">

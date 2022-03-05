@@ -45,6 +45,10 @@
     margin-top: 1rem;
 }
 
+.sidebar-menu ul {
+    padding-left: 0;
+}
+
 .sidebar-menu li {
     width: 100%;
     margin-bottom: 1.5rem;
@@ -56,6 +60,11 @@
     display: block;
     color: #fff;
     font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.sidebar-menu a:hover, .sidebar-menu a:focus, .sidebar-menu a:active {
+    color: #eee;
 }
 
 .sidebar-menu a span:first-child {

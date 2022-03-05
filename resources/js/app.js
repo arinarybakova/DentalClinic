@@ -14,6 +14,18 @@ import App from './components/App.vue';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
+import Vue from 'vue'
+import { BootstrapVue } from 'bootstrap-vue'
+
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+
+Vue.use(VueAxios, axios);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -26,6 +38,8 @@ import axios from 'axios';
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('procedure-table', require('./components/admin/procedure/Table.vue').default);
+
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));
 /**
