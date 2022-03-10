@@ -31,9 +31,18 @@ class ProcedureController extends Controller
         //
     }
 
-    public function procedures() {
-        $procedures = Procedure::all()->toArray();
-        return array_reverse($procedures);
+    public function procedures(Request $request) {
+        if($request->get('page') !== null) {
+            $limit = $request->get('limit') ?? 10;
+            $pagination = Procedure::orderBy('title')->paginate($limit)->toArray();
+            $procedures = $pagination['data'];
+            $total_pages = $pagination['to'];
+            $total = $pagination['total'];
+        } else {
+            $procedures = [];
+            $total = 0;
+        }
+        return ['procedures' => $procedures, 'total' => $total];
     }
 
     /**

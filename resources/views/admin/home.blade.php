@@ -43,7 +43,7 @@
                     Vizitų registracija
                 </h3>
 
-                <button> <a href="appointments.html"> Pamatyti visus <span class="fas fa-chevron-right"></span></a></button>
+                <button> <a class="text-reset text-decoration-none" href="appointments.html"> Pamatyti visus <span class="fas fa-chevron-right"></span></a></button>
 
             </div>
             <div class="card-body">
@@ -96,7 +96,7 @@
         <div class="card">
             <div class="card-header">
                 <h3> Nauji pacientai </h3>
-                <button> <a href="patients.html">Pamatyti visus <span class="fas fa-chevron-right"></span></a></button>
+                <button> <a class="text-reset text-decoration-none" href="patients.html">Pamatyti visus <span class="fas fa-chevron-right"></span></a></button>
             </div>
             <div class="card-body">
                 <div class="patient">

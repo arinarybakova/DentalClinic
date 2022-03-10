@@ -2,6 +2,7 @@
 
 :root{
     --main-color: #2fbab8;
+    --main-color25: #2fbab825;
     --color-dark: #1D2231;
     --text-grey: #8390A2;
     --button-hover: #048f8e;
@@ -382,7 +383,7 @@ td .status {
     }
 
 }
-.ptable {
+.ptable, .b-table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -390,7 +391,10 @@ td .status {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-.ptable thead tr {
+.b-table tbody {
+    border-top: none !important;
+}
+.ptable thead tr, .b-table thead tr {
 
     background-color: var(--main-color);
     color: #ffffff;
@@ -401,11 +405,16 @@ a { color: inherit; }
 
   .search
   {
+      display: flex;
       border: 1px solid var(--main-color);
       overflow: auto;
       border-radius: 6px;
       -moz-border-radius: 6px;
       -webkit-border-radius: 6px;
+      background: #fff;
+  }
+  .search:focus-within {
+    box-shadow:0 0 0 .15rem var(--main-color25);
   }
   
   .search input[type="text"]
@@ -417,17 +426,18 @@ a { color: inherit; }
   
   .search input[type="text"]:focus
   {
+      box-shadow: none;
       outline: 0;
   }
   
-  .search input[type="submit"]
+  .search input[type="submit"], .btn.btn-secondary
   {
       border: 0px;
       background: none;
       background-color: var(--main-color);
       color: #fff;
       float: right;
-      padding: 11px;
+      padding: 11px 36px;
       border-top-right-radius: 5px;
       border-top-left-radius: 5px;
       -moz-border-radius-top-right: 5px;
@@ -438,15 +448,12 @@ a { color: inherit; }
       -webkit-border-radius-bottom-right: 5px;
           cursor:pointer;
   }
-  .search input[type="submit"]:hover{
+  .search input[type="submit"]:hover, .btn.btn-secondary:hover, .card-header button:hover, 
+  .search input[type="submit"]:focus, .btn.btn-secondary:focus, .card-header button:focus,
+  .search input[type="submit"]:active, .btn.btn-secondary:active, .card-header button:active {
     background-color: var(--button-hover);
     border: 0px solid var(--button-hover);
   }
-  
-.card-header button:hover {
-    background-color: var(--button-hover);
-    border: 0px solid var(--button-hover);
-}
 
 .calendar-container {
     display: grid;
