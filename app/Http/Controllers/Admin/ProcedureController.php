@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Procedure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
@@ -34,7 +35,14 @@ class ProcedureController extends Controller
     public function procedures(Request $request) {
         if($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            $pagination = Procedure::orderBy('title')->paginate($limit)->toArray();
+            if($request->get('filter') !== null) {
+                $procedures = Procedure::where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                ->orWhere('details', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                ->orderBy('title');
+            } else {
+                $procedures = Procedure::orderBy('title');
+            }
+            $pagination = $procedures->paginate($limit)->toArray();
             $procedures = $pagination['data'];
             $total_pages = $pagination['to'];
             $total = $pagination['total'];
