@@ -9,7 +9,11 @@
     </div>
     <div v-if="v$.filter.$error" class="text-danger mt-1">Prašome įvesti paieškos raktažodį</div>
 
-    <b-table hover :items="items" :fields="fields" :perPage="0"></b-table>
+    <b-table hover :items="items" :fields="fields" :perPage="0">
+      <template #cell(id)="data">
+        <b>{{ getPatientId(data.value) }}</b>
+      </template>
+    </b-table>
     <b-pagination
       :total-rows="totalRows"
       :per-page="perPage"
@@ -88,6 +92,9 @@ export default {
         this.fetchProcedures();
       }
     },
+    getPatientId(value) {
+      return "P" + value.toString().padStart(3, '0');
+    }
   },
   watch: {
     currentPage: {
