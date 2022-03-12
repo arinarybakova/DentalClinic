@@ -1,4 +1,4 @@
-<header>
+<header id="main-header">
     <h2>
         <label for="nav-toggle">
             <span class="fas fa-bars"></span>
