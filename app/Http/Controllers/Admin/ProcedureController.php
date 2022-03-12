@@ -17,9 +17,9 @@ class ProcedureController extends Controller
      */
     public function index()
     {
-    //    $procedures = Procedure::all();
-    //    return response()->json($procedures);
-    return view("admin.procedure");
+        //    $procedures = Procedure::all();
+        //    return response()->json($procedures);
+        return view("admin.procedure");
     }
 
     /**
@@ -32,13 +32,14 @@ class ProcedureController extends Controller
         //
     }
 
-    public function procedures(Request $request) {
-        if($request->get('page') !== null) {
+    public function procedures(Request $request)
+    {
+        if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            if($request->get('filter') !== null) {
+            if ($request->get('filter') !== null) {
                 $procedures = Procedure::where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                ->orWhere('details', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                ->orderBy('title');
+                    ->orWhere('details', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orderBy('title');
             } else {
                 $procedures = Procedure::orderBy('title');
             }
@@ -61,9 +62,17 @@ class ProcedureController extends Controller
      */
     public function store(Request $request)
     {
-        $procedure = Procedure::create($request->post());
+        try {
+            $procedure = Procedure::create($request->post());
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'procedure' => []
+            ]);
+        }
         return response()->json([
-            'procedure'=>$procedure
+            'success'   => true,
+            'procedure' => $procedure
         ]);
     }
 
@@ -96,11 +105,20 @@ class ProcedureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Procedure $procedure)
+    public function update(int $id, Request $request)
     {
-        $procedure->fill($request->post())->save();
+        try {
+            $procedure = Procedure::find($id);
+            $procedure->fill($request->post())->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'procedure' => []
+            ]);
+        }
         return response()->json([
-            'procedure'=>$procedure
+            'success'   => true,
+            'procedure' => $procedure
         ]);
     }
 
