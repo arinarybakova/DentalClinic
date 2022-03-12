@@ -45,6 +45,7 @@ Vue.use(VueAxios, axios);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('procedure-table', require('./components/admin/procedure/Table.vue').default);
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
+Vue.component('toast', require('./components/ui/Toast.vue').default);
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));
