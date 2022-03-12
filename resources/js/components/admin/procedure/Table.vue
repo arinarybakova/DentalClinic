@@ -1,5 +1,12 @@
 <template>
   <div class="card-body">
+    <add-procedure @procedureAdded="procedureAdded"></add-procedure>
+    <toast
+      type="success"
+      :msg="success.message"
+      :show="success.show"
+      @toastClosed="success.show = false"
+    ></toast>
     <div class="search">
       <b-form-input
         v-model="filter"
@@ -7,7 +14,9 @@
       ></b-form-input>
       <b-button v-on:click="filterTable()">Ieškoti</b-button>
     </div>
-    <div v-if="v$.filter.$error" class="text-danger mt-1">Prašome įvesti paieškos raktažodį</div>
+    <div v-if="v$.filter.$error" class="text-danger mt-1">
+      Prašome įvesti paieškos raktažodį
+    </div>
 
     <b-table hover :items="items" :fields="fields" :perPage="0">
       <template #cell(id)="data">
@@ -22,14 +31,14 @@
   </div>
 </template>
 <script>
-import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 
 export default {
-  setup () {
+  setup() {
     return {
-      v$: useVuelidate()
-    }
+      v$: useVuelidate(),
+    };
   },
   data() {
     return {
@@ -37,6 +46,10 @@ export default {
       perPage: 10,
       totalRows: 1,
       filter: "",
+      success: {
+        message: "",
+        show: false,
+      },
       fields: [
         {
           key: "id",
@@ -62,10 +75,10 @@ export default {
       items: [],
     };
   },
-  validations () {
+  validations() {
     return {
-      filter: { required }
-    }
+      filter: { required },
+    };
   },
   created() {
     this.fetchProcedures();
@@ -76,10 +89,9 @@ export default {
         page: this.currentPage,
         limit: this.perPage,
       };
-      if(this.filter !== "") {
-        requestParams = Object.assign(requestParams, {filter: this.filter});
+      if (this.filter !== "") {
+        requestParams = Object.assign(requestParams, { filter: this.filter });
       }
-      console.log(requestParams);
       this.axios
         .get("/api/procedures", { params: requestParams })
         .then((response) => {
@@ -93,15 +105,20 @@ export default {
       }
     },
     getPatientId(value) {
-      return "P" + value.toString().padStart(3, '0');
-    }
+      return "P" + value.toString().padStart(3, "0");
+    },
+    procedureAdded(procedure) {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message = 'Procedūra "' + procedure.title + '" sėkmingai pridėta';
+      this.success.show = true;
+      this.fetchProcedures();
+    },
   },
   watch: {
     currentPage: {
       handler: function (value) {
-        this.fetchProcedures().catch((error) => {
-          console.error(error);
-        });
+        this.fetchProcedures();
       },
     },
   },

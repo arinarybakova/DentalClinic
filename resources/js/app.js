@@ -8,8 +8,6 @@ require('./bootstrap');
 import vue from 'vue'
 window.Vue = vue;
 
-import App from './components/App.vue';
-
 // imports
 import VueAxios from 'vue-axios';
 import axios from 'axios';
@@ -44,6 +42,9 @@ Vue.use(VueAxios, axios);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('procedure-table', require('./components/admin/procedure/Table.vue').default);
+Vue.component('procedure-form', require('./components/admin/procedure/Form.vue').default);
+Vue.component('add-procedure', require('./components/admin/procedure/Create.vue').default);
+
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);
 
@@ -56,5 +57,5 @@ Vue.component('toast', require('./components/ui/Toast.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });
