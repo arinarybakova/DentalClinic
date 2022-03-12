@@ -1,6 +1,7 @@
 <template>
   <div class="card-body">
     <add-procedure @procedureAdded="procedureAdded"></add-procedure>
+    <edit-procedure @procedureUpdated="procedureUpdated" :procedure="selectedProcedure"></edit-procedure>
     <toast
       type="success"
       :msg="success.message"
@@ -21,6 +22,9 @@
     <b-table hover :items="items" :fields="fields" :perPage="0">
       <template #cell(id)="data">
         <b>{{ getPatientId(data.value) }}</b>
+      </template>
+      <template #cell(actions)="data">
+        <b-button v-on:click="updateProcedure(data.item)" variant="outline-info" size="sm" v-b-tooltip.hover title="Redaguoti procedūrą"><i class="fas fa-pencil-alt"></i></b-button>
       </template>
     </b-table>
     <b-pagination
@@ -50,6 +54,12 @@ export default {
         message: "",
         show: false,
       },
+      selectedProcedure: {
+        id: "",
+        title: "",
+        price: "",
+        details: "",
+      },
       fields: [
         {
           key: "id",
@@ -69,6 +79,11 @@ export default {
         {
           key: "details",
           label: "Aprašymas",
+          sortable: false,
+        },
+        {
+          key: "actions",
+          label: "",
           sortable: false,
         },
       ],
@@ -110,10 +125,23 @@ export default {
     procedureAdded(procedure) {
       this.filter = "";
       this.currentPage = 1;
-      this.success.message = 'Procedūra "' + procedure.title + '" sėkmingai pridėta';
+      this.success.message =
+        'Procedūra "' + procedure.title + '" sėkmingai pridėta';
       this.success.show = true;
       this.fetchProcedures();
     },
+    updateProcedure(procedure) {
+      this.selectedProcedure = procedure;
+      this.$bvModal.show("edit-procedure");
+    },
+    procedureUpdated(procedure) {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Procedūros "' + procedure.title + '" redagavimas sėkmingas';
+      this.success.show = true;
+      this.fetchProcedures();
+    }
   },
   watch: {
     currentPage: {

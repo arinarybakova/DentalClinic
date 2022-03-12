@@ -35,7 +35,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'api'], function () {
     Route::get('/procedures', [ProcedureController::class, 'procedures'])->name('api.admin.procedures');
     Route::post('/procedures/store', [ProcedureController::class, 'store'])->name('api.admin.procedures.store');
-    Route::patch('/procedures/update', [ProcedureController::class, 'update'])->name('api.admin.procedures.update');
+    Route::patch('/procedures/update/{id}', [ProcedureController::class, 'update'])->name('api.admin.procedures.update');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);

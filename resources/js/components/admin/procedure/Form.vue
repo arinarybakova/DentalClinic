@@ -6,8 +6,7 @@
       :show="errorToast.show"
       @toastClosed="errorToast.show = false"
     ></toast>
-    <b-button v-b-modal.add-procedure>Pridėti procedūrą</b-button>
-    <b-modal id="add-procedure" title="Pridėti procedūrą" centered hide-footer>
+    <b-modal :id="id" :title="title" centered hide-footer>
       <b-form @submit="onSubmit">
         <b-form-group
           id="title-group"
@@ -47,7 +46,7 @@
         </b-form-group>
         <form-error :validation="v$.form.details"></form-error>
         <b-button type="submit" variant="secondary" class="mt-3"
-          >Pridėti</b-button
+          >{{ submitTitle }}</b-button
         >
       </b-form>
     </b-modal>
@@ -64,7 +63,13 @@ import {
 } from "@vuelidate/validators";
 
 export default {
-  props: ["bus"],
+  props: {
+    bus: { required: true },
+    id: { required: true },
+    title: { required: true },
+    submitTitle: { required: true },
+    procedure: { required: false }
+  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -141,6 +146,11 @@ export default {
       };
       this.v$.$reset();
     },
+  },
+  watch: {
+    "procedure": function (newVal) {
+       this.form = this.procedure;
+    }
   },
 };
 </script>

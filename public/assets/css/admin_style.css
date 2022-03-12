@@ -448,6 +448,14 @@ a { color: inherit; }
       -webkit-border-radius-bottom-right: 5px;
           cursor:pointer;
   }
+  .main-content .btn-outline-info {
+    color: var(--main-color);
+    border-color: var(--main-color);
+  }
+  .main-content .btn-outline-info:hover, .main-content .btn-outline-info:focus, .main-content .btn-outline-info:active {
+      background-color: var(--main-color);
+      color: #fff;
+  }
   .search input[type="submit"]:hover, .btn.btn-secondary:hover, .card-header button:hover, 
   .search input[type="submit"]:focus, .btn.btn-secondary:focus, .card-header button:focus,
   .search input[type="submit"]:active, .btn.btn-secondary:active, .card-header button:active {

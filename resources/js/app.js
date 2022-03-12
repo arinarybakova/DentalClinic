@@ -44,6 +44,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('procedure-table', require('./components/admin/procedure/Table.vue').default);
 Vue.component('procedure-form', require('./components/admin/procedure/Form.vue').default);
 Vue.component('add-procedure', require('./components/admin/procedure/Create.vue').default);
+Vue.component('edit-procedure', require('./components/admin/procedure/Edit.vue').default);
 
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);
