@@ -19,7 +19,7 @@ class ProcedureController extends Controller
     {
         //    $procedures = Procedure::all();
         //    return response()->json($procedures);
-        return view("admin.procedure");
+        return view("admin.procedures");
     }
 
     /**
