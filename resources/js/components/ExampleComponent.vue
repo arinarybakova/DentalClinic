@@ -1,7 +1,7 @@
 <template>
 <section class="services" id="services">
 
-    <h1 class="headings">teikiamos <span>procedūros</span></h1>
+    <h1 class="heading">teikiamos <span>procedūros</span></h1>
 
     <div class ="box-container">
 
@@ -14,7 +14,36 @@
             </p>
             <div class = "cost">Kaina: 20 eurų</div>
             <!--<a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span></a>-->
-        </div>    
+        </div>
+
+        <div class ="box">
+            <h3>Burnos higiena</h3>
+            <p>
+                Dantų minkštos ir kietos apnašos šalinamos specialiu šveicarišku EMS ultragarsiniu skaleriu
+                  kurio galvutė vibruoja itin dideliu dažniu taip atskeldama akmenis nuo dantų paviršiaus.
+            </p>
+            <div class = "cost">Kaina:50 eurų</div>
+            <!--<a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span></a>-->
+        </div>
+        <div class ="box">
+            <h3>Paviršinio karieso gydymas skystu kompozitu</h3>
+            <p>
+                Plombo, atliekamas naudojant dentalinį „Carl Zeiss“ OPMI pico markės mikroskopą. 
+                Pasitelkiant mikroskopą galima pamatyti tai, ko neįmanoma pamatyti plika akimi: siauras kanalų įeigas, 
+                papildomus kanalus, dantų šaknų skilimus ar traumos pasėkoje kalcifikuotus kanalus.
+            </p>
+            <div class = "cost">Kaina: 25 eurų</div>
+            <!--<a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span></a>-->
+        </div>
+        <div class ="box">
+            <h3>Vieno danties uždaras kiuretažas</h3>
+            <p>
+                Uždaras dantenų kiuretažas periodontologinė procedūra, apimanti gilųjį dantų kišenių išvalymą nuo minkštų ir kietų apnašų. 
+                Priklausomai nuo klinikinės situacijos, procedūra gali būti atliekama minimaliai invazyviu būdu arba padarant pjūvį dantenų gleivinėje.
+            </p>
+            <div class = "cost">Kaina: 25 eurų</div>
+            <!--<a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span></a>-->
+        </div>               
     </div>
    
 </section>
@@ -30,22 +59,6 @@
 </script>
 
 <style>
-.headings{
-    text-align: center;
-    padding-bottom: 2rem;
-    text-transform: uppercase;
-    color: var(--black);
-    font-size: 5rem;
-    padding-top: 10rem;
-    letter-spacing: .4rem;
-}
-.headings span{
-    text-transform: uppercase;
-    color: var(--green);
-    font-size: 5rem;
-    letter-spacing: .4rem;
-}
-
 .services .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(43rem, 1fr));
@@ -58,6 +71,7 @@
     box-shadow: var(--box-shadow);
     border: var(--border);
     padding: 2.5rem;
+    position: relative;
 }
 
 
@@ -80,6 +94,7 @@
     font-size: 1.4rem;
     line-height: 2;
     text-transform: none;
+    text-align: justify
 }
 .services .cost{
     color: var(--green);
@@ -87,5 +102,11 @@
     font-size: 1.5rem;
     font-weight: bold;
     text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
 }
+
 </style>

@@ -13,7 +13,7 @@
 
     <!--custom css file link-->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <a href="https://storyset.com/people">People illustrations by Storyset</a>
+    
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -27,12 +27,13 @@
 <body>
     <!--header section starts-->
     <header class="header">
-        <a href="#" class="logo"> <i class="fas fa-tooth"></i> dentalcare. </a>
+        <div class = banner>
+                <div class="logo"> <i class="fas fa-tooth"></i> Odontologijos klinika</div>
+                 <div class = "cnt">+3706700013</div>
+                 <div class = "cne">info@odklinika.com</div>  
+        </div>
         <nav class="navbar">
-            <a href="#home">Pagrindinis</a>
-            <a href="#services">Paslaugos</a>
-            <a href="#about">Apie mus</a>
-            <a href="#doctors">Specialistai</a>
+            <a href="#services">Procedūros</a>
             @if(Route:: has('login'))
 
             @auth

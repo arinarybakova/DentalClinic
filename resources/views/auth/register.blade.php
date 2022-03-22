@@ -1,11 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--font awesome cdn link-->
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <!--custom css file link-->
+     
+</head>
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
+            <!--<x-jet-authentication-card-logo />-->
+     
+        <div class = "txt-lg"><i id = icon class="fas fa-tooth"></i>Odontologijos klinika</div>
+        <div class = "txt-lb"> Registracija </div>
         <x-jet-validation-errors class="mb-4" />
-
+        </x-slot>
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -68,3 +77,26 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+<style>
+    <style>
+    #icon {
+        color: #16a085;
+        margin-top: 1rem;   
+    }
+    .txt-lg{
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 80px;
+        color: #16a085;
+        font-size: 3.2rem;
+        
+    }
+    .txt-lb{
+        text-align: center;
+        padding-top: 10px;
+        font-size: 1.9rem;
+        color: #444;
+        font-weight: bold;
+        
+    }
+</style>

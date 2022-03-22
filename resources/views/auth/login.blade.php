@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <!--font awesome cdn link-->
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <!--custom css file link-->
+     
 </head>
 <x-guest-layout>
     <x-jet-authentication-card>
@@ -54,10 +57,7 @@
                 </div>
                 <div class = "lb-psws"> Neturite paskyros? <a class="text-smi" href="{{ route('register') }}">
                 {{ __('Registruotis') }}
-                </a></div>
-
-               
-            
+                </a></div>  
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
