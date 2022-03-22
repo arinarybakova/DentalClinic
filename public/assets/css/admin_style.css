@@ -39,6 +39,7 @@
 .sidebar-brand span {
     display: inline-block;
     padding-right: 1rem;
+    font-size: 1.45rem;
 
 }
 
@@ -133,8 +134,8 @@ header#main-header {
 
 
 header h2 {
-    color: #222;
-
+    color: var(--color-dark);
+   
 }
 
 header label span {
@@ -398,7 +399,7 @@ td .status {
 
     background-color: var(--main-color);
     color: #ffffff;
-    text-align: left;;
+    text-align: left;
 }
 a { color: inherit; }
   /* mouse over link */
@@ -645,3 +646,44 @@ a { color: inherit; }
     font-size: 24px;
     padding: 4px;
   }
+
+.user-wrapper ul{
+    padding: 0;
+    list-style: none;
+    background: #fff;
+}
+.user-wrapper ul li{
+    display: inline-block;
+    position: relative;
+    line-height: 21px;
+    text-align: center;
+}
+.user-wrapper ul li a{
+    display: block;
+    padding: 8px 5px;
+    color: var(--color-dark);
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+.user-wrapper ul li a:hover{
+    color: var(--main-color);
+    background: #fff;
+    
+}
+.user-wrapper ul li ul.dropdown{
+    min-width: 175px; /* Set width of the dropdown */
+    background: #ffff;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    border: 1px solid #ccc;
+    
+}
+.user-wrapper ul li:hover ul.dropdown{
+    display: block; /* Display the dropdown */
+    font-size: 0.8rem;
+}
+.user-wrapper ul li ul.dropdown li{
+    display: block;
+}

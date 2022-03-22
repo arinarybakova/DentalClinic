@@ -3,20 +3,18 @@
         <label for="nav-toggle">
             <span class="fas fa-bars"></span>
         </label>
-
-        Pagrindinis
+        Procedūros
     </h2>
-    <div class="search-wrapper">
-        <span class="fas fa-search"></span>
-        <input type="search" placeholder="Įveskite raktažodį" />
-    </div>
-
     <div class="user-wrapper">
-        <img src="admin/assets/images/image.jpg" width="35px" height="40px" alt="">
         <div>
-            <h4> Agne Jonaitiene</h4>
-            <small>Administratorius</small>
-
+            <ul id="nav-ul">
+                <li id="nav-li">
+                    <a  id="nav-a">Administratorius</a>
+                    <ul id="nav-ul" class="dropdown">      
+                        <li id="nav-li"><a  id="nav-a" href="#"><i class="fas fa-sign-out-alt"></i>Atsijungti</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </header>

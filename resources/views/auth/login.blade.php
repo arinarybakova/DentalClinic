@@ -64,14 +64,14 @@
 
 <style>
     #icon {
-        color: #16a085;
+        color: #2fbab8;
         margin-top: 1rem;   
     }
     .txt-lg{
         text-align: center;
         padding-top: 5px;
         padding-bottom: 80px;
-        color: #16a085;
+        color: #2fbab8;
         font-size: 3.2rem;
         
     }
@@ -84,7 +84,7 @@
         
     }
     .ml-4{
-       background-color: #16a085;
+       background-color: #2fbab8;
        border-radius: 12px;
        font-size: 1rem;
        margin-top: 30px;
@@ -120,7 +120,7 @@
     }
     .text-smi{
         text-decoration:none;
-        color: #16a085;
+        color: #2fbab8;
         font-size: 1.12rem;
         font-weight: bold;
         margin-left: 0.5rem;   

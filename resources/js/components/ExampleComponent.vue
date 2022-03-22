@@ -76,7 +76,7 @@
 
 
 .services .box-container .box i{
-    color: var(--green);
+    color: #2fbab8;
     font-size: 5rem;
     padding-bottom: .5rem;
 }
@@ -86,7 +86,7 @@
     font-size: 2.5rem;
     padding: 1rem 0;
     text-transform: none;
-    color: var(--green);
+    color: #2fbab8;
 }
 
 .services .box-container .box p{
@@ -97,7 +97,7 @@
     text-align: justify
 }
 .services .cost{
-    color: var(--green);
+    color: #2fbab8;
     text-transform: none;
     font-size: 1.5rem;
     font-weight: bold;

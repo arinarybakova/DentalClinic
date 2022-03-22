@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="sidebar-brand">
-        <h2><span class="fas fa-tooth"></span> <span>DentalClinic</span></h2>
+        <h2><span class="fas fa-tooth"></span> <span>Odontologijos klinika</span></h2>
     </div>
     <div class="sidebar-menu">
         <ul>
