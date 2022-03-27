@@ -11,6 +11,7 @@
     
     <!--custom css file link-->
     <link rel = "stylesheet" href = "{{ asset('assets/css/admin_style.css') }}">
+    <link href ="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
     
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>

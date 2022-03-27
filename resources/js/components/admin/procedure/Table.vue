@@ -55,6 +55,7 @@
       :total-rows="totalRows"
       :per-page="perPage"
       v-model="currentPage"
+      v-if="totalRows / perPage > 1"
     />
   </div>
 </template>

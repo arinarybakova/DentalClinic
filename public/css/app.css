@@ -11330,6 +11330,18 @@ textarea.form-control-lg {
   padding-right: 1rem;
   padding-bottom: 1rem;
 }
+
+.page-item .page-link {
+  color: #2fbab8;
+}
+.page-item .page-link:hover, .page-item .page-link:focus, .page-item .page-link:active {
+  color: #2fbab8;
+}
+.page-item.active .page-link {
+  background-color: #2fbab8 !important;
+  border-color: #2fbab8 !important;
+  color: #fff;
+}
 /*
 ! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com
 *//*

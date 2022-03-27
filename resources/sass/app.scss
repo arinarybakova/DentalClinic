@@ -53,3 +53,18 @@
         padding-bottom: 1rem;
     }
 }
+.page-item {
+    .page-link {
+        color: $main-color;
+        &:hover, &:focus, &:active {
+            color: $main-color;
+        }
+    }
+    &.active {
+        .page-link {
+            background-color: $main-color !important;
+            border-color: $main-color !important;
+            color: #fff;
+        }
+    }
+}
