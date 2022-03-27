@@ -35,10 +35,10 @@ class AdminViewServiceProvider extends ServiceProvider
                 'route'     => 'admin'
             ];
             $links[] = (object)[
-                'href'      => 'admin/html/patients.html',
+                'href'      => route('admin.patients'),
                 'icon'      => 'fas fa-users',
                 'name'      => 'Pacientai',
-                'route'     => false
+                'route'     => 'admin/patients'
             ];
             $links[] = (object)[
                 'href'      => route('admin.doctors'),

@@ -8,28 +8,37 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
-class DoctorController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function doctors()
     {
         return view("admin.doctors");
     }
 
-    public function doctors(Request $request)
+    public function patients()
+    {
+        return view("admin.patients");
+    }
+
+    public function users(Request $request)
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
+            $doctors = User::select(DB::raw('*, concat(firstname, " ", lastname) as name'));
+            if($request->get('usertype') !== null) {
+                $doctors->where('usertype', $request->get('usertype'));
+            }
             if ($request->get('filter') !== null) {
-                $doctors = User::where('name', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                $doctors->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('name');
             } else {
-                $doctors = User::orderBy('name');
+                $doctors->orderBy('name');
             }
             $pagination = $doctors->paginate($limit)->toArray();
             $doctors = $pagination['data'];

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProcedureController;
 use App\Http\Controllers\Frontend\ProcedureController as FrontendProcedureController;
@@ -37,7 +37,8 @@ Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
     Route::get('/procedure', [ProcedureController::class, 'index'])->name('admin.procedure');
-    Route::get('/doctors', [DoctorController::class, 'index'])->name('admin.doctors');
+    Route::get('/doctors', [UserController::class, 'doctors'])->name('admin.doctors');
+    Route::get('/patients', [UserController::class, 'patients'])->name('admin.patients');
 });
 
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'api'], function () {
@@ -46,7 +47,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::patch('/procedures/update/{id}', [ProcedureController::class, 'update'])->name('api.admin.procedures.update');
     Route::post('/procedures/destroy/{id}', [ProcedureController::class, 'destroy'])->name('api.admin.procedures.destroy');
 
-    Route::get('/doctors', [DoctorController::class, 'doctors'])->name('api.admin.doctors');
+    Route::get('/users', [UserController::class, 'users'])->name('api.admin.users');
 });
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {

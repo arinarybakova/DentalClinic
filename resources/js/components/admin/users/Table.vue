@@ -48,6 +48,9 @@ import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 
 export default {
+  props: {
+    usertype: { required: true }
+  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -109,19 +112,21 @@ export default {
     };
   },
   created() {
-    this.fetchDoctors();
+    this.fetchUsers();
+    console.log(this.usertype);
   },
   methods: {
-    fetchDoctors() {
+    fetchUsers() {
       var requestParams = {
         page: this.currentPage,
         limit: this.perPage,
+        usertype: this.usertype
       };
       if (this.filter !== "") {
         requestParams = Object.assign(requestParams, { filter: this.filter });
       }
       this.axios
-        .get("/api/doctors", { params: requestParams })
+        .get("/api/users", { params: requestParams })
         .then((response) => {
           this.items = response.data.doctors;
           this.totalRows = response.data.total;
@@ -133,7 +138,7 @@ export default {
       }
     },
     getDoctorsId(value) {
-      return "D" + value.toString().padStart(3, "0");
+      return "G" + value.toString().padStart(3, "0");
     },
     getDate(value) {
       var arr = value.split("T");
