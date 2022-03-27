@@ -17,7 +17,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() != null && Auth::user()->usertype == 1) {
+        if (Auth::user() != null && Auth::user()->usertype == config('app.usertype_admin')) {
             return $next($request);
         }
 

@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 switch(Auth::user()->usertype) {
-                    case 1:
+                    case config('app.usertype_admin'):
                         return redirect(route('admin'));
                     default:
                         return redirect(RouteServiceProvider::HOME);

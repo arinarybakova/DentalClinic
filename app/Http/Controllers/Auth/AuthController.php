@@ -46,7 +46,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             switch(Auth::user()->usertype) {
-                case 1:
+                case config('app.usertype_admin'):
                     redirect()->intended('admin')
                         ->withSuccess('You have Successfully loggedin');
                 default:
