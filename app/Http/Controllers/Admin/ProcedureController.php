@@ -128,11 +128,18 @@ class ProcedureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Procedure $procedure)
+    public function destroy(int $id)
     {
-        $procedure->delete();
-        return response()->json([
-            'message' => 'Procedure removed'
-        ]);
+        $procedure = Procedure::find($id);
+        if($procedure !== null) {
+            $procedure->delete();
+            return response()->json([
+                'success'   => true
+            ]);
+        } else {
+            return response()->json([
+                'success'   => false
+            ]);
+        }
     }
 }

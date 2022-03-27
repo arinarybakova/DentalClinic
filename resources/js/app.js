@@ -40,14 +40,16 @@ Vue.use(VueAxios, axios);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('procedure-table', require('./components/admin/procedure/Table.vue').default);
 Vue.component('procedure-form', require('./components/admin/procedure/Form.vue').default);
 Vue.component('add-procedure', require('./components/admin/procedure/Create.vue').default);
 Vue.component('edit-procedure', require('./components/admin/procedure/Edit.vue').default);
+Vue.component('delete-procedure', require('./components/admin/procedure/Delete.vue').default);
 Vue.component('doctors', require('./components/admin/doctors/Table.vue').default);
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);
+
+Vue.component('procedures', require('./components/frontend/procedures.vue').default);
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));

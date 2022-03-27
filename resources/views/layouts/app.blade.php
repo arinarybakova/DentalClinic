@@ -33,13 +33,14 @@
                  <div class = "cne">info@odklinika.com</div>  
         </div>
         <nav class="navbar">
-            <a href="#services">Procedūros</a>
+            <a href="{{ route('procedures') }}">Procedūros</a>
             @if(Route:: has('login'))
 
             @auth
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-
+                <a href="{{route('login')}}">Vizitų istorija</a>
+                
                 <a href="{{route('login')}}">Atsijungti</a>
             </form>
             @else

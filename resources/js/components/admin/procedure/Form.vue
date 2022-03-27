@@ -18,6 +18,7 @@
             v-model="form.title"
             type="text"
             placeholder="Pavadinimas"
+            :disabled="disabled"
           ></b-form-input>
         </b-form-group>
         <form-error :validation="v$.form.title"></form-error>
@@ -28,6 +29,7 @@
             type="number"
             step="0.01"
             placeholder="Kaina"
+            :disabled="disabled"
           ></b-form-input>
         </b-form-group>
         <form-error :validation="v$.form.price"></form-error>
@@ -42,6 +44,7 @@
             placeholder="Aprašymas"
             rows="3"
             max-rows="6"
+            :disabled="disabled"
           ></b-form-textarea>
         </b-form-group>
         <form-error :validation="v$.form.details"></form-error>
@@ -68,7 +71,8 @@ export default {
     id: { required: true },
     title: { required: true },
     submitTitle: { required: true },
-    procedure: { required: false }
+    procedure: { required: false },
+    disabled: { required: false, default: false }
   },
   setup() {
     return {

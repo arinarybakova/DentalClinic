@@ -1,7 +1,14 @@
 <template>
   <div class="card-body">
     <add-procedure @procedureAdded="procedureAdded"></add-procedure>
-    <edit-procedure @procedureUpdated="procedureUpdated" :procedure="selectedProcedure"></edit-procedure>
+    <edit-procedure
+      @procedureUpdated="procedureUpdated"
+      :procedure="selectedProcedure"
+    ></edit-procedure>
+    <delete-procedure
+      @procedureDeleted="procedureDeleted"
+      :procedure="selectedProcedure"
+    ></delete-procedure>
     <toast
       type="success"
       :msg="success.message"
@@ -24,7 +31,24 @@
         <b>{{ getPatientId(data.value) }}</b>
       </template>
       <template #cell(actions)="data">
-        <b-button v-on:click="updateProcedure(data.item)" variant="outline-info" size="sm" v-b-tooltip.hover title="Redaguoti procedūrą"><i class="fas fa-pencil-alt"></i></b-button>
+        <div class="buttons">
+          <b-button
+            v-on:click="updateProcedure(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Redaguoti procedūrą"
+            ><i class="fas fa-pencil-alt"></i
+          ></b-button>
+          <b-button
+            v-on:click="deleteProcedure(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Ištrinti procedūrą"
+            ><i class="fas fa-trash"></i
+          ></b-button>
+        </div>
       </template>
     </b-table>
     <b-pagination
@@ -120,7 +144,7 @@ export default {
       }
     },
     getPatientId(value) {
-      return "P" + value.toString().padStart(3, "0");
+      return "PR" + value.toString().padStart(3, "0");
     },
     procedureAdded(procedure) {
       this.filter = "";
@@ -134,6 +158,10 @@ export default {
       this.selectedProcedure = procedure;
       this.$bvModal.show("edit-procedure");
     },
+    deleteProcedure(procedure) {
+      this.selectedProcedure = procedure;
+      this.$bvModal.show("delete-procedure");
+    },
     procedureUpdated(procedure) {
       this.filter = "";
       this.currentPage = 1;
@@ -141,7 +169,14 @@ export default {
         'Procedūros "' + procedure.title + '" redagavimas sėkmingas';
       this.success.show = true;
       this.fetchProcedures();
-    }
+    },
+    procedureDeleted() {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message = "Procedūra ištrinta";
+      this.success.show = true;
+      this.fetchProcedures();
+    },
   },
   watch: {
     currentPage: {

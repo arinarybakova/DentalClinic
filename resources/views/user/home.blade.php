@@ -4,5 +4,4 @@
 
 @section('content')
     Test homepage layout
-    <example-component></example-component>
 @endsection

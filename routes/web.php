@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DoctorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProcedureController;
+use App\Http\Controllers\Frontend\ProcedureController as FrontendProcedureController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Auth\AuthController;
@@ -25,8 +26,13 @@ Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::get('register', [AuthController::class, 'registration'])->name('register');
 Route::post('post-register', [AuthController::class, 'postRegister'])->name('register.post');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout'); 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::group(['namespace' => 'Frontend'], function () {
+    Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
+});
+
+Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');
 
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
@@ -38,15 +44,20 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::get('/procedures', [ProcedureController::class, 'procedures'])->name('api.admin.procedures');
     Route::post('/procedures/store', [ProcedureController::class, 'store'])->name('api.admin.procedures.store');
     Route::patch('/procedures/update/{id}', [ProcedureController::class, 'update'])->name('api.admin.procedures.update');
+    Route::post('/procedures/destroy/{id}', [ProcedureController::class, 'destroy'])->name('api.admin.procedures.destroy');
 
     Route::get('/doctors', [DoctorController::class, 'doctors'])->name('api.admin.doctors');
 });
 
+Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
+    Route::get('/procedures', [FrontendProcedureController::class, 'procedures'])->name('api.procedures');
+});
+
 // Route::get('/home', [HomeController::class, 'redirect']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 // Route::get('{any}', function(){
 //     return view('app');
