@@ -13,7 +13,7 @@
 
     <!--custom css file link-->
     <link rel="stylesheet" href="assets/css/styles.css">
-    
+
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -27,21 +27,20 @@
 <body>
     <!--header section starts-->
     <header class="header">
-        <div class = banner>
-                <div class="logo"> <i class="fas fa-tooth"></i> Odontologijos klinika</div>
-                 <div class = "cnt">+3706700013</div>
-                 <div class = "cne">info@odklinika.com</div>  
+        <div class=banner>
+            <div class="logo"> <i class="fas fa-tooth"></i> Odontologijos klinika</div>
+            <div class="cnt">+3706700013</div>
+            <div class="cne">info@odklinika.com</div>
         </div>
         <nav class="navbar">
             <a href="{{ route('procedures') }}">Procedūros</a>
             @if(Route:: has('login'))
 
             @auth
+            <a href="{{route('login')}}">Vizitų istorija</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <a href="{{route('login')}}">Vizitų istorija</a>
-                
-                <a href="{{route('login')}}">Atsijungti</a>
+                <button type="submit">Atsijungti</button>
             </form>
             @else
             <a href="{{route('login')}}">Prisijungti</a>
@@ -62,4 +61,5 @@
 
     <!-- footer section ends -->
 </body>
+
 </html>

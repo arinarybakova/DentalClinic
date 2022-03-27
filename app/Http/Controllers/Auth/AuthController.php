@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Hash;
   
@@ -45,8 +45,14 @@ class AuthController extends Controller
    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
+            switch(Auth::user()->usertype) {
+                case 1:
+                    redirect()->intended('admin')
                         ->withSuccess('You have Successfully loggedin');
+                default:
+                redirect()->intended(RouteServiceProvider::HOME)
+                        ->withSuccess('You have Successfully loggedin');
+            }
         }
   
         return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
@@ -60,15 +66,19 @@ class AuthController extends Controller
     public function postRegistration(Request $request)
     {  
         $request->validate([
-            'name' => 'required',
+            'firstname' => 'required|max:255',
+            'lastname'  => 'required|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
            
         $data = $request->all();
-        $check = $this->create($data);
+        if($this->create($data)) {
+            return redirect(route('login'))->withSuccess('Great! You have Successfully loggedin');
+        } else {
+            return redirect(route('register'))->withSuccess('Error. User was not created.');
+        }
          
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
     
     /**
@@ -93,9 +103,12 @@ class AuthController extends Controller
     public function create(array $data)
     {
       return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password'])
+        'firstname' => $data['name'],
+        'lastname'  => $data['lastname'],
+        'email'     => $data['email'],
+        'phone'     => $data['phone'],
+        'usertype'  => config('app.usertype_patient'),
+        'password'  => Hash::make($data['password'])
       ]);
     }
     
@@ -108,6 +121,6 @@ class AuthController extends Controller
         Session::flush();
         Auth::logout();
   
-        return Redirect('login');
+        return redirect(route('index'));
     }
 }

@@ -20,7 +20,7 @@
 
             <div class="mt-4">
                 <x-jet-label for="firstname" value="{{ __('Vardas') }}" />
-                <x-jet-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="firstname" />
+                <x-jet-input id="firstname" class="block mt-1 w-full" type="text" name="name" :value="old('firstname')" required autofocus autocomplete="firstname" />
             </div>
             <div class="mt-4">
                 <x-jet-label for="lastname" value="{{ __('Pavardė') }}" />
