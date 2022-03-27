@@ -50,6 +50,7 @@ Vue.component('delete-procedure', require('./components/admin/procedure/Delete.v
 //Admin users
 Vue.component('users', require('./components/admin/users/Table.vue').default);
 Vue.component('user-form', require('./components/admin/users/Form.vue').default);
+Vue.component('add-user', require('./components/admin/users/Create.vue').default);
 Vue.component('edit-user', require('./components/admin/users/Edit.vue').default);
 
 Vue.component('form-error', require('./components/ui/FormError.vue').default);

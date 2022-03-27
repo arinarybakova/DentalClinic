@@ -1,5 +1,6 @@
 <template>
   <div class="card-body">
+    <add-user @userAdded="userAdded" v-if="usertype == 3"></add-user>
     <edit-user
       @userUpdated="userUpdated"
       :user="selectedUser"
@@ -173,6 +174,14 @@ export default {
       this.currentPage = 1;
       this.success.message =
         'Vartotojo "' + user.name + '" redagavimas sėkmingas';
+      this.success.show = true;
+      this.fetchUsers();
+    },
+    userAdded(user) {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Vartotojas "' + user.firstname + ' ' + user.lastname + '" sėkmingai pridėtas';
       this.success.show = true;
       this.fetchUsers();
     }

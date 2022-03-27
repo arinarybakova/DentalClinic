@@ -58,18 +58,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
-        //     $procedure = Procedure::create($request->post());
-        // } catch (\Illuminate\Database\QueryException $exception) {
-        //     return response()->json([
-        //         'success'   => false,
-        //         'procedure' => []
-        //     ]);
-        // }
-        // return response()->json([
-        //     'success'   => true,
-        //     'procedure' => $procedure
-        // ]);
+        try {
+            $data = [
+               'usertype'   => config('app.usertype_dentist'),
+               'password'   => md5(rand())
+            ];
+            $user = User::create(array_merge($request->post(), $data));
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'user' => []
+            ]);
+        }
+        return response()->json([
+            'success'   => true,
+            'user' => $user
+        ]);
     }
 
     /**
