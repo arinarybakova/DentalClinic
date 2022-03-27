@@ -117,11 +117,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(int $id)
     {
-        $user->delete();
-        return response()->json([
-            'message' => 'User removed'
-        ]);
+        $user = User::find($id);
+        if($user !== null) {
+            $user->delete();
+            return response()->json([
+                'success'   => true
+            ]);
+        } else {
+            return response()->json([
+                'success'   => false
+            ]);
+        }
     }
 }

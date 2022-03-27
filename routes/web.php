@@ -50,6 +50,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::get('/users', [UserController::class, 'users'])->name('api.admin.users');
     Route::post('/users/store', [UserController::class, 'store'])->name('api.admin.users.store');
     Route::patch('/users/update/{id}', [UserController::class, 'update'])->name('api.admin.users.update');
+    Route::post('/users/destroy/{id}', [UserController::class, 'destroy'])->name('api.admin.users.destroy');
 });
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {

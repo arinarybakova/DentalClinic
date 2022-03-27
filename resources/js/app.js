@@ -52,6 +52,7 @@ Vue.component('users', require('./components/admin/users/Table.vue').default);
 Vue.component('user-form', require('./components/admin/users/Form.vue').default);
 Vue.component('add-user', require('./components/admin/users/Create.vue').default);
 Vue.component('edit-user', require('./components/admin/users/Edit.vue').default);
+Vue.component('delete-user', require('./components/admin/users/Delete.vue').default);
 
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);

@@ -1,10 +1,8 @@
 <template>
   <div class="card-body">
     <add-user @userAdded="userAdded" v-if="usertype == 3"></add-user>
-    <edit-user
-      @userUpdated="userUpdated"
-      :user="selectedUser"
-    ></edit-user>
+    <edit-user @userUpdated="userUpdated" :user="selectedUser"></edit-user>
+    <delete-user @userDeleted="userDeleted" :user="selectedUser"></delete-user>
     <toast
       type="success"
       :msg="success.message"
@@ -30,14 +28,24 @@
         {{ getDate(data.value) }}
       </template>
       <template #cell(actions)="data">
-        <b-button
-          v-on:click="updateUser(data.item)"
-          variant="outline-info"
-          size="sm"
-          v-b-tooltip.hover
-          title="Redaguoti vartotoją"
-          ><i class="fas fa-pencil-alt"></i
-        ></b-button>
+        <div class="buttons">
+          <b-button
+            v-on:click="updateUser(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Redaguoti naudotoją"
+            ><i class="fas fa-pencil-alt"></i
+          ></b-button>
+          <b-button
+            v-on:click="deleteUser(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Ištrinti naudotoją"
+            ><i class="fas fa-trash"></i
+          ></b-button>
+        </div>
       </template>
     </b-table>
     <b-pagination
@@ -54,7 +62,7 @@ import { required } from "@vuelidate/validators";
 
 export default {
   props: {
-    usertype: { required: true }
+    usertype: { required: true },
   },
   setup() {
     return {
@@ -77,7 +85,7 @@ export default {
         lastname: "",
         email: "",
         phone: "",
-        created_at: ""
+        created_at: "",
       },
       fields: [
         {
@@ -132,7 +140,7 @@ export default {
       var requestParams = {
         page: this.currentPage,
         limit: this.perPage,
-        usertype: this.usertype
+        usertype: this.usertype,
       };
       if (this.filter !== "") {
         requestParams = Object.assign(requestParams, { filter: this.filter });
@@ -150,8 +158,8 @@ export default {
       }
     },
     getUsersId(value) {
-      switch(this.usertype) {
-        case 1:
+      switch (this.usertype) {
+        case "3":
           return "G" + value.toString().padStart(3, "0");
         default:
           return "P" + value.toString().padStart(3, "0");
@@ -164,6 +172,10 @@ export default {
       } else {
         return "-";
       }
+    },
+    deleteUser(user) {
+      this.selectedUser = user;
+      this.$bvModal.show("delete-user");
     },
     updateUser(user) {
       this.selectedUser = user;
@@ -181,10 +193,21 @@ export default {
       this.filter = "";
       this.currentPage = 1;
       this.success.message =
-        'Vartotojas "' + user.firstname + ' ' + user.lastname + '" sėkmingai pridėtas';
+        'Vartotojas "' +
+        user.firstname +
+        " " +
+        user.lastname +
+        '" sėkmingai pridėtas';
       this.success.show = true;
       this.fetchUsers();
-    }
+    },
+    userDeleted() {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message = "Gydytojas ištrintas";
+      this.success.show = true;
+      this.fetchUsers();
+    },
   },
   watch: {
     currentPage: {
