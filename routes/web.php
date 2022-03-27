@@ -48,6 +48,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::post('/procedures/destroy/{id}', [ProcedureController::class, 'destroy'])->name('api.admin.procedures.destroy');
 
     Route::get('/users', [UserController::class, 'users'])->name('api.admin.users');
+    Route::patch('/users/update/{id}', [UserController::class, 'update'])->name('api.admin.users.update');
 });
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {

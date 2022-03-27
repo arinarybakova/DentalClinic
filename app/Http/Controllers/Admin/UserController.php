@@ -29,26 +29,25 @@ class UserController extends Controller
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            $doctors = User::select(DB::raw('*, concat(firstname, " ", lastname) as name'));
+            $users = User::select(DB::raw('*, concat(firstname, " ", lastname) as name'));
             if($request->get('usertype') !== null) {
-                $doctors->where('usertype', $request->get('usertype'));
+                $users->where('usertype', $request->get('usertype'));
             }
             if ($request->get('filter') !== null) {
-                $doctors->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                $users->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('name');
             } else {
-                $doctors->orderBy('name');
+                $users->orderBy('name');
             }
-            $pagination = $doctors->paginate($limit)->toArray();
-            $doctors = $pagination['data'];
-            $total_pages = $pagination['to'];
+            $pagination = $users->paginate($limit)->toArray();
+            $users = $pagination['data'];
             $total = $pagination['total'];
         } else {
-            $doctors = [];
+            $users = [];
             $total = 0;
         }
-        return ['doctors' => $doctors, 'total' => $total];
+        return ['users' => $users, 'total' => $total];
     }
 
     /**
@@ -93,19 +92,19 @@ class UserController extends Controller
      */
     public function update(int $id, Request $request)
     {
-        // try {
-        //     $procedure = Procedure::find($id);
-        //     $procedure->fill($request->post())->save();
-        // } catch (\Illuminate\Database\QueryException $exception) {
-        //     return response()->json([
-        //         'success'   => false,
-        //         'procedure' => []
-        //     ]);
-        // }
-        // return response()->json([
-        //     'success'   => true,
-        //     'procedure' => $procedure
-        // ]);
+        try {
+            $user = User::find($id);
+            $user->fill($request->post())->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'user' => []
+            ]);
+        }
+        return response()->json([
+            'success'   => true,
+            'user' => $user
+        ]);
     }
 
     /**

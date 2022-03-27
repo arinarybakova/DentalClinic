@@ -1,5 +1,9 @@
 <template>
   <div class="card-body">
+    <edit-user
+      @userUpdated="userUpdated"
+      :user="selectedUser"
+    ></edit-user>
     <toast
       type="success"
       :msg="success.message"
@@ -19,19 +23,18 @@
 
     <b-table hover :items="items" :fields="fields" :perPage="0">
       <template #cell(id)="data">
-        <b>{{ getDoctorsId(data.value) }}</b>
+        <b>{{ getUsersId(data.value) }}</b>
       </template>
       <template #cell(created_at)="data">
         {{ getDate(data.value) }}
       </template>
-      <template #cell(patients)> 0 </template>
       <template #cell(actions)="data">
         <b-button
-          v-on:click="updateDoctor(data.item)"
+          v-on:click="updateUser(data.item)"
           variant="outline-info"
           size="sm"
           v-b-tooltip.hover
-          title="Redaguoti daktarą"
+          title="Redaguoti vartotoją"
           ><i class="fas fa-pencil-alt"></i
         ></b-button>
       </template>
@@ -67,6 +70,14 @@ export default {
         message: "",
         show: false,
       },
+      selectedUser: {
+        id: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        created_at: ""
+      },
       fields: [
         {
           key: "id",
@@ -74,8 +85,13 @@ export default {
           sortable: true,
         },
         {
-          key: "name",
-          label: "Vardas Pavardė",
+          key: "firstname",
+          label: "Vardas",
+          sortable: true,
+        },
+        {
+          key: "lastname",
+          label: "Pavardė",
           sortable: true,
         },
         {
@@ -87,11 +103,6 @@ export default {
           key: "phone",
           label: "Tel. nr.",
           sortable: false,
-        },
-        {
-          key: "patients",
-          label: "Priskirti pacientai",
-          sortable: true,
         },
         {
           key: "created_at",
@@ -114,7 +125,6 @@ export default {
   },
   created() {
     this.fetchUsers();
-    console.log(this.usertype);
   },
   methods: {
     fetchUsers() {
@@ -129,17 +139,22 @@ export default {
       this.axios
         .get("/api/users", { params: requestParams })
         .then((response) => {
-          this.items = response.data.doctors;
+          this.items = response.data.users;
           this.totalRows = response.data.total;
         });
     },
     filterTable() {
       if (this.v$.$validate() && !this.v$.filter.$error) {
-        this.fetchProcedures();
+        this.fetchUsers();
       }
     },
-    getDoctorsId(value) {
-      return "G" + value.toString().padStart(3, "0");
+    getUsersId(value) {
+      switch(this.usertype) {
+        case 1:
+          return "G" + value.toString().padStart(3, "0");
+        default:
+          return "P" + value.toString().padStart(3, "0");
+      }
     },
     getDate(value) {
       var arr = value.split("T");
@@ -149,15 +164,23 @@ export default {
         return "-";
       }
     },
-    updateDoctor(procedure) {
-      // this.selectedProcedure = procedure;
-      // this.$bvModal.show("edit-procedure");
+    updateUser(user) {
+      this.selectedUser = user;
+      this.$bvModal.show("edit-user");
     },
+    userUpdated(user) {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Vartotojo "' + user.name + '" redagavimas sėkmingas';
+      this.success.show = true;
+      this.fetchUsers();
+    }
   },
   watch: {
     currentPage: {
       handler: function (value) {
-        this.fetchProcedures();
+        this.fetchUsers();
       },
     },
   },
