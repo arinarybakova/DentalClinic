@@ -32,7 +32,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
-    Route::get('appointment', [FrontendAppointmentController::class, 'appointment'])->name('appointment');
+    Route::get('appointments', [FrontendAppointmentController::class, 'index'])->name('appointments');
 
     Route::get('treatment', [FrontendTreatmentController::class, 'treatment'])->name('treatment');
     Route::get('profile', [FrontendProfileController::class, 'profile'])->name('profile');

@@ -37,7 +37,7 @@
             @if(Route:: has('login'))
 
             @auth
-            <a href="{{route('appointment')}}">Vizitų istorija</a>
+            <a href="{{route('appointments')}}">Vizitų istorija</a>
             <a href="{{route('treatment')}}">Gydymo planas</a>
             <a href="{{route('profile')}}">Paskyra</a>
 
