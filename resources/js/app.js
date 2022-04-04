@@ -60,6 +60,9 @@ Vue.component('toast', require('./components/ui/Toast.vue').default);
 //Frontend procedures
 Vue.component('procedures', require('./components/frontend/procedures.vue').default);
 
+//Frontent appointments
+Vue.component('appointments', require('./components/frontend/appointments.vue').default);
+
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));
 /**

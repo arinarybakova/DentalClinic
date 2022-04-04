@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProcedureController;
 use App\Http\Controllers\Frontend\ProcedureController as FrontendProcedureController;
+use App\Http\Controllers\Frontend\AppointmentController as FrontendAppointmentController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Models\Procedure;
+use App\Models\Appointment;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,11 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
+    Route::get('appointment', [FrontendAppointmentController::class, 'appointment'])->name('appointment');
+
+    Route::get('treatment', [FrontendTreatmentController::class, 'treatment'])->name('treatment');
+    Route::get('profile', [FrontendProfileController::class, 'profile'])->name('profile');
+    
 });
 
 Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');

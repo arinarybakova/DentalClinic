@@ -37,10 +37,17 @@
             @if(Route:: has('login'))
 
             @auth
-            <a href="{{route('login')}}">Vizitų istorija</a>
+            <a href="{{route('appointment')}}">Vizitų istorija</a>
+            <a href="{{route('treatment')}}">Gydymo planas</a>
+            <a href="{{route('profile')}}">Paskyra</a>
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf 
+                <button class= "book" type="submit">Rezervuoti vizitą</button>
+            </form>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit">Atsijungti</button>
+                <button class = "logout" type="submit">Atsijungti</button>
             </form>
             @else
             <a href="{{route('login')}}">Prisijungti</a>
