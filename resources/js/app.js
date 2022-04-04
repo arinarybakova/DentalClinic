@@ -63,6 +63,9 @@ Vue.component('procedures', require('./components/frontend/procedures.vue').defa
 //Frontent appointments
 Vue.component('appointments', require('./components/frontend/appointments.vue').default);
 
+//Frontent treatment
+Vue.component('treatments', require('./components/frontend/treatments.vue').default);
+
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));
 /**

@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProcedureController;
 use App\Http\Controllers\Frontend\ProcedureController as FrontendProcedureController;
 use App\Http\Controllers\Frontend\AppointmentController as FrontendAppointmentController;
+use App\Http\Controllers\Frontend\TreatmentController as FrontendTreatmentController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Models\Procedure;
 use App\Models\Appointment;
+use App\Models\Treatment;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +35,8 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
     Route::get('appointments', [FrontendAppointmentController::class, 'index'])->name('appointments');
+    Route::get('treatments', [FrontendTreatmentController::class, 'index'])->name('treatments');
 
-    Route::get('treatment', [FrontendTreatmentController::class, 'treatment'])->name('treatment');
     Route::get('profile', [FrontendProfileController::class, 'profile'])->name('profile');
     
 });
@@ -63,6 +65,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
     Route::get('/procedures', [FrontendProcedureController::class, 'procedures'])->name('api.procedures');
     Route::get('/appointments', [FrontendAppointmentController::class, 'appointments'])->name('api.appointments');
+    Route::get('/treatments', [FrontendTreatmentController::class, 'treatments'])->name('api.treatments');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);

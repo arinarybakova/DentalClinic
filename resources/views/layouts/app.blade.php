@@ -38,7 +38,7 @@
 
             @auth
             <a href="{{route('appointments')}}">Vizitų istorija</a>
-            <a href="{{route('treatment')}}">Gydymo planas</a>
+            <a href="{{route('treatments')}}">Gydymo planas</a>
             <a href="{{route('profile')}}">Paskyra</a>
 
             <form method="POST" action="{{ route('login') }}">
