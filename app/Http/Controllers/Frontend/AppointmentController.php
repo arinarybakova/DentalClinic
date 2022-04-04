@@ -12,9 +12,38 @@ class AppointmentController extends Controller {
         return view('user.appointments');
     }
 
-    public function appointment(Request $request)
+    public function appointments(Request $request)
     {
-        $appointments = Appointment::orderBy('date')->get();
-        return $appointments->toArray();
+        if ($request->get('page') !== null) {
+            $limit = $request->get('limit') ?? 10;
+            if ($request->get('filter') !== null) {
+                $appointments = Appointment::where('dentist', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('date', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('time', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orderBy('status');
+            } else {
+                $appointments = Appointment::orderBy('date');
+            }
+            $pagination = $appointments->paginate($limit)->toArray();
+            $appointments = $pagination['data'];
+            $total_pages = $pagination['to'];
+            $total = $pagination['total'];
+        } else {
+            $appointments = [];
+            $total = 0;
+        }
+        return ['appointments' => $appointments, 'total' => $total];
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Appointment $appointment)
+    {
+        return response()->json($appointment);
+    }
+
 }

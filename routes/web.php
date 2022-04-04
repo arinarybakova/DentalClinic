@@ -62,6 +62,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
     Route::get('/procedures', [FrontendProcedureController::class, 'procedures'])->name('api.procedures');
+    Route::get('/appointments', [FrontendAppointmentController::class, 'appointments'])->name('api.appointments');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);

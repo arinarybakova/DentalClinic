@@ -1,14 +1,82 @@
 <template>
-  <section class="services" id="services">
-    <h1 class="heading">vizitų <span>istorija</span></h1>
-  </section>
-  
+     <div class="card-body">
+        <section class="services" id="services">
+            <h1 class="heading">vizitų <span>istorija</span></h1>
+        </section>
+        <div class="search">
+        <b-form-input
+            v-model="filter"
+            placeholder="Įveskite paieškos raktažodį"
+        ></b-form-input>
+        <b-button v-on:click="filterTable()">Ieškoti</b-button>
+        </div>
+        <div v-if="v$.filter.$error" class="text-danger mt-1">
+        Prašome įvesti paieškos raktažodį
+        </div>
+
+        <b-table hover :items="items" :fields="fields" :perPage="0">
+        </b-table>
+        <b-pagination
+      :total-rows="totalRows"
+      :per-page="perPage"
+      v-model="currentPage"
+      v-if="totalRows / perPage > 1"
+    />
+    </div>
 </template>
 <script>
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+
 export default {
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
   data() {
     return {
+      currentPage: 1,
+      perPage: 10,
+      totalRows: 1,
+      filter: "",
+      success: {
+        message: "",
+        show: false,
+      },
+      fields: [
+        {
+          key: "id",
+          label: "ID",
+          sortable: true,
+        },
+        {
+          key: "dentist",
+          label: "Gyd. odontologas",
+          sortable: true,
+        },
+        {
+          key: "date",
+          label: "Data",
+          sortable: true,
+        },
+        {
+          key: "time",
+          label: "Laikas",
+          sortable: true,
+        },
+        {
+          key: "status",
+          label: "Būsena",
+          sortable: true,
+        },
+      ],
       items: [],
+    };
+  },
+  validations() {
+    return {
+      filter: { required },
     };
   },
   created() {
@@ -16,16 +84,34 @@ export default {
   },
   methods: {
     fetchAppointments() {
+      var requestParams = {
+        page: this.currentPage,
+        limit: this.perPage,
+      };
+      if (this.filter !== "") {
+        requestParams = Object.assign(requestParams, { filter: this.filter });
+      }
       this.axios
-        .get("/api/front/appointments")
+        .get("/api/front/appointments", { params: requestParams })
         .then((response) => {
-          this.items = response.data;
+          this.items = response.data.appointments;
+          this.totalRows = response.data.total;
         });
     },
-      filterTable() {
+    filterTable() {
       if (this.v$.$validate() && !this.v$.filter.$error) {
-        this.fetchUsers();
+        this.fetchAppointments();
       }
+    },
+    getAppointmentId(value) {
+      return "V" + value.toString().padStart(3, "0");
+    },
+  },
+  watch: {
+    currentPage: {
+      handler: function (value) {
+        this.fetchAppointments();
+      },
     },
   },
 };
