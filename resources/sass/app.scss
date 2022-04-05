@@ -8,6 +8,15 @@
 @import "~bootstrap/scss/bootstrap";
 
 .services {
+
+    .heading{
+        font-size: 3.5rem;
+    }
+    h1{
+        span{    
+            font-size: 3.5rem;
+        }
+    }
     .box-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(43rem, 1fr));
@@ -21,7 +30,7 @@
             position: relative;
             i {
                 color: #2fbab8;
-                font-size: 5rem;
+                font-size: 3rem;
                 padding-bottom: 0.5rem;
             }
             h3 {
@@ -105,5 +114,11 @@
         }
         
     }
-    
+    .card-body{
+        .table{
+            .thead{
+                background-color: #048f8e !important;
+            }
+        }
+    }
 }

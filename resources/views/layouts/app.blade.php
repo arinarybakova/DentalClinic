@@ -13,6 +13,9 @@
 
     <!--custom css file link-->
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link href ="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+
+    <link rel = "stylesheet" href = "{{ asset('assets/css/patient_style.css') }}">
 
 
     <!-- Styles -->

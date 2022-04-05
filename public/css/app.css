@@ -11286,6 +11286,12 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.services .heading {
+  font-size: 3.5rem;
+}
+.services h1 span, .services .h1 span {
+  font-size: 3.5rem;
+}
 .services .box-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(43rem, 1fr));
@@ -11301,7 +11307,7 @@ textarea.form-control-lg {
 }
 .services .box-container .box i {
   color: #2fbab8;
-  font-size: 5rem;
+  font-size: 3rem;
   padding-bottom: 0.5rem;
 }
 .services .box-container .box h3, .services .box-container .box .h3 {
@@ -11369,6 +11375,9 @@ textarea.form-control-lg {
 .header .navbar .book:hover {
   background-color: #048f8e;
   color: #fff;
+}
+.header .card-body .table .thead {
+  background-color: #048f8e !important;
 }
 /*
 ! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com

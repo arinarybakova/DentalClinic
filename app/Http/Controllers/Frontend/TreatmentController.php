@@ -16,8 +16,7 @@ class TreatmentController extends Controller {
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            
-            $treatments = Treatment::orderBy('date');
+            $treatments = Treatment::orderBy('id');
             $pagination = $treatments->paginate($limit)->toArray();
             $treatments = $pagination['data'];
             $total_pages = $pagination['to'];
