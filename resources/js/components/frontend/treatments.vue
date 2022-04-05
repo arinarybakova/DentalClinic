@@ -3,7 +3,6 @@
         <section class="services" id="services">
             <h1 class="heading">gydymo <span>planas</span></h1>
         </section>
-
         <b-table hover :items="items" :fields="fields" :perPage="0">
         </b-table>
         <b-pagination
@@ -23,7 +22,7 @@ export default {
     return {
       v$: useVuelidate(),
     };
-  },
+  }, 
   data() {
     return {
       currentPage: 1,
@@ -76,7 +75,7 @@ export default {
         .then((response) => {
           this.items = response.data.treatments;
           this.totalRows = response.data.total;
-        });
+        });`
     },
     getTreatmentId(value) {
       return "E" + value.toString().padStart(3, "0");
