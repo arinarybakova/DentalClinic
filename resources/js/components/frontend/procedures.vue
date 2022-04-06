@@ -5,7 +5,7 @@
       <div class="box" v-for="procedure in items" :key="procedure.id">
         <h3>{{ procedure.title }}</h3>
         <p>{{ procedure.details }}</p>
-        <div class="cost">Kaina: {{ procedure.price}} eurų</div>
+        <div class="cost">Kaina: {{ procedure.price}} Eur</div>
         <!--<a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span></a>-->
       </div>
     </div>

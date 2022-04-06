@@ -13,14 +13,23 @@
         <div v-if="v$.filter.$error" class="text-danger mt-1">
         Prašome įvesti paieškos raktažodį
         </div>
-
-        <b-table hover :items="items" :fields="fields" :perPage="0">
-        </b-table>
+       
+        <b-table class="atable" hover :items="items" :fields="fields" :perPage="0">
+          <template #cell(id)="data">
+            <b>{{ getAppointmentId(data.value) }}</b>
+          </template>
+          <template v-slot:cell(status)="{ item }">
+          <span :class="{ 'text-green': item.status == 'Patvirtinta', 'text-red': item.status == 'Atšaukta',
+          'text-grey': item.status == 'Rezervuota' }">
+          {{ item.status }}
+          </span>
+          </template>
+         </b-table>
         <b-pagination
-      :total-rows="totalRows"
-      :per-page="perPage"
-      v-model="currentPage"
-      v-if="totalRows / perPage > 1"
+        :total-rows="totalRows"
+        :per-page="perPage"
+        v-model="currentPage"
+        v-if="totalRows / perPage > 1"
     />
     </div>
 </template>

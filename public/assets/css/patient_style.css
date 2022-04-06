@@ -276,24 +276,8 @@ td .status {
     margin-right: 1rem;
 }
 
-.status.red{
-    background: red;
-}
-
-.status.green{
-    background: green;
-}
-
-.status.yellow{
-    background: yellow;
-}
-
-.status.grey{
-    background: grey;
-}
-
 .table-responsive{
-    width: 100%;
+    width: 90%;
     overflow-x: auto;
 }
 
@@ -392,11 +376,31 @@ td .status {
 }
 .ptable, .b-table {
     border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
+    margin: 5px 0;
+    font-size: 1.4rem;
     font-family: sans-serif;
-    min-width: 300px;
+    min-width: 500px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.atable{
+    margin: 5px 0;
+    margin: auto;
+    max-width: 102rem;
+    padding-top: 10rem !important;
+    
+}
+
+.ttable {
+    border-collapse: collapse;
+    margin: 5px 0;
+    margin: auto;
+    font-size: 1rem;
+    font-family: sans-serif;
+    max-width: 750px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.Pcolumn{
+    width: 42%;
 }
 .b-table tbody {
     border-top: none !important;
@@ -406,15 +410,19 @@ td .status {
     background-color: var(--main-color);
     color: #ffffff;
     text-align: left;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 a { color: inherit; }
   /* mouse over link */
 
   .search
   {
+      height: 48px;
+      margin:auto;
+      max-width: 102rem;
+      margin-bottom: 3rem;
       display: flex;
-      border: 1px solid var(--main-color);
+      border: 1.6px solid var(--main-color);
       overflow: auto;
       border-radius: 6px;
       -moz-border-radius: 6px;
@@ -427,9 +435,10 @@ a { color: inherit; }
   
   .search input[type="text"]
   {
+      font-size: 1.5rem;
       border: 0px;
       width: 75.8%;
-      padding: 10px 10px;
+      padding: 3px 3px;
   }
   
   .search input[type="text"]:focus
@@ -445,8 +454,8 @@ a { color: inherit; }
       background-color: var(--main-color);
       color: #fff;
       float: right;
-      font-size: 1.2rem;
-      padding: 11px 36px;
+      font-size: 1.5rem;
+      padding: 11px 30px;
       border-top-right-radius: 5px;
       border-top-left-radius: 5px;
       -moz-border-radius-top-right: 5px;
@@ -694,4 +703,36 @@ a { color: inherit; }
 }
 .user-wrapper ul li ul.dropdown li{
     display: block;
+}
+
+.totalcost{
+    
+    display: inline center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 550;
+    color: var(--color-dark);
+    display:flex; flex-direction: row; text-align:center;
+    padding-top: 15px;
+    align-items: center;
+    justify-content: center;
+
+}
+.totalcost .price{
+    color: var(--main-color) !important;
+    padding-left: 0.8rem;
+    font-size: 1.9rem;
+}
+.text-green {
+    color: green;
+    font-weight: bold;
+  }
+.text-red {
+    color: red;
+    font-weight: bold;
+}
+
+.text-grey{
+    color: grey;
+    font-weight: bold;
 }
