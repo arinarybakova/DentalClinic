@@ -111,41 +111,41 @@ export default {
       form: {
         firstname: {
           required: helpers.withMessage(
-            "Prašome įvesti vartotojo vardą",
+            "Prašome įvesti naudotojo vardą",
             required
           ),
           maxLength: helpers.withMessage(
-            "Vartotojo vardas negali būti ilgesnis nei 255 simboliai",
+            "Naudotojo vardas negali būti ilgesnis nei 255 simboliai",
             maxLength(255)
           ),
         },
         lastname: {
           required: helpers.withMessage(
-            "Prašome įvesti vartotojo pavardę",
+            "Prašome įvesti naudotojo pavardę",
             required
           ),
           maxLength: helpers.withMessage(
-            "Vartotojo pavardė negali būti ilgesnė nei 255 simboliai",
+            "Naudotojo pavardė negali būti ilgesnė nei 255 simboliai",
             maxLength(255)
           ),
         },
         email: {
           required: helpers.withMessage(
-            "Prašome įvesti vartotojo el. paštą",
+            "Prašome įvesti naudotojo el. paštą",
             required
           ),
           email: helpers.withMessage(
-            "Vartotojo el. paštas neatitinka formato",
+            "Naudotojo el. paštas neatitinka formato",
             email
           )
         },
         phone: {
           required: helpers.withMessage(
-            "Prašome įvesti vartotojo tel. numerį",
+            "Prašome įvesti naudotojo tel. numerį",
             required
           ),
           maxLength: helpers.withMessage(
-            "Vartotojo tel. numeris negali būti ilgesnis nei 255 simboliai",
+            "Naudotojo tel. numeris negali būti ilgesnis nei 255 simboliai",
             maxLength(255)
           ),
         },

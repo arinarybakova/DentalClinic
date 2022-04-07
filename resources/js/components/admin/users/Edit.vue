@@ -3,7 +3,7 @@
     <user-form
       :bus="bus"
       :id="formId"
-      title="Redaguoti vartotoją"
+      title="Redaguoti naudotoją"
       submitTitle="Išsaugoti"
       :user="user"
       @formSubmit="onSubmit"
@@ -30,7 +30,7 @@ export default {
             this.bus.$emit("resetForm");
           } else {
             this.errorToast.message =
-              "Atsprašome įvyko klaida, nepavyko atnaujinti vartotojo";
+              "Atsprašome įvyko klaida, nepavyko atnaujinti naudotojo duomenų";
             this.errorToast.show = true;
           }
         });

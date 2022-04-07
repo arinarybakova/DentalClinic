@@ -748,13 +748,30 @@ a { color: inherit; }
 }
 .profile .label{
     color: var(--text-grey);
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 520;
     margin-top: 1.5rem;
 }
 input[readonly]{
     background-color: #fff !important;
     border-color: var(--main-color);
+    font-size: 1.7rem;
+    max-width: 500px;
+    height: 40px;
+}
+input[type="text"]
+  {
+      font-size: 1.7rem;
+      padding: 1px 1px;
+  }
+  input[type="password"]
+{
+  -webkit-text-security: disc;
+  font-size: 2rem;
+}
+input{
+    background-color: #fff !important;
+    border-color: var(--main-color) !important;
     font-size: 1.2rem;
     max-width: 500px;
     height: 40px;
@@ -763,4 +780,34 @@ input[readonly]{
     display:flex; flex-direction: column; text-align: center;
     font-size: 1.5rem;
     display:block;
+}
+
+.kbutton{
+    position:absolute;top: 20rem; right:40rem;
+    font-size: 1.4rem;
+   
+}
+
+.modal-footer{
+    border: none !important;
+    margin-bottom: 2rem !important;
+    margin-top: 3rem !important;
+    
+}
+.close{
+    font-size: 3.8rem !important;
+    position: absolute !important;
+    top: -10px !important;
+    right: 8px !important;
+    
+}
+.modal-header{
+    border: none !important;
+    
+}
+.modal-title{
+    font-size: 2rem !important;
+    margin: auto !important;
+    color: var(--color-dark) !important;
+    top: -80px !important;
 }
