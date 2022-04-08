@@ -9,7 +9,7 @@
         <div>
             <ul id="nav-ul">
                 <li id="nav-li">
-                    <a  id="nav-a">Administratorius</a>
+                    <a  id="nav-a">Administratorius <i class="fas fa-angle-down"></i> </a>
                     <ul id="nav-ul" class="dropdown">      
                         <li id="nav-li">
                             <form action="{{ route('logout') }}" method="POST">
