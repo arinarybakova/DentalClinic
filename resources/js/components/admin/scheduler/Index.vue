@@ -32,7 +32,7 @@
         :events="events"
         :event-color="getEventColor"
         :event-ripple="false"
-        @change="getEvents"
+        @change="fetchEvents"
         @click:event="updateEvent"
         @click:more="viewDay"
         @click:date="viewDay"
@@ -55,45 +55,6 @@
         @eventUpdated="eventUpdated"
         :event="selectedEvent"
       ></edit-event>
-
-      <v-menu
-          v-model="selectedOpen"
-          :close-on-content-click="false"
-          :activator="selectedElement"
-          offset-x
-        >
-          <v-card
-            color="grey lighten-4"
-            min-width="350px"
-            flat
-          >
-            <v-toolbar
-              :color="selectedEvent.color"
-              dark
-            >
-              <v-btn>
-                Edit
-              </v-btn>
-              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                More
-              </v-btn>
-            </v-toolbar>
-            <v-card-text>
-              <span v-html="selectedEvent.details"></span>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn
-                text
-                color="secondary"
-                @click="selectedOpen = false"
-              >
-                Cancel
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-menu>
     </v-col>
   </v-row>
 </template>
@@ -105,6 +66,7 @@ export default {
     data: () => ({
         value: '',
         events: [],
+        fetchedEvents: [],
         colors: ['#2196F3', '#3F51B5'],
         names: ['Work Schedule', 'Appointment'],
         dragEvent: null,
@@ -218,26 +180,29 @@ export default {
                 `rgba(${r}, ${g}, ${b}, 0.7)` :
                 event.color
         },
-        getEvents({ start, end }) {
-            const events = []
-            const min = new Date(`${start.date}T00:00:00`).getTime()
-            const max = new Date(`${end.date}T23:59:59`).getTime()
-            const eventCount = 10;
-            for (let i = 0; i < eventCount; i++) {
-                const timed = this.rnd(0, 3) !== 0
-                const firstTimestamp = this.rnd(min, max)
-                const secondTimestamp = this.rnd(2, timed ? 8 : 288) * 900000
-                const start = firstTimestamp - (firstTimestamp % 900000)
-                const end = start + secondTimestamp
-                events.push({
-                    name: this.rndElement(this.names),
-                    color: this.rndElement(this.colors),
-                    start,
-                    end,
-                    timed,
-                })
-            }
-            this.events = events
+        async fetchEvents() {
+          this.axios
+            .get("/api/schedules")
+            .then((response) => {
+              this.fetchedEvents = response.data;
+              this.mapEvents();
+            });
+        },
+        mapEvents() {
+          var mappedEvents = [];
+          for (let i = 0; i < this.fetchedEvents.length; i++) {
+              const timed = true;
+              var start = this.fetchedEvents[i].time_from * 1000;
+              var end = this.fetchedEvents[i].time_to * 1000;
+              mappedEvents.push({
+                  name: this.fetchedEvents[i].doctor,
+                  color: this.rndElement(this.colors),
+                  start,
+                  end,
+                  timed,
+              })
+          }
+          this.events = mappedEvents;
         },
         rnd(a, b) {
             return Math.floor((b - a + 1) * Math.random()) + a
@@ -269,6 +234,7 @@ export default {
           this.$bvModal.show("edit-event");
         },
         eventUpdated(event) {
+          this.selectedEvent.name = event.title;
           console.log(event);
         }
     },

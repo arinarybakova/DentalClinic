@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ form }}
     <toast
       type="error"
       :msg="errorToast.message"
@@ -152,6 +151,7 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       if (this.v$.$validate() && !this.v$.$error) {
+        this.$bvModal.hide(this.formId);
         this.$emit("formSubmit", this.form);
       }
     },
