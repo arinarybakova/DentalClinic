@@ -50,6 +50,7 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::get('/procedure', [ProcedureController::class, 'index'])->name('admin.procedure');
     Route::get('/doctors', [UserController::class, 'doctors'])->name('admin.doctors');
     Route::get('/patients', [UserController::class, 'patients'])->name('admin.patients');
+    Route::get('/schedule', [App\Http\Controllers\Admin\HomeController::class, 'schedule'])->name('admin.schedule');
 });
 
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'api'], function () {

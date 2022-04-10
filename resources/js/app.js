@@ -29,6 +29,19 @@ Vue.use(BootstrapVue)
 
 Vue.use(VueAxios, axios);
 
+import Vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'dayspan-vuetify/dist/lib/dayspan-vuetify.min.css'
+
+Vue.use(Vuetify);
+
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#2fbab8'
+  }
+});
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -54,6 +67,10 @@ Vue.component('add-user', require('./components/admin/users/Create.vue').default
 Vue.component('edit-user', require('./components/admin/users/Edit.vue').default);
 Vue.component('delete-user', require('./components/admin/users/Delete.vue').default);
 
+Vue.component('schedule', require('./components/admin/scheduler/Index.vue').default);
+Vue.component('edit-event', require('./components/admin/scheduler/Edit.vue').default);
+Vue.component('event-form', require('./components/admin/scheduler/EventForm.vue').default);
+
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);
 
@@ -78,5 +95,6 @@ Vue.component('profile', require('./components/frontend/profile.vue').default);
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    vuetify: new Vuetify()
 });

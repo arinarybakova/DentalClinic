@@ -11379,6 +11379,17 @@ textarea.form-control-lg {
 .header .card-body .table .thead {
   background-color: #048f8e !important;
 }
+
+header.v-sheet {
+  left: 0 !important;
+  width: 100% !important;
+}
+header .mdi-chevron-left::before {
+  content: "<" !important;
+}
+header .mdi-chevron-right::before {
+  content: ">" !important;
+}
 /*
 ! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com
 *//*

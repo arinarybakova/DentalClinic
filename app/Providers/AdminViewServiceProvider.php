@@ -53,10 +53,10 @@ class AdminViewServiceProvider extends ServiceProvider
                 'route'     => false
             ];
             $links[] = (object)[
-                'href'      => 'admin/html/htmlschedule.html',
+                'href'      => route('admin.schedule'),
                 'icon'      => 'fas fa-calendar-alt',
                 'name'      => 'Tvarkaraštis',
-                'route'     => false
+                'route'     => 'admin/schedule'
             ];
             $links[] = (object)[
                 'href'      => route('admin.procedure'),

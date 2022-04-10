@@ -9,4 +9,9 @@ class HomeController extends Controller
     {
         return view('admin.home');
     }
+
+    public function schedule()
+    {
+        return view('admin.schedule');
+    }
 }
