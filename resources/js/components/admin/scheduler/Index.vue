@@ -180,7 +180,7 @@ export default {
                 `rgba(${r}, ${g}, ${b}, 0.7)` :
                 event.color
         },
-        async fetchEvents() {
+        fetchEvents() {
           this.axios
             .get("/api/schedules")
             .then((response) => {
@@ -200,6 +200,7 @@ export default {
                   start,
                   end,
                   timed,
+                  fk_dentist: this.fetchedEvents[i].fk_dentist,
               })
           }
           this.events = mappedEvents;

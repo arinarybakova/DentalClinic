@@ -25,10 +25,10 @@
         >
           <b-form-select 
             id="doctor-input"
-            v-model="form.doctor" 
+            v-model="form.fk_dentist" 
             :options="doctorOptions" />
         </b-form-group>
-        <form-error :validation="v$.form.doctor"></form-error>
+        <form-error :validation="v$.form.fk_dentist"></form-error>
         <b-form-group id="date-group" label="Data:" label-for="date-input">
           <b-form-input
             id="date-input"
@@ -94,7 +94,7 @@ export default {
     return {
       form: {
         title: "",
-        doctor: "",
+        fk_dentist: "",
         date: "",
         timeFrom: "",
         timeTo: "",
@@ -103,12 +103,7 @@ export default {
         message: "",
         show: false,
       },
-      doctorOptions: [
-        { value: '', text: 'Pasirinkite gydytoją' },
-        { value: '1', text: 'Arina' },
-        { value: '2', text: 'Miglė' },
-        { value: '3', text: 'Antanas' }
-      ],
+      doctorOptions: [],
     };
   },
   validations() {
@@ -120,7 +115,7 @@ export default {
             required
           ),
         },
-        doctor: {
+        fk_dentist: {
           required: helpers.withMessage(
             "Prašome pasirinkti gydytoją",
             required
@@ -147,6 +142,9 @@ export default {
       },
     };
   },
+  created() {
+    this.fetchDoctors();
+  },
   methods: {
     onSubmit(event) {
       event.preventDefault();
@@ -158,7 +156,7 @@ export default {
     resetForm() {
       this.form = {
         title: "",
-        doctor: "",
+        fk_dentist: "",
         date: "",
         timeFrom: "",
         timeTo: "",
@@ -166,12 +164,13 @@ export default {
       this.v$.$reset();
     },
     mapEventToForm() {
+      console.log(this.event);
       var dateFrom = new Date(this.event.start);
       var dateFormatted = dateFrom.getFullYear() + "-" + this.addPadStart((dateFrom.getMonth() + 1)) + "-" + this.addPadStart(dateFrom.getDate());
       var dateTo = new Date(this.event.end);
       this.form = {
         title: this.event.name,
-        doctor: "",
+        fk_dentist: this.event.fk_dentist,
         date: dateFormatted,
         timeFrom: this.addPadStart(dateFrom.getHours()) + ":" + this.addPadStart(dateFrom.getMinutes()),
         timeTo: this.addPadStart(dateTo.getHours()) + ":" + this.addPadStart(dateTo.getMinutes()),
@@ -179,7 +178,17 @@ export default {
     },
     addPadStart(value) {
       return value.toString().padStart(2, "0");
-    }
+    },
+    fetchDoctors() {
+          this.axios
+            .get("/api/users?usertype=3&page=1")
+            .then((response) => {
+              this.doctorOptions.push({ value: '', text: 'Pasirinkite gydytoją' });
+              for(var i = 0; i < response.data.users.length; i++) {
+                this.doctorOptions.push({ value: response.data.users[i].id, text: response.data.users[i].name });
+              }
+            });
+        },
   },
   watch: {
     "event": function (newVal) {
