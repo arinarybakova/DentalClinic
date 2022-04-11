@@ -17,6 +17,7 @@ export default {
     }),
     methods: {
         fetchEvents(value) {
+            console.log(this.value);
             this.axios
                 .get("/api/schedules?start=" + value)
                 .then((response) => {
@@ -47,10 +48,10 @@ export default {
             this.$bvModal.show("edit-event");
         },
         eventUpdated(event) {
-            this.fetchEvents();
+            this.fetchEvents(this.value);
         },
         eventAdded(event) {
-            this.fetchEvents();
+            this.fetchEvents(this.value);
         }
     },
 }
