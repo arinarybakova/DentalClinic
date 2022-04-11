@@ -66,6 +66,8 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::post('/users/destroy/{id}', [UserController::class, 'destroy'])->name('api.admin.users.destroy');
 
     Route::get('/schedules', [ScheduleController::class, 'schedules'])->name('api.admin.schedules');
+    Route::post('/schedules/store', [ScheduleController::class, 'store'])->name('api.admin.schedules.store');
+    Route::patch('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('api.admin.schedules.update');
 });
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {

@@ -68,6 +68,7 @@ Vue.component('edit-user', require('./components/admin/users/Edit.vue').default)
 Vue.component('delete-user', require('./components/admin/users/Delete.vue').default);
 
 Vue.component('schedule', require('./components/admin/scheduler/Index.vue').default);
+Vue.component('calendar', require('./components/admin/scheduler/Calendar.vue').default);
 Vue.component('edit-event', require('./components/admin/scheduler/Edit.vue').default);
 Vue.component('event-form', require('./components/admin/scheduler/EventForm.vue').default);
 
