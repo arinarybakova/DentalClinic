@@ -185,7 +185,7 @@ export default {
       this.filter = "";
       this.currentPage = 1;
       this.success.message =
-        'Vartotojo "' + user.name + '" redagavimas sėkmingas';
+        'Naudotojo "' + user.name + '" redagavimas sėkmingas';
       this.success.show = true;
       this.fetchUsers();
     },
@@ -193,7 +193,7 @@ export default {
       this.filter = "";
       this.currentPage = 1;
       this.success.message =
-        'Vartotojas "' +
+        'Naudotojas "' +
         user.firstname +
         " " +
         user.lastname +

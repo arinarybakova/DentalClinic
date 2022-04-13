@@ -47,10 +47,10 @@ class AdminViewServiceProvider extends ServiceProvider
                 'route'     => 'admin/doctors'
             ];
             $links[] = (object)[
-                'href'      => 'admin/html/appointments.html',
+                'href'      => route('admin.appointment'),
                 'icon'      => 'fas fa-calendar-check',
                 'name'      => 'Vizitai',
-                'route'     => false
+                'route'     => 'admin/appointment'
             ];
             $links[] = (object)[
                 'href'      => route('admin.schedule'),
@@ -65,10 +65,10 @@ class AdminViewServiceProvider extends ServiceProvider
                 'route'     => 'admin/procedure'
             ];
             $links[] = (object)[
-                'href'      => 'admin/html/currentuser.html',
+                'href'      => route('admin.profile'),
                 'icon'      => 'fas fa-user-cog',
                 'name'      => 'Paskyra',
-                'route'     => false
+                'route'     => 'admin/profile'
             ];
 
             $view->with('links', $links);

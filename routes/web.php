@@ -8,6 +8,8 @@ use App\Http\Controllers\Frontend\AppointmentController as FrontendAppointmentCo
 use App\Http\Controllers\Frontend\TreatmentController as FrontendTreatmentController;
 use App\Http\Controllers\Frontend\ProfileController as FrontendProfileController;
 use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\AppointmentController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Auth\AuthController;
@@ -52,6 +54,8 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::get('/doctors', [UserController::class, 'doctors'])->name('admin.doctors');
     Route::get('/patients', [UserController::class, 'patients'])->name('admin.patients');
     Route::get('/schedule', [ScheduleController::class, 'index'])->name('admin.schedule');
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('admin.appointment');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
 });
 
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'api'], function () {
@@ -68,6 +72,10 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::get('/schedules', [ScheduleController::class, 'schedules'])->name('api.admin.schedules');
     Route::post('/schedules/store', [ScheduleController::class, 'store'])->name('api.admin.schedules.store');
     Route::patch('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('api.admin.schedules.update');
+
+    Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('api.admin.appointments');
+
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('api.admin.profile');
 });
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {

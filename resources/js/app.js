@@ -75,16 +75,20 @@ Vue.component('event-form', require('./components/admin/scheduler/EventForm.vue'
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);
 
+Vue.component('appointment', require('./components/admin/appointment/Table.vue').default);
+
+Vue.component('profile', require('./components/admin/profile/Index.vue').default);
+
 //Frontend procedures
 Vue.component('procedures', require('./components/frontend/procedures.vue').default);
 
-//Frontent appointments
+//Frontend appointments
 Vue.component('appointments', require('./components/frontend/appointments.vue').default);
 
-//Frontent treatments
+//Frontend treatments
 Vue.component('treatments', require('./components/frontend/treatments.vue').default);
 
-//Frontent profile
+//Frontend profile
 Vue.component('profile', require('./components/frontend/profile.vue').default);
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);

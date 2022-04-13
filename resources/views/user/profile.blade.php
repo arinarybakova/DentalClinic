@@ -3,5 +3,5 @@
 @section('title', 'Home Page')
 
 @section('content')
-    <profile />
+    <profile><profile/>
 @endsection

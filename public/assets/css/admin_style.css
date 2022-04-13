@@ -391,7 +391,7 @@ td .status {
 .ptable, .b-table {
     border-collapse: collapse;
     margin: 25px 0;
-    font-size: 0.9em;
+    font-size: 1.1rem;
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -404,6 +404,9 @@ td .status {
     background-color: var(--main-color);
     color: #ffffff;
     text-align: left;
+}
+.ptable td, .b-table td{
+    font-size: 1rem;
 }
 a { color: inherit; }
   /* mouse over link */
@@ -691,3 +694,43 @@ a { color: inherit; }
 .user-wrapper ul li ul.dropdown li{
     display: block;
 }
+.text-green {
+    color: green;
+    font-weight: bold;
+    
+}
+.text-red {
+    color: red;
+    font-weight: bold;
+    
+}
+
+.text-grey{
+    color: grey;
+    font-weight: bold;
+}
+#nav-ul .dropdown{
+    font-size: 1rem;
+    border-radius: 15px;
+    border: 1.5px solid var(--color-dark);
+    padding: 2px;
+    width: 50px;
+    height: 40px;
+    background-color: var(--button-hover);
+}
+#nav-ul .dropdown #nav-li{
+    color: var(--color-dark);
+    padding-top: 4px;
+}
+#nav-ul .dropdown #nav-li :hover{
+    color: #ffffff;
+}
+#nav-ul .dropdown #nav-li #out{
+    font-size: 1.2rem !important;
+    font-style: bold !important;
+    
+} 
+#nav-ul .dropdown #nav-li #out #out{
+    padding-right: 4px;
+    
+} 
