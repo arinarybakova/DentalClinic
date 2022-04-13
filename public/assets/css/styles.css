@@ -21,7 +21,6 @@
 }
 
 html{
-    font-size: 62.5%;
     overflow-x: hidden;
     scroll-padding-top:7rem;
     scroll-behavior: smooth;
@@ -40,19 +39,18 @@ section:nth-child(even){
 
 .heading{
     text-align: center;
-    padding-bottom: 2rem;
-    
+    padding-bottom: 1rem;
     text-transform: uppercase;
     color: var(--black);
-    font-size: 5rem;
-    padding-top: 10rem;
+    font-size: 2.4rem !important;
+    padding-top: 4rem;
     letter-spacing: .4rem;
 }
 
 .heading span{
     text-transform: uppercase;
     color: var(--green);
-    font-size: 5rem;
+    font-size: 2.4rem!important;
     letter-spacing: .4rem;
 }
 
@@ -89,10 +87,10 @@ section:nth-child(even){
     
 }
 .header{
-    padding:2rem 9%;
+    padding:2rem 6%;
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 1000;
+    z-index: 1;
     box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
     display: flex;
     align-items: center;
@@ -106,29 +104,28 @@ section:nth-child(even){
 }
 /*logo teksto dydis ir spalva*/
 .header .banner .logo{
-    font-size: 2.5rem;
+    font-size: 1.6rem;
     color: var(--black);
-    margin-top: 13px;
+    margin-top: 8px;
    
 }
 .header .banner .cne{
     display: inline-block;
-    font-size: 1.45rem;
+    font-size: 1rem;
     color: var(--green);
     font-weight: bold;
     position: absolute;
     left: 0;
-    margin-left: 3rem;
-    margin-right: 4rem;
+    margin-right: 1.5rem;
 }
 .header .banner  .cnt{
     display: inline-block;
-    font-size: 1.45rem;
+    font-size: 1rem;
     font-weight: bold;
     position: absolute;
     color: var(--green);
     right: 0;
-    margin-left: 4rem;
+    margin-left: 1.5rem;
     text-align: right;
 }
 /*logo icon'o spalva*/
@@ -136,12 +133,13 @@ section:nth-child(even){
     color: var(--green);
 }
 
+
 /*navbar'o skiltys*/
 .header .navbar a, 
 .header .navbar button[type="submit"] {
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     color: var(--light-color);
-    margin-left:  2rem;
+    margin-left:  1rem;
     text-decoration: none;
 }
 /*navbar'o skiltys uzvedus pele*/
@@ -163,9 +161,9 @@ section:nth-child(even){
 
 
 .services .box-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(43rem, 1fr));
-    gap: 2rem;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(43rem, 1fr)) !important;
+    gap: 2rem !important;
 }
 
 .services .box-container .box{
@@ -173,22 +171,15 @@ section:nth-child(even){
     border-radius:  .5rem;
     box-shadow: var(--box-shadow);
     border: var(--border);
-    padding: 2.5rem;
+    padding: 2rem;
     position: relative;
-}
-
-
-.services .box-container .box i{
-    color: var(--green);
-    font-size: 5rem;
-    padding-bottom: .5rem;
 }
 
 .services .box-container .box h3{
     color: var(--black);
-    font-size: 2.5rem;
-    padding: 1rem 0;
-    text-transform: none;
+    font-size: 1.6rem !important;
+    padding: 1rem 0 !important;
+    text-transform: none !important;
     color: var(--green);
 }
 
@@ -202,7 +193,7 @@ section:nth-child(even){
 .services .cost{
     color: var(--green);
     text-transform: none;
-    font-size: 1.5rem;
+    font-size: 1.3rem !important;
     font-weight: bold;
     text-align: right;
     position: absolute;
@@ -213,19 +204,19 @@ section:nth-child(even){
 }
 
 
-/* media queries kai ekrando dydis yra mazesnis nei 991px*/
+/* media queries kai ekrando dydis yra mazesnis nei 991px
 @media (max-width: 991px){
     html{
-        font-size: 55%;
+        
     }
     .header{
-        padding: 2rem;
+        
     }
 }
 
 
 /* kai ekrano dydis mazesnis nei 768px, rodyti menu mygtuka ir paslepti navbar'o sekcijas po mygtuku*/
-@media (max-width: 768px){
+@media (max-width: 1455px){
     #menu-btn{
         display: initial;
     }
@@ -256,11 +247,11 @@ section:nth-child(even){
     }
     
 }
-/* media queries kai ekrando dydis yra mazesnis nei 450px*/
+/* media queries kai ekrando dydis yra mazesnis nei 450px
 @media (max-width: 450px){
     html{
         font-size: 50%;
     }
    
-}
+}*/
 

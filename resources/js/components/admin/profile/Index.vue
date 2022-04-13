@@ -1,6 +1,5 @@
 <template>
 <div>
-  <section class="services" id="services">
     <b-button v-b-modal.modal-1 class ="kbutton">Keisti</b-button>
     <b-modal id="modal-1":no-close-on-backdrop="true" title ="Keisti paskyros duomenis"
      ok-only ok-variant="secondary" ok-title="Išsauogti">

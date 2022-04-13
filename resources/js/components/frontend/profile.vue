@@ -12,7 +12,7 @@
         label-for="input-1"
         :state="state"
         >
-        <b-form-input id="input-1" v-model="name" :state="state" trim></b-form-input>
+        <b-form-input id="input-1"  v-model="name" :state="state" trim></b-form-input>
         </b-form-group>
         <b-form-group class = "label"
         id="fieldset-1"
@@ -97,9 +97,10 @@
 </template>
 <script>
 export default {
+  props: ['user'],
   data() {
     return {
-      items: [],
+      user: ''
     };
   },
   created() {
@@ -111,6 +112,7 @@ export default {
         .get("/api/front/profile")
         .then((response) => {
           this.items = response.data;
+          
         });
     },
   },
