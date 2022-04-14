@@ -3,6 +3,17 @@
         <section class="services" id="services">
             <h1 class="heading">gydymo <span>planas</span></h1>
         </section>
+        <div class="searcht">
+          <b-form-input
+              v-model="filter"
+              placeholder="Įveskite paieškos raktažodį"
+          ></b-form-input>
+          <b-button v-on:click="filterTable()">Ieškoti</b-button>
+          </div>
+          <div v-if="v$.filter.$error" class="text-danger mt-1">
+          Prašome įvesti paieškos raktažodį
+          </div>
+       
         <b-table class ="ttable" hover :items="items" :fields="fields" :perPage="0" :cell-class-name="classChecker">
         <template #cell(id)="data">
           <b>{{ getTreatmentId(data.value) }}</b>
@@ -21,7 +32,7 @@
           v-if="totalRows / perPage > 1"
        />
        <div class = "totalcost">
-          Preliminari gydymo plano kaina: <div class = "price"> {{ total }} Eur</div>
+          Preliminari gydymo plano kaina: <div class = "price">{{ total }} Eur</div>
        </div>
   </div>      
 </template>
@@ -49,30 +60,32 @@ export default {
         {
           key: "id",
           label: "ID",
-          sortable: false,
+          sortable: true,
         },
         {
           key: "procedure",
           label: "Procedūra",
-          sortable: false,
+          sortable: true,
           thClass: 'Pcolumn'
         },
         {
           key: "cost",
-          label: "Kaiana",
-          sortable: false,
+          label: "Kaina",
+          sortable: true,
         },
         {
           key: "status",
           label: "Būsena",
-          sortable: false,
+          sortable: true,
         },
       ],
       items: [],
     };
   },
   validations() {
-    
+    return {
+      filter: { required },
+    };
   },
   created() {
     this.fetchTreatments();
@@ -92,6 +105,11 @@ export default {
     },
     getTreatmentId(value) {
       return "E" + value.toString().padStart(3, "0");
+    },
+    filterTable() {
+      if (this.v$.$validate() && !this.v$.filter.$error) {
+        this.fetchTreatments();
+      }
     },
   },
   computed: {

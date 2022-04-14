@@ -695,19 +695,37 @@ a { color: inherit; }
     display: block;
 }
 .text-green {
-    color: green;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 2px solid var(--color-dark);
+    padding: 3px; 
+    background-color:green ;
+    
     
 }
 .text-red {
-    color: red;
-    font-weight: bold;
-    
-}
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 2px solid var(--color-dark);
+    padding: 3px; 
+    background-color:red ;
 
+}
 .text-grey{
-    color: grey;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 2px solid var(--color-dark);
+    padding: 3px; 
+    background-color:grey ;
 }
 #nav-ul .dropdown{
     font-size: 1rem;

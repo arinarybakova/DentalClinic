@@ -2,7 +2,7 @@
 
 
 :root{
-    --green:#2fbab8;
+    --green: #2fbab8;
     --black:#444;
     --light-color:#777;
     --box-shadow:.5rem .5rem 0 rgba(22, 160, 133, .2);
@@ -61,7 +61,7 @@ section:nth-child(even){
     padding-left: 1rem;
     border: var(--border);
     border-radius: .5rem;
-    box-shadow: var(--box-shadow);
+  
     color:var(--green);
     cursor: pointer;
     font-size: 1.7rem;
@@ -177,7 +177,7 @@ section:nth-child(even){
 
 .services .box-container .box h3{
     color: var(--black);
-    font-size: 1.6rem !important;
+    font-size: 1.4rem !important;
     padding: 1rem 0 !important;
     text-transform: none !important;
     color: var(--green);
@@ -185,7 +185,7 @@ section:nth-child(even){
 
 .services .box-container .box p{
     color: var(--light-color);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 2;
     text-transform: none;
     text-align: justify
@@ -215,7 +215,7 @@ section:nth-child(even){
 }
 
 
-/* kai ekrano dydis mazesnis nei 768px, rodyti menu mygtuka ir paslepti navbar'o sekcijas po mygtuku*/
+/* kai ekrano dydis mazesnis nei 1455px, rodyti menu mygtuka ir paslepti navbar'o sekcijas po mygtuku*/
 @media (max-width: 1455px){
     #menu-btn{
         display: initial;
@@ -244,8 +244,12 @@ section:nth-child(even){
         font-size: 2rem;
         display: block;
         margin: 2.5rem;
-    }
-    
+    }    
+}
+
+.active{
+    color: var(--green);
+    font-style: bold ;
 }
 /* media queries kai ekrando dydis yra mazesnis nei 450px
 @media (max-width: 450px){
