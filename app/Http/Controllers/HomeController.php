@@ -25,7 +25,7 @@ class HomeController extends Controller
             }
             else
             {
-                return view('doctor.home');
+                return view('dentist.home');
             }
         }
         else

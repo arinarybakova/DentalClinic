@@ -11,10 +11,15 @@ use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\Dentist\UserController as DentistUserController;
+use App\Http\Controllers\Dentist\ProcedureController as DentistProcedureController;
+use App\Http\Controllers\Dentist\ScheduleController as DentistScheduleController;
+use App\Http\Controllers\Dentist\AppointmentController as DentistAppointmentController;
+use App\Http\Controllers\Dentist\ProfileController as DentistProfileController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Models\Procedure;
 use App\Models\Appointment;
+use App\Models\Schedule;
 use App\Models\Treatment;
 use App\Models\User;
 
@@ -86,6 +91,22 @@ Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
 
 });
 
+Route::group(['middleware' => ['is.dentist'], 'namespace' => 'Dentist', 'prefix' => 'dentist'], function () {
+    /*Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');*/
+    Route::get('/procedure', [DentistProcedureController::class, 'index'])->name('dentist.procedure');
+    Route::get('/patients', [DentistUserController::class, 'patients'])->name('dentist.patients');
+    Route::get('/schedule', [DentistScheduleController::class, 'index'])->name('dentist.schedule');
+    Route::get('/appointments', [DentistAppointmentController::class, 'index'])->name('dentist.appointment');
+    Route::get('/profile', [DentistProfileController::class, 'index'])->name('dentist.profile');
+});
+
+Route::group(['middleware' => ['is.dentist'], 'namespace' => 'Dentist', 'prefix' => 'api'], function () {
+    Route::get('/procedures', [DentistProcedureController::class, 'procedures'])->name('api.dentist.procedures');
+    Route::get('/users', [DentistUserController::class, 'users'])->name('api.dentist.users');
+    Route::get('/schedules', [DentistScheduleController::class, 'schedules'])->name('api.dentist.schedules');
+    Route::get('/appointments', [DentistAppointmentController::class, 'appointments'])->name('api.dentist.appointments');
+    Route::get('/profile', [DentistProfileController::class, 'profile'])->name('api.denist.profile');
+});
 // Route::get('/home', [HomeController::class, 'redirect']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

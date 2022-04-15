@@ -67,6 +67,7 @@ Vue.component('add-user', require('./components/admin/users/Create.vue').default
 Vue.component('edit-user', require('./components/admin/users/Edit.vue').default);
 Vue.component('delete-user', require('./components/admin/users/Delete.vue').default);
 
+//Admin scheduler
 Vue.component('schedule', require('./components/admin/scheduler/Index.vue').default);
 Vue.component('calendar', require('./components/admin/scheduler/Calendar.vue').default);
 Vue.component('edit-event', require('./components/admin/scheduler/Edit.vue').default);
@@ -75,8 +76,10 @@ Vue.component('event-form', require('./components/admin/scheduler/EventForm.vue'
 Vue.component('form-error', require('./components/ui/FormError.vue').default);
 Vue.component('toast', require('./components/ui/Toast.vue').default);
 
+//Admin appointments
 Vue.component('appointment', require('./components/admin/appointment/Table.vue').default);
 
+//Admin profile
 Vue.component('profile', require('./components/admin/profile/Index.vue').default);
 
 //Frontend procedures
@@ -90,6 +93,22 @@ Vue.component('treatments', require('./components/frontend/treatments.vue').defa
 
 //Frontend profile
 Vue.component('profile', require('./components/frontend/profile.vue').default);
+
+//Dentist appointments
+Vue.component('appointment', require('./components/dentist/appointment/Table.vue').default);
+
+//Dentist patients
+Vue.component('patients', require('./components/dentist/patients/Table.vue').default);
+
+//Dentist procedures
+Vue.component('procedure-table', require('./components/dentist/procedure/Table.vue').default);
+
+//Dentist schedule
+Vue.component('schedule', require('./components/dentist/scheduler/Index.vue').default);
+
+//Dentist profile
+Vue.component('profile', require('./components/dentist/profile/profile.vue').default);
+
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));

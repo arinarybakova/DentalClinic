@@ -49,6 +49,9 @@ class AuthController extends Controller
                 case config('app.usertype_admin'):
                     redirect()->intended('admin')
                         ->withSuccess('You have Successfully loggedin');
+                 case config('app.usertype_dentist'):
+                    redirect()->intended('dentist')
+                        ->withSuccess('You have Successfully loggedin');
                 default:
                 redirect()->intended(RouteServiceProvider::HOME)
                         ->withSuccess('You have Successfully loggedin');
