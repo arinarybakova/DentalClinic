@@ -3,7 +3,7 @@
         <label for="nav-toggle">
             <span class="fas fa-bars"></span>
         </label>
-        Procedūros
+        @yield('headingTitle')
     </h2>
     <div class="user-wrapper">
         <div>

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Home Page')
+@section('title', 'Profile')
+@section('headingTitle', 'Paskyra')
 
 @section('content')
     <profile><profile/>

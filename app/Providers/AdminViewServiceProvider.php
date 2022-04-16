@@ -50,7 +50,7 @@ class AdminViewServiceProvider extends ServiceProvider
                 'href'      => route('admin.appointment'),
                 'icon'      => 'fas fa-calendar-check',
                 'name'      => 'Vizitai',
-                'route'     => 'admin/appointment'
+                'route'     => 'admin/appointments'
             ];
             $links[] = (object)[
                 'href'      => route('admin.schedule'),

@@ -94,21 +94,6 @@ Vue.component('treatments', require('./components/frontend/treatments.vue').defa
 //Frontend profile
 Vue.component('profile', require('./components/frontend/profile.vue').default);
 
-//Dentist appointments
-Vue.component('appointment', require('./components/dentist/appointment/Table.vue').default);
-
-//Dentist patients
-Vue.component('patients', require('./components/dentist/patients/Table.vue').default);
-
-//Dentist procedures
-Vue.component('procedure-table', require('./components/dentist/procedure/Table.vue').default);
-
-//Dentist schedule
-Vue.component('schedule', require('./components/dentist/scheduler/Index.vue').default);
-
-//Dentist profile
-Vue.component('profile', require('./components/dentist/profile/profile.vue').default);
-
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Doctors')
+@section('title', 'Patients')
+@section('headingTitle', 'Pacientai')
 
 @section('content')
     <users usertype="{{ config('app.usertype_patient') }}"></users>
