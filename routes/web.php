@@ -17,6 +17,8 @@ use App\Http\Controllers\Dentist\ScheduleController as DentistScheduleController
 use App\Http\Controllers\Dentist\AppointmentController as DentistAppointmentController;
 use App\Http\Controllers\Dentist\ProfileController as DentistProfileController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Frontend\ReservationController;
+use App\Http\Controllers\Frontend\DoctorsController;
 use App\Models\Procedure;
 use App\Models\Appointment;
 use App\Models\Schedule;
@@ -46,7 +48,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
     Route::get('appointments', [FrontendAppointmentController::class, 'index'])->name('appointments');
     Route::get('treatments', [FrontendTreatmentController::class, 'index'])->name('treatments');
-
+    Route::get('reservations', [ReservationController::class, 'index'])->name('reservation');
     Route::get('profile', [FrontendProfileController::class, 'index'])->name('profile');
     
 });
@@ -88,7 +90,8 @@ Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
     Route::get('/appointments', [FrontendAppointmentController::class, 'appointments'])->name('api.appointments');
     Route::get('/treatments', [FrontendTreatmentController::class, 'treatments'])->name('api.treatments');
     Route::get('/profile', [FrontendProfileController::class, 'profile'])->name('api.profile');
-
+    Route::get('/doctors', [DoctorsController::class, 'index'])->name('api.doctors');
+    Route::get('/availableTimes', [ReservationController::class, 'availableTimes'])->name('api.availableTimes');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);

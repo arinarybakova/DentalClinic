@@ -94,6 +94,8 @@ Vue.component('treatments', require('./components/frontend/treatments.vue').defa
 //Frontend profile
 Vue.component('profile', require('./components/frontend/profile.vue').default);
 
+Vue.component('reservation-modal', require('./components/frontend/reservation/reservation.vue').default);
+Vue.component('reservation-day', require('./components/frontend/reservation/reservationDay.vue').default);
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('component', require('./components/Home.vue'));

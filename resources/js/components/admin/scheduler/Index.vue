@@ -7,7 +7,7 @@
     
         </b-form-group>
     
-        <calendar :events="events" @fetchEvents="fetchEvents" @updateEvent="updateEvent" />
+        <calendar :events="events" @fetchEvents="fetchEvents" @updateEvent="updateEvent" @valueChange="updateValue"/>
     
         <edit-event @eventUpdated="eventUpdated" @eventAdded="eventAdded" :event="selectedEvent"></edit-event>
     
@@ -82,6 +82,9 @@ export default {
         },
         eventAdded(event) {
             this.fetchEvents(this.value);
+        },
+        updateValue(value) {
+            this.value = value;
         }
     },
 }

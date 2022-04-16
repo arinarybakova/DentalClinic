@@ -189,6 +189,7 @@ export default {
         },
         updateEvent(event) {
             this.$emit("updateEvent", event);
+            this.$emit("valueChange", this.value);
         }
     },
 }

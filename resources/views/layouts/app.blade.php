@@ -42,12 +42,9 @@
             @auth
             <a href="{{route('appointments')}}">Vizitų istorija</a>
             <a href="{{route('treatments')}}">Gydymo planas</a>
-            <a href="{{route('profile')}}">Paskyra</a>
+            <a href="{{route('profile')}}" class="mr-2">Paskyra</a>
+            <a href="{{route('reservation')}}" class="book" type="submit">Rezervuoti vizitą</a>
 
-            <form method="POST" action="{{ route('login') }}">
-                @csrf 
-                <button class= "book" type="submit">Rezervuoti vizitą</button>
-            </form>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class = "logout" type="submit">Atsijungti</button>
