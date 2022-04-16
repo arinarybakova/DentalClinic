@@ -1,7 +1,16 @@
 <template>
     <div>
-        <calendar :events="events" @fetchEvents="fetchEvents" @updateEvent="updateEvent"/>
+    
+        <b-form-group id="fieldset-filter" label-cols-sm="4" label-cols-lg="3" content-cols-sm content-cols-lg="7" label="Gydytojas (-ai)" label-for="input-doctor-filter">
+    
+            <b-form-select id="input-doctor-filter" v-model="filterDentist" v-on:change="filterEvents" :options="doctorOptions" :select-size="3" multiple class="form-select" />
+    
+        </b-form-group>
+    
+        <calendar :events="events" @fetchEvents="fetchEvents" @updateEvent="updateEvent" />
+    
         <edit-event @eventUpdated="eventUpdated" @eventAdded="eventAdded" :event="selectedEvent"></edit-event>
+    
     </div>
 </template>
 
@@ -11,19 +20,30 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 export default {
     data: () => ({
         value: '',
+        filterDentist: [''],
         events: [],
         fetchedEvents: [],
         selectedEvent: [],
+        doctorOptions: [],
     }),
+    created() {
+        this.fetchDoctors();
+    },
     methods: {
         fetchEvents(value) {
-            console.log(this.value);
+            var url = "/api/schedules?start=" + value;
+            if(this.filterDentist.length !== 0) {
+                url += "&doctors=" + this.filterDentist.join();
+            }
             this.axios
-                .get("/api/schedules?start=" + value)
+                .get(url)
                 .then((response) => {
                     this.fetchedEvents = response.data;
                     this.mapEvents();
                 });
+        },
+        filterEvents() {
+            this.fetchEvents(this.value);
         },
         mapEvents() {
             var mappedEvents = [];
@@ -42,6 +62,16 @@ export default {
                 })
             }
             this.events = mappedEvents;
+        },
+        fetchDoctors() {
+            this.axios
+                .get("/api/users?usertype=3&page=1")
+                .then((response) => {
+                    this.doctorOptions.push({ value: '', text: 'Visi gydytojai' });
+                    for (var i = 0; i < response.data.users.length; i++) {
+                        this.doctorOptions.push({ value: response.data.users[i].id, text: response.data.users[i].name });
+                    }
+                });
         },
         updateEvent(event) {
             this.selectedEvent = event.event;

@@ -26,7 +26,7 @@ class ScheduleController extends Controller
             $dateFrom = date('Y-m-d', strtotime('monday this week'));
             $dateTo = date('Y-m-d', strtotime('sunday this week'));
         }
-        $schedules = DB::table('schedule')
+        $query = DB::table('schedule')
             ->join('users', 'users.id', '=', 'schedule.fk_dentist')
             ->select(
                 'schedule.*', 
@@ -35,8 +35,19 @@ class ScheduleController extends Controller
                 DB::raw('CONCAT(users.firstname, " ", users.lastname) AS doctor')
                 )
             ->where('schedule.work_time_from', '>=', $dateFrom)
-            ->where('schedule.work_time_to', '<=', $dateTo)
-            ->get();
+            ->where('schedule.work_time_to', '<=', $dateTo);
+
+        if(isset($request->doctors)) {
+            $doctors = explode(",", $request->doctors);
+            foreach($doctors as $key => $doctor) {
+                if($doctor === '') {
+                    unset($doctors[$key]);
+                }
+            }
+            $query->whereIn('fk_dentist', $doctors);
+        }
+
+        $schedules = $query->get();
         return $schedules;
     }
 

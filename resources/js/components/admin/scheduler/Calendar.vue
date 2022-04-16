@@ -22,12 +22,15 @@
                 ref="calendar" 
                 v-model="value" 
                 color="primary" 
-                type="week" 
+                type="week"
+                first-interval="7"
+                interval-count="12"
+                :max-days="maxDays"
                 :events="events" 
                 :event-color="getEventColor" 
                 :event-ripple="false" 
                 :interval-height="intervalHeight" 
-                :weekdays="weekdays" 
+                :weekdays="weekdays"
                 @change="fetchEvents" 
                 @click:event="updateEvent" 
                 @click:more="viewDay"
@@ -66,17 +69,18 @@ export default {
         selectedElement: null,
         selectedOpen: false,
         intervalHeight: 30,
-        weekdays: [1, 2, 3, 4, 5, 6, 0]
+        maxDays: 5,
+        weekdays: [1, 2, 3, 4, 5, 6]
     }),
     methods: {
         setToday() {
             this.value = ''
         },
         prev() {
-            this.$refs.calendar.prev()
+            this.$refs.calendar.prev();
         },
         next() {
-            this.$refs.calendar.next()
+            this.$refs.calendar.next();
         },
         startDrag({ event, timed }) {
             if (event && timed) {
