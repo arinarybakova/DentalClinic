@@ -17,10 +17,6 @@
 
     <link rel = "stylesheet" href = "{{ asset('assets/css/patient_style.css') }}">
 
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
     @livewireStyles
 
     <!-- Scripts -->

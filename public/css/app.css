@@ -11390,6 +11390,39 @@ header .mdi-chevron-left::before {
 header .mdi-chevron-right::before {
   content: ">" !important;
 }
+
+.reservation-table thead th {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.reservation-table thead th div {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.radio-custom {
+  text-align: center;
+  padding: 4px;
+}
+.radio-custom input {
+  display: none;
+}
+.radio-custom label {
+  cursor: pointer;
+  width: 75%;
+  border-radius: 6px;
+  border: 1px solid #2fbab8;
+  padding: 4px 24px;
+}
+.radio-custom label:hover {
+  background: #2fbab8;
+  color: #fff;
+}
+.radio-custom input:focus + label, .radio-custom input:checked + label {
+  border-color: #048f8e;
+  background: #048f8e;
+  color: #fff;
+}
 /*
 ! tailwindcss v3.0.23 | MIT License | https://tailwindcss.com
 *//*
