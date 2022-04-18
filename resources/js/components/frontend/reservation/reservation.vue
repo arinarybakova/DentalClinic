@@ -180,9 +180,6 @@ export default {
             this.monday = d;
             this.fetchAvailableTimes();
         },
-        addReservation() {
-
-        },
         resetForm() {
             this.form = {
                 doctor: "",
@@ -224,6 +221,7 @@ export default {
                         "Atsiprašome įvyko klaida, nepavyko pridėti vizito";
                     this.errorToast.show = true;
                 }
+                this.fetchAvailableTimes();
             });
         }
     },

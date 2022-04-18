@@ -114,6 +114,11 @@ class AppointmentController extends Controller
             ->where('work_time_to', ">=", $dateTimeTo)
             ->count();
 
-        return $scheduleCount > 0;
+        $appointmentCount = Appointment::where('fk_dentist', '=', $post['doctor'])
+            ->whereBetween('time_from', [$dateTime, $dateTimeTo])
+            ->whereBetween('time_to', [$dateTime, $dateTimeTo])
+            ->count();
+            
+        return $scheduleCount > 0 && $appointmentCount === 0;
     }
 }
