@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller {
     public function index()
@@ -16,17 +17,26 @@ class AppointmentController extends Controller {
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
+            $appointments = Appointment::select('appointments.*',
+                    DB::raw('DATE(appointments.time_from) as date'),
+                    DB::raw('CONCAT(TIME_FORMAT(TIME(appointments.time_from), "%H:%i"), " - ", 
+                    TIME_FORMAT(TIME(appointments.time_to), "%H:%i")) as time'),
+                    DB::raw('CONCAT(patient.firstname, " ", patient.lastname) as patient'),
+                    DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
+                )
+                ->join('users as patient', 'patient.id', '=', 'appointments.fk_patient')
+                ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist');
+
             if ($request->get('filter') !== null) {
-                $appointments = Appointment::where('dentist', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('date', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('time', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('status');
             } else {
-                $appointments = Appointment::orderBy('date');
+                $appointments->orderBy('time_from');
             }
             $pagination = $appointments->paginate($limit)->toArray();
             $appointments = $pagination['data'];
-            $total_pages = $pagination['to'];
             $total = $pagination['total'];
         } else {
             $appointments = [];
