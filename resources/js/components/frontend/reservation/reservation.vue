@@ -124,9 +124,9 @@ export default {
         };
     },
     created() {
+        this.getDate();
         this.fetchAvailableTimes();
         this.fetchDoctors();
-        this.getDate();
         this.minDate = this.monday;
     },
     methods: {
@@ -172,11 +172,13 @@ export default {
             var d = new Date();
             d.setDate(this.monday.getDate() + 7);
             this.monday = d;
+            this.fetchAvailableTimes();
         },
         prev() {
             var d = new Date();
             d.setDate(this.monday.getDate() - 7);
             this.monday = d;
+            this.fetchAvailableTimes();
         },
         addReservation() {
 
@@ -198,8 +200,11 @@ export default {
                 });
         },
         fetchAvailableTimes() {
+            var url = "/api/front/availableTimes?doctor=" + this.form.doctor;
+            url += "&dateFrom=" + this.getDay(1);
+            url += "&dateTo=" + this.getDay(5);
             this.axios
-                .get("/api/front/availableTimes?doctor=" + this.form.doctor)
+                .get(url)
                 .then((response) => {
                     this.times = response.data;
                 });
