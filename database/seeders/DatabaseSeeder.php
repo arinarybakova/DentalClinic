@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AppointmentStatusTableSeeder::class);
         $this->call(TreatmentStageStatusTableSeeder::class);
         $this->call(UserTypeTableSeeder::class);
+        $this->call(ProcedureTableSeeder::class);
     }
 }

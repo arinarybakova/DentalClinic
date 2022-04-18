@@ -214,8 +214,117 @@ section:nth-child(even){
     }
 }
 
+/* For laptop 1024 Resolution */  
+@media only screen   
+and (min-device-width : 768px)   
+and (max-device-width : 1024px)  {
 
-/* kai ekrano dydis mazesnis nei 1455px, rodyti menu mygtuka ir paslepti navbar'o sekcijas po mygtuku*/
+    
+      
+}
+
+/* For laptop 1366 Resolution */  
+@media only screen   
+and (min-width: 1030px)   
+and (max-width: 1366px) {
+    /*logo teksto dydis ir spalva*/
+    .header .banner .logo{
+        font-size: 1.2rem;
+        margin-top: 6px;
+
+    }
+    .header .banner .cne{
+        font-size: 0.8rem;
+    }
+    .header .banner  .cnt{
+        font-size: 0.8rem;
+    }
+    /*navbar'o skiltys*/
+    .header .navbar a, 
+    .header .navbar button[type="submit"] {
+        font-size: 1.3rem;
+        margin-left:  1rem;
+    }
+    .heading{
+        padding-bottom: 1rem;
+        font-size: 1.6rem !important;
+        padding-top: 4rem;
+        letter-spacing: .2rem;
+    }
+    
+    .heading span{
+        font-size: 1.6rem!important;
+        letter-spacing: .2rem;
+    }
+} 
+/* For mobile 640 Resolution */  
+@media only screen   
+and (min-device-width : 360px)   
+and (max-device-width : 640px){
+    #menu-btn{
+        display: initial;
+    }
+    .header .navbar{
+        position: absolute;
+        top: 115%; right: 2rem;
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        width: 30rem;
+        border: var(--border);
+        background: #fff;
+        transform: scale(0);
+        opacity: 0;
+        transform-origin: top right;
+        transition: none;
+    }
+    
+    .header .navbar.active{
+        transform: scale(1);
+        opacity: 1;
+        transition: .2S ease-out;
+    }
+
+    .header .navbar a{
+        font-size: 2rem;
+        display: block;
+        margin: 2.5rem;
+    }    
+} 
+/* For mobile 480 Resolution */  
+@media only screen   
+and (min-device-width : 320px)   
+and (max-device-width : 480px){
+    #menu-btn{
+        display: initial;
+    }
+    .header .navbar{
+        position: absolute;
+        top: 115%; right: 2rem;
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        width: 30rem;
+        border: var(--border);
+        background: #fff;
+        transform: scale(0);
+        opacity: 0;
+        transform-origin: top right;
+        transition: none;
+    }
+    
+    .header .navbar.active{
+        transform: scale(1);
+        opacity: 1;
+        transition: .2S ease-out;
+    }
+
+    .header .navbar a{
+        font-size: 2rem;
+        display: block;
+        margin: 2.5rem;
+    }    
+
+}
+/* kai ekrano dydis mazesnis nei 1455px, rodyti menu mygtuka ir paslepti navbar'o sekcijas po mygtuku
 @media (max-width: 1455px){
     #menu-btn{
         display: initial;

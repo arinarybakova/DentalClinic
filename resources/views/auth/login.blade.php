@@ -29,12 +29,12 @@
             @csrf
             <div>
                <x-jet-label for="email" value="{{ __('El. paštas') }}" /></div>
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-jet-input id="email" class="mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </id>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Slaptažodis') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password"/>
             </div>
 
             <!--<div class="block mt-4">
@@ -133,5 +133,81 @@
     .label{
         font-size: 5rem;
         color: #444;
+    }
+    .mt-1 .w-full{
+        border-color: #2fbab8 !important;
+        border-width: 1px !important;
+    }
+    /* For laptop 1024 Resolution */  
+    @media only screen   
+            and (min-device-width : 768px)   
+            and (max-device-width : 1024px)  {
+        #icon {
+            margin-top: 1rem;
+            font-size: 2rem;  
+        }
+        .txt-lg {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 60px;
+            font-size: 2.2rem;
+        }
+        .txt-lb{
+            text-align: center;
+            font-size: 1.6rem;
+        }
+    }
+
+    /* For laptop 1366 Resolution */  
+    @media only screen   
+        and (min-width: 1030px)   
+        and (max-width: 1366px) {
+        
+            #icon {
+            margin-top: 1rem;
+            font-size: 2rem;  
+        }
+        .txt-lg {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 60px;
+            font-size: 2.2rem;
+        }
+        .txt-lb{
+            text-align: center;
+            font-size: 1.6rem;
+        }
+    } 
+    /* For mobile 640 Resolution */  
+    @media only screen   
+        and (min-device-width : 360px)   
+        and (max-device-width : 640px){
+
+    } 
+    /* For mobile 480 Resolution */  
+    @media only screen   
+    and (min-device-width : 320px)   
+    and (max-device-width : 480px){
+        #icon {
+            margin-top: 1rem;
+            font-size: 1.5rem;  
+        }
+        .txt-lg {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .txt-lb{
+            text-align: center;
+            font-size: 1rem;
+        }
+        .mt-1{
+            max-width: 340px;
+        }
+        .text-sm{
+            font-size: 0.8rem;
+        }
+
     }
 </style>
