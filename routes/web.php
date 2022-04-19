@@ -92,6 +92,7 @@ Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
     Route::get('/profile', [FrontendProfileController::class, 'profile'])->name('api.profile');
     Route::get('/doctors', [DoctorsController::class, 'index'])->name('api.doctors');
     Route::get('/availableTimes', [ReservationController::class, 'availableTimes'])->name('api.availableTimes');
+    Route::post('/appointments/store', [FrontendAppointmentController::class, 'store'])->name('api.appointments.store');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);

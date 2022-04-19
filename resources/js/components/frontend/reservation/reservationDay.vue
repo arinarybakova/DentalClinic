@@ -1,7 +1,8 @@
 <template>
     <td>
-        <div v-for="time in times" v-bind:key="time">
-            {{ time }}
+        <div v-for="time in times" v-bind:key="time" class="radio-custom">
+            <input type="radio" v-model="selected" :value="time" :id="date + '/' + time" name="time" v-on:change="setTime(time, date)" />
+            <label :for="date + '/' + time">{{ time }}</label>
         </div>
     </td>
 </template>
@@ -9,13 +10,17 @@
 export default {
     props: {
         times: { required: true },
+        date: { required: true},
     },
-    watch: {
-        times: {
-            handler: function(value) {
-                console.log(times);
-            },
-        },
+    data() {
+        return {
+            selected: "",
+        };
+    },
+    methods: {
+        setTime(time, date) {
+            this.$emit("setTime", [date, time ]);
+        }
     },
 };
 </script>

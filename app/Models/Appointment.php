@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
-    protected $fillable = ['patient', 'dentist', 'date', 'time', 'status'];
+    protected $fillable = ['fk_patient', 'fk_dentist', 'time_from', 'time_to', 'status'];
 }

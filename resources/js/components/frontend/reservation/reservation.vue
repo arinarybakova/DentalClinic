@@ -1,5 +1,17 @@
 <template>
     <div>
+        <toast
+            type="error"
+            :msg="errorToast.message"
+            :show="errorToast.show"
+            @toastClosed="errorToast.show = false"
+        ></toast>
+        <toast
+            type="success"
+            :msg="successToast.message"
+            :show="successToast.show"
+            @toastClosed="successToast.show = false"
+        ></toast>
         <section class="services" id="services">
             <h1 class="heading">Vizito <span>rezervacija</span></h1>
             <div class="box-container">
@@ -14,7 +26,7 @@
                             v-on:change="fetchAvailableTimes()" />
                     </b-form-group>
                     <form-error :validation="v$.form.doctor"></form-error>
-                    <div class="row">
+                    <div class="row" v-if="form.doctor != ''">
                         <div class="col-6">
                             <b-button variant="outline-info" v-on:click="prev()" v-if="minDate < monday">Atgal</b-button>
                         </div>
@@ -22,27 +34,24 @@
                             <b-button variant="outline-info" v-on:click="next()">Pirmyn</b-button>
                         </div>
                     </div>
-                    <table class="table b-table atable reservation-table my-3">
+                    <table class="table b-table atable reservation-table my-3" v-if="form.doctor != ''">
                         <thead>
                             <tr>
-                                <th :class="getDisabled(1)">P <div v-text="getDay(1)"></div></th>
-                                <th :class="getDisabled(2)">A <div v-text="getDay(2)"></div></th>
-                                <th :class="getDisabled(3)">T <div v-text="getDay(3)"></div></th>
-                                <th :class="getDisabled(4)">K <div v-text="getDay(4)"></div></th>
-                                <th :class="getDisabled(5)">Pn <div v-text="getDay(5)"></div></th>
+                                <th v-for="index in 5" :key="index" 
+                                    :class="getDisabled(index)">{{ dayShortFormat[index] }} <div v-text="getDay(index)"></div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <reservation-day :times="times[getDay(1)]" />
-                                <reservation-day :times="times[getDay(2)]" />
-                                <reservation-day :times="times[getDay(3)]" />
-                                <reservation-day :times="times[getDay(4)]" />
-                                <reservation-day :times="times[getDay(5)]" />
+                                <reservation-day v-for="index in 5" :key="index" 
+                                    :times="times[getDay(index)]" 
+                                    :date="getDay(index)"
+                                    v-on:setTime="setTime" />
                             </tr>
                         </tbody>
                     </table>
-                    <b-button type="submit" variant="secondary" class="mt-3">Rezervuoti</b-button>
+                    <b-button type="submit" variant="secondary" class="mt-3" v-if="form.doctor != ''">Rezervuoti</b-button>
                 </b-form>
             </div>
         </section>
@@ -66,8 +75,14 @@ export default {
         return {
             form: {
                 doctor: "",
+                date: "",
+                time: "",
             },
             errorToast: {
+                message: "",
+                show: false,
+            },
+            successToast: {
                 message: "",
                 show: false,
             },
@@ -75,6 +90,9 @@ export default {
             monday: '',
             minDate: '',
             times: [],
+            dayShortFormat: [
+                "", "P", "A", "T", "K", "Pn",
+            ]
         };
     },
     validations() {
@@ -90,20 +108,32 @@ export default {
                         minValue(1)
                     ),
                 },
+                date: {
+                    required: helpers.withMessage(
+                        "Prašome pasirinkti vizito laiką",
+                        required
+                    ),
+                },
+                time: {
+                    required: helpers.withMessage(
+                        "Prašome pasirinkti vizito laiką",
+                        required
+                    ),
+                },
             },
         };
     },
     created() {
+        this.getDate();
         this.fetchAvailableTimes();
         this.fetchDoctors();
-        this.getDate();
         this.minDate = this.monday;
     },
     methods: {
         onSubmit(event) {
             event.preventDefault();
             if (this.v$.$validate() && !this.v$.$error) {
-                addReservation()
+                this.addReservation();
             }
         },
         getDate() {
@@ -142,14 +172,13 @@ export default {
             var d = new Date();
             d.setDate(this.monday.getDate() + 7);
             this.monday = d;
+            this.fetchAvailableTimes();
         },
         prev() {
             var d = new Date();
             d.setDate(this.monday.getDate() - 7);
             this.monday = d;
-        },
-        addReservation() {
-
+            this.fetchAvailableTimes();
         },
         resetForm() {
             this.form = {
@@ -168,11 +197,32 @@ export default {
                 });
         },
         fetchAvailableTimes() {
+            var url = "/api/front/availableTimes?doctor=" + this.form.doctor;
+            url += "&dateFrom=" + this.getDay(1);
+            url += "&dateTo=" + this.getDay(5);
             this.axios
-                .get("/api/front/availableTimes?doctor=" + this.form.doctor)
+                .get(url)
                 .then((response) => {
                     this.times = response.data;
                 });
+        },
+        setTime(dateTime) {
+            this.form.date = dateTime[0];
+            this.form.time = dateTime[1];
+        },
+        addReservation() {
+            this.axios.post("/api/front/appointments/store", this.form).then((response) => {
+                if (response.data.success) {
+                    this.successToast.message =
+                        "Vizitas sėkmingai pridėtas (" + response.data['appointment'].time_from + ")";
+                    this.successToast.show = true;
+                } else {
+                    this.errorToast.message =
+                        "Atsiprašome įvyko klaida, nepavyko pridėti vizito";
+                    this.errorToast.show = true;
+                }
+                this.fetchAvailableTimes();
+            });
         }
     },
 };
