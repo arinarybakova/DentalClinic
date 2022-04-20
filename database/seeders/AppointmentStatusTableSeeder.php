@@ -13,10 +13,16 @@ class AppointmentStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('appointment_status')->insert([
-            ['status' => 'Rezervuota'],
-            ['status' => 'Patvirtinta'],
-            ['status' => 'Atšaukta']
-        ]);
+        $count = DB::table('appointment_status')->count();
+        if($count == 0) {
+            DB::table('appointment_status')->insert([
+                ['status' => 'Rezervuota'],
+                ['status' => 'Patvirtinta'],
+                ['status' => 'Atšaukta']
+            ]);
+        }
+        else {
+            //data already there no need to add data
+        }
     }
 }

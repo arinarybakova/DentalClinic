@@ -13,10 +13,16 @@ class UserTypeTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_type')->insert([
-            ['name' => 'admin'],
-            ['name' => 'patient'],
-            ['name' => 'dentist']
-        ]);
+        $count = DB::table('user_type')->count();
+        if($count == 0) {
+            DB::table('user_type')->insert([
+                ['name' => 'admin'],
+                ['name' => 'patient'],
+                ['name' => 'dentist']
+            ]);
+        }
+        else {
+            //data already there no need to add data
+        }
     }
 }

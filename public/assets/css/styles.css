@@ -42,7 +42,7 @@ section:nth-child(even){
     padding-bottom: 1rem;
     text-transform: uppercase;
     color: var(--black);
-    font-size: 2.4rem !important;
+    font-size: 1.8rem !important;
     padding-top: 4rem;
     letter-spacing: .4rem;
 }
@@ -50,7 +50,7 @@ section:nth-child(even){
 .heading span{
     text-transform: uppercase;
     color: var(--green);
-    font-size: 2.4rem!important;
+    font-size: 1.8rem!important;
     letter-spacing: .4rem;
 }
 
@@ -159,7 +159,12 @@ section:nth-child(even){
     display: none;
 }
 
-
+/*.services .heading{
+    font-size: 1.8rem !important;
+}
+.services h1 span, .services .h1 span{
+    font-size: 1.8rem !important;
+}*/
 .services .box-container{
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(43rem, 1fr)) !important;
@@ -177,7 +182,7 @@ section:nth-child(even){
 
 .services .box-container .box h3{
     color: var(--black);
-    font-size: 1.4rem !important;
+    font-size: 1.2rem !important;
     padding: 1rem 0 !important;
     text-transform: none !important;
     color: var(--green);
@@ -185,15 +190,15 @@ section:nth-child(even){
 
 .services .box-container .box p{
     color: var(--light-color);
-    font-size: 1.2rem;
+    font-size: 1rem !important;
     line-height: 2;
     text-transform: none;
     text-align: justify
 }
-.services .cost{
+.services .box-container .box .cost{
     color: var(--green);
     text-transform: none;
-    font-size: 1.3rem !important;
+    font-size: 1rem !important;
     font-weight: bold;
     text-align: right;
     position: absolute;
@@ -202,27 +207,6 @@ section:nth-child(even){
     padding-right: 1rem;
     padding-bottom: 1rem;
 }
-
-
-/* media queries kai ekrando dydis yra mazesnis nei 991px
-@media (max-width: 991px){
-    html{
-        
-    }
-    .header{
-        
-    }
-}
-
-/* For laptop 1024 Resolution */  
-@media only screen   
-and (min-device-width : 768px)   
-and (max-device-width : 1024px)  {
-
-    
-      
-}
-
 /* For laptop 1366 Resolution */  
 @media only screen   
 and (min-width: 1030px)   
@@ -246,14 +230,19 @@ and (max-width: 1366px) {
         margin-left:  1rem;
     }
     .heading{
+        text-align: center;
         padding-bottom: 1rem;
-        font-size: 1.6rem !important;
+        text-transform: uppercase;
+        color: var(--black);
+        font-size: 1.3rem !important;
         padding-top: 4rem;
         letter-spacing: .2rem;
     }
     
     .heading span{
-        font-size: 1.6rem!important;
+        text-transform: uppercase;
+        color: var(--green);
+        font-size: 1.3rem!important;
         letter-spacing: .2rem;
     }
 
@@ -272,7 +261,7 @@ and (max-width: 1366px) {
     
     .services .box-container .box h3{
         
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
         padding: 1rem 0 !important;
        
     }
@@ -283,7 +272,7 @@ and (max-width: 1366px) {
         line-height: 2;
         text-align: justify
     }
-    .services .cost{
+    .services .box-container .box .cost{
         font-size: 0.8rem !important;
         font-weight: bold;
         text-align: right;
@@ -294,12 +283,110 @@ and (max-width: 1366px) {
         padding-bottom: 1rem;
     }
 } 
-/* For mobile 640 Resolution */  
+/* For laptop 1024 Resolution */  
 @media only screen   
-and (min-device-width : 360px)   
-and (max-device-width : 640px){
+and (min-device-width : 768px)   
+and (max-device-width : 1024px)  {
+
+    .header .banner .logo{
+        font-size: 1.2rem;
+        color: var(--black);
+        margin-top: 6px;
+        padding-left: 20px !important;
+       
+    }
+    .header .banner .cne{
+        display: inline-block;
+        font-size: 0.8rem;
+        color: var(--green);
+        font-weight: bold;
+        position: absolute;
+        padding-left: 20px !important;
+        margin-right: 1rem;
+    }
+    .header .banner  .cnt{
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: bold;
+        position: absolute;
+        color: var(--green);
+        right: 0;
+        margin-left: 1rem;
+        text-align: right;
+    }
+    /*navbar'o skiltys*/
+    .header .navbar a, 
+    .header .navbar button[type="submit"] {
+        font-size: 1.2rem;
+        margin-left:  1rem;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 1rem;
+        text-transform: uppercase;
+        color: var(--black);
+        font-size: 1rem !important;
+        padding-top: 4rem;
+        letter-spacing: .2rem;
+    }
+    
+    .heading span{
+        text-transform: uppercase;
+        color: var(--green);
+        font-size: 1rem!important;
+        letter-spacing: .2rem;
+    }
+
+    .services .box-container{
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(37rem, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .services .box-container .box{
+       
+        border-radius:  .5rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .services .box-container .box h3{
+        
+        font-size: 1rem !important;
+        padding: 1rem 0 !important;
+       
+    }
+    
+    .services .box-container .box p{
+        
+        font-size: 0.8rem !important;
+        line-height: 2;
+        text-align: justify
+    }
+    .services .box-container .box .cost{
+        font-size: 0.8rem !important;
+        font-weight: bold;
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+@media only screen   
+and (min-device-width : 641px)   
+and (max-device-width : 767px){
     #menu-btn{
-        display: initial;
+        display: initial !important;
+        font-size: 1.5rem;
+        border-radius: .5rem;
+        background: #eee;
+        color:var(--green);
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        display: none;
+
     }
     .header .navbar{
         position: absolute;
@@ -325,14 +412,230 @@ and (max-device-width : 640px){
         font-size: 2rem;
         display: block;
         margin: 2.5rem;
-    }    
+    }
+    .header .banner .logo{
+        font-size: 1.4rem !important;
+        margin-top: 6px;
+        padding-left: 40px !important;
+       
+    }
+    .header .banner .cne{
+        display: inline-block;
+        font-size: 0.9rem !important;
+        color: var(--green);
+        font-weight: bold;
+        position: absolute;
+        padding-left: 40px !important;
+        margin-right: 1rem;
+    }
+    .header .banner  .cnt{
+        display: inline-block;
+        font-size: 0.9rem !important;
+        font-weight: bold;
+        position: absolute;
+        color: var(--green);
+        right: 0;
+        margin-left: 1rem;
+        text-align: right;
+    }
+    /*navbar'o skiltys*/
+    .header .navbar a, 
+    .header .navbar button[type="submit"] {
+        font-size: 1.2rem;
+        margin-left:  1rem;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 1rem;
+        text-transform: uppercase;
+        color: var(--black);
+        font-size: 1.2rem !important;
+        padding-top: 4rem;
+        letter-spacing: .2rem;
+    }
+    
+    .heading span{
+        text-transform: uppercase;
+        color: var(--green);
+        font-size: 1.2rem!important;
+        letter-spacing: .2rem;
+    }
+
+    .services .box-container{
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .services .box-container .box{
+        border-radius:  .5rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .services .box-container .box h3{
+        
+        font-size: 1rem !important;
+        padding: 0.2rem 0 !important;
+       
+    }
+    
+    .services .box-container .box p{
+        
+        font-size: 0.8rem !important;
+        line-height: 1;
+        text-align: justify
+    }
+    .services .box-container .box .cost{
+        font-size: 0.8rem !important;
+        font-weight: bold;
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+
+}
+/* For mobile 640 Resolution */  
+@media only screen   
+and (min-device-width : 360px)   
+and (max-device-width : 640px){
+    #menu-btn{
+        display: initial !important;
+        font-size: 1.2rem;
+        border-radius: .5rem;
+        background: #eee;
+        color:var(--green);
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        display: none;
+
+    }
+    .header .navbar{
+        position: absolute;
+        top: 115%; right: 2rem;
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        width: 30rem;
+        border: var(--border);
+        background: #fff;
+        transform: scale(0);
+        opacity: 0;
+        transform-origin: top right;
+        transition: none;
+    }
+    
+    .header .navbar.active{
+        transform: scale(1);
+        opacity: 1;
+        transition: .2S ease-out;
+    }
+
+    .header .navbar a{
+        font-size: 2rem;
+        display: block;
+        margin: 2.5rem;
+    }
+    .header .banner .logo{
+        font-size: 1rem !important;
+        margin-top: 6px;
+        padding-left: 40px !important;
+       
+    }
+    .header .banner .cne{
+        display: inline-block;
+        font-size: 0.65rem !important;
+        color: var(--green);
+        font-weight: bold;
+        position: absolute;
+        padding-left: 40px !important;
+        margin-right: 1rem;
+    }
+    .header .banner  .cnt{
+        display: inline-block;
+        font-size: 0.65rem !important;
+        font-weight: bold;
+        position: absolute;
+        color: var(--green);
+        right: 0;
+        margin-left: 1rem;
+        text-align: right;
+    }
+    /*navbar'o skiltys*/
+    .header .navbar a, 
+    .header .navbar button[type="submit"] {
+        font-size: 1.2rem;
+        margin-left:  1rem;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 1rem;
+        text-transform: uppercase;
+        color: var(--black);
+        font-size: 0.8rem !important;
+        padding-top: 4rem;
+        letter-spacing: .2rem;
+    }
+    
+    .heading span{
+        text-transform: uppercase;
+        color: var(--green);
+        font-size: 0.8rem!important;
+        letter-spacing: .2rem;
+    }
+
+    .services .box-container{
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .services .box-container .box{
+        border-radius:  .5rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .services .box-container .box h3{
+        
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0 !important;
+       
+    }
+    
+    .services .box-container .box p{
+        
+        font-size: 0.6rem !important;
+        line-height: 1;
+        text-align: justify
+    }
+    .services .box-container .box .cost{
+        font-size: 0.6rem !important;
+        font-weight: bold;
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
 } 
 /* For mobile 480 Resolution */  
 @media only screen   
 and (min-device-width : 320px)   
 and (max-device-width : 480px){
     #menu-btn{
-        display: initial;
+        display: initial !important;
+        font-size: 1rem !important;
+        border-radius: .5rem;
+        background: #eee;
+        color:var(--green);
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+        display: none;
+
     }
     .header .navbar{
         position: absolute;
@@ -358,7 +661,90 @@ and (max-device-width : 480px){
         font-size: 2rem;
         display: block;
         margin: 2.5rem;
-    }    
+    }
+    .header .banner .logo{
+        font-size: 0.8rem !important;
+        margin-top: 6px;
+        padding-left: 40px !important;
+       
+    }
+    .header .banner .cne{
+        display: inline-block;
+        font-size: 0.50rem !important;
+        color: var(--green);
+        font-weight: bold;
+        position: absolute;
+        padding-left: 40px !important;
+        margin-right: 1rem;
+    }
+    .header .banner  .cnt{
+        display: inline-block;
+        font-size: 0.50rem !important;
+        font-weight: bold;
+        position: absolute;
+        color: var(--green);
+        right: 0;
+        margin-left: 1rem;
+        text-align: right;
+    }
+    /*navbar'o skiltys*/
+    .header .navbar a, 
+    .header .navbar button[type="submit"] {
+        font-size: 1.2rem;
+        margin-left:  1rem;
+    }
+    .heading{
+        text-align: center;
+        padding-bottom: 1rem;
+        text-transform: uppercase;
+        color: var(--black);
+        font-size: 0.7rem !important;
+        padding-top: 4rem;
+        letter-spacing: .2rem;
+    }
+    
+    .heading span{
+        text-transform: uppercase;
+        color: var(--green);
+        font-size: 0.7rem!important;
+        letter-spacing: .2rem;
+    }
+
+    .services .box-container{
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)) !important;
+        gap: 1rem !important;
+    }
+    
+    .services .box-container .box{
+        border-radius:  .5rem;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    .services .box-container .box h3{
+        
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0 !important;
+       
+    }
+    
+    .services .box-container .box p{
+        
+        font-size: 0.6rem !important;
+        line-height: 1;
+        text-align: justify
+    }
+    .services .box-container .box .cost{
+        font-size: 0.6rem !important;
+        font-weight: bold;
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
 
 }
 /* kai ekrano dydis mazesnis nei 1455px, rodyti menu mygtuka ir paslepti navbar'o sekcijas po mygtuku
