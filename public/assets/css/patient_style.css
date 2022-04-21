@@ -310,7 +310,7 @@ td .status {
     color: #2fbab8;
 }
 
-@media only screen and (max-width: 1200px){
+/*@media only screen and (max-width: 1200px){
 
     .sidebar-brand h2 span:last-child,
     .sidebar li a span:last-child{
@@ -373,11 +373,11 @@ td .status {
         grid-template-columns: 100%;
     }
 
-}
+}*/
 .ptable, .b-table {
     border-collapse: collapse;
     margin: 5px 0;
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-family: sans-serif;
     /*min-width: 500px;*/
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -385,10 +385,8 @@ td .status {
 .atable{
     margin: 5px 0;
     margin: auto;
-    /*max-width: 102rem;*/
+    max-width: 1200px;
     padding-top: 8rem !important;
-    font-size: 1rem !important;
-    
 }
 
 .ttable {
@@ -411,13 +409,13 @@ td .status {
     background-color: var(--main-color);
     color: #ffffff;
     text-align: left;
-    font-size: 1.1rem !important;
+    font-size: 1.1rem !important; /*font size of column labels*/
 }
 .ptable td, .b-table td {
 
     background-color: var(--main-color);
     text-align: left;
-    font-size: 1.1rem !important;
+    font-size: 1rem !important; /*font size of table rows*/
 }
 a { color: inherit; }
   /* mouse over link */
@@ -478,11 +476,11 @@ a { color: inherit; }
   {
       height: 44px;
       margin:auto;
-      /*max-width: 102rem;*/
-      margin-bottom: 1rem;
+      max-width: 1200px; /*width of search field*/
+      margin-bottom: 1.5rem;
       display: flex;
       border: 1.6px solid var(--main-color);
-      overflow: auto;
+      /*overflow: auto;*/ /*sitas gadina mygtuko overlapa*/
       border-radius: 6px;
       -moz-border-radius: 6px;
       -webkit-border-radius: 6px;
@@ -494,10 +492,10 @@ a { color: inherit; }
   
   .search input[type="text"]
   {
-      font-size: 1.3rem;
+      font-size: 1rem;
       border: 0px;
       width: 75%;
-      padding: 3px 3px;
+      padding: 2px 2px;
       margin-left: 1rem;
   }
   
@@ -505,19 +503,24 @@ a { color: inherit; }
   {
       box-shadow: none;
       outline: 0;
+      
   }
-  
+  /*tekstui prasome ivesti paieskot raktazodi*/
+  .mt-1{
+      padding-left: 265px !important;
+      
+  }
   .search input[type="submit"], .btn.btn-secondary
   {
       border: 0px;
       background: none;
       background-color: var(--main-color);
       color: #fff;
-      float: right;
-      font-size: 1.3rem !important;
-      margin:auto !important;
-      margin-left: 38rem !important;
-      padding: 4.8px 20px;
+      float: right !important;
+      position: fixed !important;
+      left: 848px !important; 
+      font-size: 1.1rem !important;
+      padding: 7.7px 20px !important;
       border-top-right-radius: 4px;
       border-top-left-radius: 4px;
       -moz-border-radius-top-right: 4px;
@@ -526,7 +529,7 @@ a { color: inherit; }
       border-bottom-left-radius: 4px;
       -moz-border-radius-bottom-right: 4px;
       -webkit-border-radius-bottom-right: 4px;
-          cursor:pointer;
+ 
   }
   .main-content .btn-outline-info {
     color: var(--main-color);
@@ -545,17 +548,17 @@ a { color: inherit; }
 
 
   
-  .gridcell::after {
+  /*.gridcell::after {
     content: "";
     border-right: #dadce0 1px solid;
     position: relative;
     /* padding-right: 12px; */
     /* -webkit-box-sizing: border-box; */
     /* box-sizing: border-box; */
-    -webkit-box-flex: 1 1 auto;
+    /*-webkit-box-flex: 1 1 auto;
     /* -webkit-flex: 1 1 auto; */
     /* flex: 1 1 auto; */
-    height: 200%;
+    /*height: 200%;
   }
 
   .recent-grid-pv {
@@ -566,7 +569,7 @@ a { color: inherit; }
     grid-template-columns: 170% auto;
     position: absolute;  right: 0px;
      
-  }
+  }*/
   .close {
     background: transparent;
     border: none;
@@ -574,7 +577,7 @@ a { color: inherit; }
     padding: 4px;
   }
 
-.user-wrapper ul{
+/*.user-wrapper ul{
     padding: 0;
     list-style: none;
     background: #fff;
@@ -599,7 +602,7 @@ a { color: inherit; }
     
 }
 .user-wrapper ul li ul.dropdown{
-   /* min-width: 175px; /* Set width of the dropdown */
+   /* min-width: 175px; /* Set width of the dropdown
     background: #ffff;
     display: none;
     position: absolute;
@@ -608,12 +611,12 @@ a { color: inherit; }
     
 }
 .user-wrapper ul li:hover ul.dropdown{
-    display: block; /* Display the dropdown */
+    display: block; /* Display the dropdown 
     font-size: 0.8rem;
 }
 .user-wrapper ul li ul.dropdown li{
     display: block;
-}
+}*/
 
 .totalcost{
     
@@ -743,9 +746,105 @@ input{
     top: -70px !important;
 }
 
-@media (max-width: 1455px){
-    .kbutton{
-       
+/* For laptop 1366 Resolution */  
+@media only screen   
+and (min-width: 1030px)   
+and (max-width: 1366px) {
+
+    .ptable thead tr, .b-table thead tr {
+
+        background-color: var(--main-color);
+        color: #ffffff;
+        text-align: left;
+        font-size: 1rem !important; /*font size of column labels*/
+    }
+    .ptable td, .b-table td {
+    
+        background-color: var(--main-color);
+        text-align: left;
+        font-size: 0.9rem !important; /*font size of table rows*/
+    }
+    .search
+    {
+        height: 44px;
+        margin:auto;
+        max-width: 1200px; /*width of search field*/
+        margin-bottom: 1.5rem;
+        display: flex;
+        border: 1.6px solid var(--main-color);
+    }
+    .search:focus-within {
+      box-shadow:0 0 0 .15rem var(--main-color25);
+    }
+    
+    .search input[type="text"]
+    {
+        font-size: 0.9rem;
+    }
+    /*tekstui prasome ivesti paieskot raktazodi*/
+    .mt-1{
+        padding-left: 5px !important;
         
     }
+    .search input[type="submit"], .btn.btn-secondary
+    {
+        border: 0px;
+        background: none;
+        background-color: var(--main-color);
+        color: #fff;
+        float: right !important;
+        position: fixed !important;
+        left: 545px !important; 
+        font-size: 1rem !important;
+        padding: 7.7px 20px !important;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+        -moz-border-radius-top-right: 4px;
+        -webkit-border-radius-top-right: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        -moz-border-radius-bottom-right: 4px;
+        -webkit-border-radius-bottom-right: 4px;
+   
+    }
+ 
+   
+} 
+/* For laptop 1024 Resolution */  
+@media only screen   
+and (min-device-width : 768px)   
+and (max-device-width : 1024px)  {
+   
+}
+@media only screen   
+and (min-device-width : 641px)   
+and (max-device-width : 767px){
+    
+
+}
+/* For mobile 640 Resolution */  
+@media only screen   
+and (min-device-width : 360px)   
+and (max-device-width : 640px){
+    
+} 
+/* For mobile 480 Resolution */  
+@media only screen   
+and (min-device-width : 320px)   
+and (max-device-width : 480px){
+    
+
+}
+@media only screen   
+and (min-width: 1144px)   
+and (max-width: 1231px) {
+
+    
+
+}
+@media only screen   
+and (min-width: 1025px)   
+and (max-width: 1143px) {
+    
+
 }
