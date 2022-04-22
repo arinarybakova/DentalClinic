@@ -19,8 +19,7 @@ class AppointmentController extends Controller {
             $limit = $request->get('limit') ?? 10;
             $appointments = Appointment::select('appointments.*',
                     DB::raw('DATE(appointments.time_from) as date'),
-                    DB::raw('CONCAT(TIME_FORMAT(TIME(appointments.time_from), "%H:%i"), " - ", 
-                    TIME_FORMAT(TIME(appointments.time_to), "%H:%i")) as time'),
+                    DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
                     DB::raw('CONCAT(patient.firstname, " ", patient.lastname) as patient'),
                     DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
                 )

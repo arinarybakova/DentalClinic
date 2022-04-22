@@ -97,12 +97,15 @@
 </template>
 <script>
 export default {
-  props: ['user'],
-  data() {
-    return {
-      user: ''
-    };
+ 
+  field: {                  
+    firstname: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    password: '',
   },
+    
   created() {
     this.fetchUser();
   },

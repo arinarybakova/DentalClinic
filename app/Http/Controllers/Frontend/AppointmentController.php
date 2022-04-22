@@ -23,8 +23,7 @@ class AppointmentController extends Controller
             $appointments = Appointment::select(
                 'appointments.*',
                 DB::raw('DATE(appointments.time_from) as date'),
-                DB::raw('CONCAT(TIME_FORMAT(TIME(appointments.time_from), "%H:%i"), " - ", 
-                    TIME_FORMAT(TIME(appointments.time_to), "%H:%i")) as time'),
+                DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
                 DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
             )
                 ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist')

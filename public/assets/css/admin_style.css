@@ -135,6 +135,7 @@ header#main-header {
 
 header h2 {
     color: var(--color-dark);
+    font-size: 1.4rem;
    
 }
 
@@ -263,9 +264,22 @@ tr td:last-child > .buttons {
 }
 
 tr td:last-child > .buttons > button:first-of-type {
-    margin-right: 0.5rem;
+    margin-right: 0.3rem;
 }
 
+.approve_appointment{
+    margin-right: 0.5rem;
+    font-size: 1rem !important;
+
+}
+.cancel_appointment{
+    font-size: 1rem !important;
+   
+    
+}
+.Pdesc{
+    width: 68% !important;
+}
 td .status {
     display: inline-block;
     height: 10px;
@@ -731,9 +745,8 @@ a { color: inherit; }
     font-size: 1rem;
     border-radius: 15px;
     border: 1.5px solid var(--color-dark);
-    padding: 2px;
-    width: 50px;
-    height: 40px;
+    padding: 1px;
+    height: 35px;
     background-color: var(--button-hover);
 }
 #nav-ul .dropdown #nav-li{
@@ -744,7 +757,7 @@ a { color: inherit; }
     color: #ffffff;
 }
 #nav-ul .dropdown #nav-li #out{
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     font-style: bold !important;
     
 } 

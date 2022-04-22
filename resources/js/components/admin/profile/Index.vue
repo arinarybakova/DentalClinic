@@ -1,7 +1,7 @@
 <template>
 <div>
     <b-button v-b-modal.modal-1 class ="kbutton">Keisti</b-button>
-    <b-modal id="modal-1":no-close-on-backdrop="true" title ="Keisti paskyros duomenis"
+    <b-modal id="modal-1" :no-close-on-backdrop="true" title ="Keisti paskyros duomenis"
      ok-only ok-variant="secondary" ok-title="Išsauogti">
       <div class = "profile">
         <b-form-group class = "label"
@@ -50,7 +50,6 @@
         </b-form-group>
         </div>
     </b-modal>
-    </section>
     <div class = "profile">
         <b-form-group class = "label"
         id="fieldset-1"

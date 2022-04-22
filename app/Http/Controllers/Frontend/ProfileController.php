@@ -16,29 +16,8 @@ class ProfileController extends Controller {
 
     public function profile(Request $request)
     {
-     
-        /* Current Login User Details */
-        $user = Auth::user();
-        var_dump($user);
-      
-        /* Current Login User ID */
-        $userID = Auth::user()->id; 
-        var_dump($userID);
-          
-        /* Current Login User Name */
-        $userName = Auth::user()->firstname; 
-        var_dump($userName);
-          
-        /* Current Login User Email */
-        $userEmail = Auth::user()->email; 
-        var_dump($userEmail);
-        /*$id = Auth::user()->id;
-        $barcode = request('barcode');
-        $users = DB::table('users')
-        ->where('id', $id)
-        ->select('id', 'firstname', 'lastname', 'email', 'phone', 'password')
-        ->get();
-        return response()->json($getuser); */
+        
+        return auth('api')->user();
     }
 
     /**

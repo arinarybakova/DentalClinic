@@ -204,7 +204,7 @@ export default {
     userDeleted() {
       this.filter = "";
       this.currentPage = 1;
-      this.success.message = "Gydytojas ištrintas";
+      this.success.message = "Naudotojas ištrintas";
       this.success.show = true;
       this.fetchUsers();
     },

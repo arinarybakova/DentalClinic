@@ -105,6 +105,7 @@ export default {
           key: "details",
           label: "Aprašymas",
           sortable: false,
+          thClass: 'Pdesc'
         },
         {
           key: "actions",

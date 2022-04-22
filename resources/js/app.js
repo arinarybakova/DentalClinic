@@ -78,6 +78,8 @@ Vue.component('toast', require('./components/ui/Toast.vue').default);
 
 //Admin appointments
 Vue.component('appointment', require('./components/admin/appointment/Table.vue').default);
+Vue.component('approve-appointment', require('./components/admin/appointment/Approve.vue').default);
+Vue.component('cancel-appointment', require('./components/admin/appointment/Cancel.vue').default);
 
 //Admin profile
 Vue.component('profile', require('./components/admin/profile/Index.vue').default);

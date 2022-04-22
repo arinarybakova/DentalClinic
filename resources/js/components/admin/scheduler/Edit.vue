@@ -1,7 +1,7 @@
 <template>
     <div class="w-100 mb-3 d-flex justify-content-end">
     
-        <event-form :bus="bus" :id="formId" title="Redaguoti rezervaciją" submitTitle="Išsaugoti" :event="event" @formSubmit="onSubmit"></event-form>
+        <event-form :bus="bus" :id="formId" title="Redaguoti darbo grafiką" submitTitle="Išsaugoti" :event="event" @formSubmit="onSubmit"></event-form>
     
     </div>
 </template>

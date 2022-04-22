@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,9 +21,10 @@ class TreatmentController extends Controller {
         if ($request->get('page') !== null && Auth::hasUser()) {
             $limit = $request->get('limit') ?? 10;
             $treatments = Treatment::select(
-                'treatments.*'
-            )
-                ->where('fk_patient', '=', Auth::user()->id);
+                'treatments.*')
+            
+            ->where('fk_patient', '=', Auth::user()->id);
+            
 
             if ($request->get('filter') !== null) {
                 $treatments

@@ -1,5 +1,13 @@
 <template>
      <div class="card-body">
+      <approve-appointment @appointmentApproved="appointmentApproved" :appointment="selectedAppointment"></approve-appointment>
+      <cancel-appointment @appointmentCancelled="appointmentCancelled" :appointment="selectedAppointment"></cancel-appointment>
+        <toast
+          type="success"
+          :msg="success.message"
+          :show="success.show"
+          @toastClosed="success.show = false"
+        ></toast>
         <div class="search">
         <b-form-input
             v-model="filter"
@@ -17,16 +25,16 @@
           </template>
            <template #cell(actions)="data">
         <div class="buttons">
-          <b-button
-            v-on:click="updateAppointment(data.item)"
+          <b-button class = "approve_appointment"
+            v-on:click="approveAppointment(data.item)"
             variant="outline-info"
             size="sm"
             v-b-tooltip.hover
             title="Patvirtinti vizitą"
             ><i class="fas fa-check"></i
           ></b-button>
-          <b-button
-            v-on:click="deleteProcedure(data.item)"
+          <b-button class = "cancel_appointment"
+            v-on:click="cancelAppointment(data.item)"
             variant="outline-info"
             size="sm"
             v-b-tooltip.hover
@@ -141,6 +149,30 @@ export default {
     },
     getAppointmentId(value) {
       return "V" + value.toString().padStart(3, "0");
+    },
+    cancelAppointment(appointment) {
+      this.selectedAppointment = appointment;
+      this.$bvModal.show("cancel-appointment");
+    },
+    approveAppointment(appointment) {
+      this.selectedAppointment = appointment;
+      this.$bvModal.show("approve-appointment");
+    },
+    appointmentApproved(appointment) {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Vizitas "' + appointment.getAppointmentId + '" patvirtintas sėkmingai';
+      this.success.show = true;
+      this.fetchAppointments();
+    },
+    appointmentCancelled(appointment) {
+       this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Vizitas "' + appointment.getAppointmentId + '" atšauktas sėkmingai';
+      this.success.show = true;
+      this.fetchAppointments();
     },
   },
   watch: {

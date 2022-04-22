@@ -74,7 +74,7 @@ export default {
           sortable: true,
         },
         {
-          key: "status",
+          key: "fk_status",
           label: "Būsena",
           sortable: true,
         },
