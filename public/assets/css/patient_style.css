@@ -421,7 +421,7 @@ a { color: inherit; }
   /* mouse over link */
 
   .searcht{
-    height: 44px;
+    /*height: 44px;
     margin:auto;
     width: 1000px !important;
     margin-bottom: 1rem;
@@ -431,18 +431,33 @@ a { color: inherit; }
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
+    background: #fff;*/
+    height: 44px;
+    margin: auto;
+    max-width: 1000px;
+    display: flex;
+    border: 1px solid var(--main-color);
+    overflow: auto;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
     background: #fff;
+    margin-bottom: 1rem;
   }
   .searcht:focus-within {
     box-shadow:0 0 0 .15rem var(--main-color25);
   }
   .searcht input[type="text"]
   {
-      font-size: 1.2rem;
+      /*font-size: 1.2rem;
       border: 0px;
       width: 75%;
       padding: 2px 2px;
-      margin-left: 1rem;
+      margin-left: 1rem;*/
+      border: 0px;
+      width: 95.8%;
+      padding: 10px 10px;
+
   }
   
   .searcht input[type="text"]:focus
@@ -453,7 +468,7 @@ a { color: inherit; }
   
   .searcht input[type="submit"], .btn.btn-secondary
   {
-      border: 0px;
+     border: 0px;
       background: none;
       background-color: var(--main-color);
       color: #fff;
@@ -471,20 +486,43 @@ a { color: inherit; }
       -moz-border-radius-bottom-right: 4px;
       -webkit-border-radius-bottom-right: 4px;
           cursor:pointer;
+         /* Paieskos mygtukas vizitu border: 0px;
+          background: none;
+          background-color: var(--main-color);
+          color: #fff;
+          float: right;
+          padding: 4.8px 20px;
+          font-size: 1.1rem !important;
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          -moz-border-radius-top-right: 5px;
+          -webkit-border-radius-top-right: 5px;
+          border-bottom-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          -moz-border-radius-bottom-right: 5px;
+          -webkit-border-radius-bottom-right: 5px;
+          cursor:pointer;*/
+       
+  }
+
+  /*tekstui prasome ivesti paieskot raktazodi*/
+  .mt-1{
+      padding-left: 265px !important;
+      
   }
   .search
   {
       height: 44px;
-      margin:auto;
-      max-width: 1200px; /*width of search field*/
-      margin-bottom: 1.5rem;
+      margin: auto;
+      max-width: 1200px;
       display: flex;
-      border: 1.6px solid var(--main-color);
-      /*overflow: auto;*/ /*sitas gadina mygtuko overlapa*/
+      border: 1px solid var(--main-color);
+      overflow: auto;
       border-radius: 6px;
       -moz-border-radius: 6px;
       -webkit-border-radius: 6px;
       background: #fff;
+      margin-bottom: 1rem;
   }
   .search:focus-within {
     box-shadow:0 0 0 .15rem var(--main-color25);
@@ -492,45 +530,87 @@ a { color: inherit; }
   
   .search input[type="text"]
   {
-      font-size: 1rem;
       border: 0px;
-      width: 75%;
-      padding: 2px 2px;
-      margin-left: 1rem;
+      width: 95.8%;
+      padding: 10px 10px;
   }
   
   .search input[type="text"]:focus
   {
       box-shadow: none;
       outline: 0;
-      
   }
-  /*tekstui prasome ivesti paieskot raktazodi*/
-  .mt-1{
-      padding-left: 265px !important;
-      
-  }
+  
   .search input[type="submit"], .btn.btn-secondary
   {
       border: 0px;
       background: none;
       background-color: var(--main-color);
       color: #fff;
-      float: right !important;
-      position: fixed !important;
-      left: 848px !important; 
+      float: right;
+      padding: 7.7px 26px;
+      font-size: 1.1rem !important;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      -moz-border-radius-top-right: 5px;
+      -webkit-border-radius-top-right: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      -moz-border-radius-bottom-right: 5px;
+      -webkit-border-radius-bottom-right: 5px;
+          cursor:pointer;
+  }
+  /*.search
+  {
+     margin:auto;
+      height: 44px;
+      display: flex;
+      max-width: 1200px; /*width of search field
+      border: 1px solid var(--main-color);
+      overflow: auto;
+      border-radius: 6px;
+      -moz-border-radius: 6px;
+      -webkit-border-radius: 6px;
+      background: #fff;
+      margin-bottom: 1.5rem;
+  }
+  .search:focus-within {
+    box-shadow:0 0 0 .15rem var(--main-color25);
+  }
+  
+  .search input[type="text"]
+  {
+      border: 0px;
+      width: 95.8%;
+      padding: 10px 10px;
+      font-size: 1.1rem;
+  }
+  
+  .search input[type="text"]:focus
+  {
+      box-shadow: none;
+      outline: 0;
+  }
+  
+  .search input[type="submit"], .btn.btn-secondary
+  {
+      border: 0px;
+      background: none;
+      background-color: var(--main-color);
+      color: #fff;
+      float: right;
       font-size: 1.1rem !important;
       padding: 7.7px 20px !important;
-      border-top-right-radius: 4px;
-      border-top-left-radius: 4px;
-      -moz-border-radius-top-right: 4px;
-      -webkit-border-radius-top-right: 4px;
-      border-bottom-right-radius: 4px;
-      border-bottom-left-radius: 4px;
-      -moz-border-radius-bottom-right: 4px;
-      -webkit-border-radius-bottom-right: 4px;
- 
-  }
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      -moz-border-radius-top-right: 5px;
+      -webkit-border-radius-top-right: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      -moz-border-radius-bottom-right: 5px;
+      -webkit-border-radius-bottom-right: 5px;
+          cursor:pointer;
+  }*/
   .main-content .btn-outline-info {
     color: var(--main-color);
     border-color: var(--main-color);
@@ -577,7 +657,7 @@ a { color: inherit; }
     padding: 4px;
   }
 
-/*.user-wrapper ul{
+.user-wrapper ul{
     padding: 0;
     list-style: none;
     background: #fff;
@@ -602,7 +682,7 @@ a { color: inherit; }
     
 }
 .user-wrapper ul li ul.dropdown{
-   /* min-width: 175px; /* Set width of the dropdown
+   /* min-width: 175px; /* Set width of the dropdown*/
     background: #ffff;
     display: none;
     position: absolute;
@@ -611,12 +691,12 @@ a { color: inherit; }
     
 }
 .user-wrapper ul li:hover ul.dropdown{
-    display: block; /* Display the dropdown 
+    display: block; /* Display the dropdown */
     font-size: 0.8rem;
 }
 .user-wrapper ul li ul.dropdown li{
     display: block;
-}*/
+}
 
 .totalcost{
     
@@ -639,7 +719,7 @@ a { color: inherit; }
 .text-green {
     color: #fff;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     border-radius: 10px;
     border: 2px solid var(--color-dark);
@@ -651,7 +731,7 @@ a { color: inherit; }
 .text-red {
     color: #fff;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     border-radius: 10px;
     border: 2px solid var(--color-dark);
@@ -662,7 +742,7 @@ a { color: inherit; }
 .text-grey{
     color: #fff;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     border-radius: 10px;
     border: 2px solid var(--color-dark);
@@ -688,7 +768,7 @@ input[readonly]{
     max-width: 500px;
     height: 38px;
 }
-input[type="text"]
+/*input[type="text"]
   {
       font-size: 1.3rem;
       padding: 1px 1px;
@@ -704,20 +784,18 @@ input{
     font-size: 1.2rem;
     max-width: 500px;
     height: 40px;
-}
-.search input[type="submit"], .btn.btn-secondary{
+}*/
+/*.search input[type="submit"], .btn.btn-secondary{
     display:flex; flex-direction: column; text-align: center;
     font-size: 1.5rem;
     display:block;
-}
+}*/
 
 .kbutton{
-
     position:absolute;
     font-size: 1.4rem;
     display: inline-block;
-    top: 10rem; right:25rem;
-   
+    top: 10rem; right:25rem;  
 }
 
 .modal-footer{
@@ -748,85 +826,232 @@ input{
 
 /* For laptop 1366 Resolution */  
 @media only screen   
-and (min-width: 1030px)   
+and (min-width: 1264px)   
 and (max-width: 1366px) {
 
     .ptable thead tr, .b-table thead tr {
 
-        background-color: var(--main-color);
-        color: #ffffff;
-        text-align: left;
-        font-size: 1rem !important; /*font size of column labels*/
+        font-size: 0.9rem !important; /*font size of column labels*/
     }
     .ptable td, .b-table td {
-    
-        background-color: var(--main-color);
-        text-align: left;
-        font-size: 0.9rem !important; /*font size of table rows*/
+        font-size: 1rem !important; /*font size of table rows*/
     }
-    .search
-    {
-        height: 44px;
-        margin:auto;
-        max-width: 1200px; /*width of search field*/
-        margin-bottom: 1.5rem;
-        display: flex;
-        border: 1.6px solid var(--main-color);
-    }
-    .search:focus-within {
-      box-shadow:0 0 0 .15rem var(--main-color25);
-    }
-    
-    .search input[type="text"]
-    {
+    .text-green {      
+        font-weight: 500;
         font-size: 0.9rem;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px;   
     }
+    .text-red {
+        font-weight: 500;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    .text-grey{
+        font-weight: 500;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    /*.search
+    {
+        margin:auto;
+        height: 42px !important;
+        display: flex;
+        max-width: 1200px; /*width of search field
+        margin-bottom: 1rem;
+    }*/
+    /*.search input[type="text"]
+    {
+      border: 0px;
+      width: 75.90%;
+      padding: 5px 5px;
+      font-size: 0.9rem;
+    }*/
+    /*.search input[type="text"]
+  {
+      border: 0px;
+      width: 95.8%;
+      padding: 10px 10px;
+      font-size: 1rem;
+  }*/
+    /*.search input[type="submit"], .btn.btn-secondary
+    {
+      font-size: 1rem !important;
+      padding: 8px 20px !important;
+    }*/
     /*tekstui prasome ivesti paieskot raktazodi*/
     .mt-1{
         padding-left: 5px !important;
-        
-    }
-    .search input[type="submit"], .btn.btn-secondary
-    {
-        border: 0px;
-        background: none;
-        background-color: var(--main-color);
-        color: #fff;
-        float: right !important;
-        position: fixed !important;
-        left: 545px !important; 
-        font-size: 1rem !important;
-        padding: 7.7px 20px !important;
-        border-top-right-radius: 4px;
-        border-top-left-radius: 4px;
-        -moz-border-radius-top-right: 4px;
-        -webkit-border-radius-top-right: 4px;
-        border-bottom-right-radius: 4px;
-        border-bottom-left-radius: 4px;
-        -moz-border-radius-bottom-right: 4px;
-        -webkit-border-radius-bottom-right: 4px;
-   
-    }
- 
-   
+        font-size: 0.9rem;  
+    } 
 } 
 /* For laptop 1024 Resolution */  
 @media only screen   
 and (min-device-width : 768px)   
 and (max-device-width : 1024px)  {
-   
+    .ptable thead tr, .b-table thead tr {
+
+        font-size: 0.7rem !important; /*font size of column labels*/
+    }
+    .ptable td, .b-table td {
+        font-size: 0.8rem !important; /*font size of table rows*/
+    }
+    .text-green {      
+        font-weight: 500;
+        font-size: 0.7rem;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px;   
+    }
+    .text-red {
+        font-weight: 500;
+        font-size: 0.7rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    .text-grey{
+        font-weight: 500;
+        font-size: 0.7rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    .search
+    {
+        height: 29px !important;
+        margin-bottom: 1rem;
+    }
+    .search input[type="text"]
+    {
+        
+        padding: 10px 10px;
+        font-size: 0.8rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/
+    }
+    
+    .search input[type="submit"], .btn.btn-secondary
+    {
+      padding: 4px 20px;
+      margin-left: 0 !important;
+      font-size: 0.8rem !important;
+    }
+    /*tekstui prasome ivesti paieskot raktazodi*/
+    .mt-1{
+        padding-left: 5px !important;
+        font-size: 0.8rem;  
+    } 
 }
 @media only screen   
 and (min-device-width : 641px)   
 and (max-device-width : 767px){
+    .ptable thead tr, .b-table thead tr {
+
+        font-size: 0.6rem !important; /*font size of column labels*/
+    }
+    .ptable td, .b-table td {
+        font-size: 0.7rem !important; /*font size of table rows*/
+    }
+    .text-green {      
+        font-weight: 500;
+        font-size: 0.6rem;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px;   
+    }
+    .text-red {
+        font-weight: 500;
+        font-size: 0.6rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    .text-grey{
+        font-weight: 500;
+        font-size: 0.6rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    .search
+    {
+        height: 27px !important;
+        margin-bottom: 1rem;
+    }
+    .search input[type="text"]
+    {
+        padding: 10px 10px;
+        font-size: 0.6rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/     
+    }
     
+    .search input[type="submit"], .btn.btn-secondary
+    {
+      padding: 4px 18px;
+      margin-left: 0 !important;
+      font-size: 0.7rem !important;
+    }
+    /*tekstui prasome ivesti paieskot raktazodi*/
+    .mt-1{
+        padding-left: 5px !important;
+        font-size: 0.6rem;  
+    } 
 
 }
 /* For mobile 640 Resolution */  
 @media only screen   
 and (min-device-width : 360px)   
 and (max-device-width : 640px){
+    .ptable thead tr, .b-table thead tr {
+
+        font-size: 0.5rem !important; /*font size of column labels*/
+    }
+    .ptable td, .b-table td {
+        font-size: 0.4rem !important; /*font size of table rows*/
+    }
+    .text-green {      
+        font-weight: 500;
+        font-size: 0.4rem;
+        border: 1.8px solid var(--color-dark);
+        padding: 1px;   
+    }
+    .text-red {
+        font-weight: 500;
+        font-size: 0.4rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 1px; 
+    }
+    .text-grey{
+        font-weight: 500;
+        font-size: 0.4rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 1px; 
+    }
+    .search
+    {
+        height: 24px !important;
+        margin-bottom: 1rem;
+    }
+    .search input[type="text"]
+    {
+        padding: 10px 10px;
+        font-size: 0.6rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/
+      
+    }
     
+    .search input[type="submit"], .btn.btn-secondary
+    {
+      padding: 3.8px 15px;
+      margin-left: 0 !important;
+      font-size: 0.6rem !important;
+    }
+    /*tekstui prasome ivesti paieskot raktazodi*/
+    .mt-1{
+        padding-left: 5px !important;
+        font-size: 0.6rem;  
+    } 
 } 
 /* For mobile 480 Resolution */  
 @media only screen   
@@ -836,15 +1061,64 @@ and (max-device-width : 480px){
 
 }
 @media only screen   
-and (min-width: 1144px)   
-and (max-width: 1231px) {
+and (min-width: 1030px)   
+and (max-width: 1263px) {
 
     
 
 }
 @media only screen   
 and (min-width: 1025px)   
-and (max-width: 1143px) {
-    
+and (max-width: 1263px) {
+    .search
+    {
+        height: 36px !important;
+        margin-bottom: 1rem;
+    }*/
+    .search input[type="text"]
+    {
+        max-width: fit-content;
+        padding: 10px 10px;
+        font-size: 0.8rem !important;
+        display: flex;
+       
+    }
+    .search input[type="submit"], .btn.btn-secondary
+    {
+      padding: 5px 20px;
+      margin-left: 0 !important;
+      font-size: 1rem !important;
+    }
+    /*tekstui prasome ivesti paieskot raktazodi*/
+    .mt-1{
+        padding-left: 5px !important;
+        font-size: 0.8rem;  
+    } 
+    .ptable thead tr, .b-table thead tr {
 
+        font-size: 0.8rem !important; /*font size of column labels*/
+    }
+    .ptable td, .b-table td {
+        font-size: 0.9rem !important; /*font size of table rows*/
+    }
+    .text-green {      
+        font-weight: 500;
+        font-size: 0.8rem;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px;   
+    }
+    .text-red {
+        font-weight: 500;
+        font-size: 0.8rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
+    .text-grey{
+        font-weight: 500;
+        font-size: 0.8rem;
+        border-radius: 10px;
+        border: 1.8px solid var(--color-dark);
+        padding: 2px; 
+    }
 }

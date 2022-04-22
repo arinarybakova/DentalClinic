@@ -415,7 +415,7 @@ and (min-device-width : 641px)
 and (max-device-width : 767px){
     #menu-btn{
         display: initial !important;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         border-radius: .5rem;
         background: #eee;
         color:var(--green);
@@ -450,14 +450,14 @@ and (max-device-width : 767px){
         margin: 2.5rem;
     }
     .header .banner .logo{
-        font-size: 1.4rem !important;
+        font-size: 1rem !important;
         margin-top: 6px;
         padding-left: 40px !important;
        
     }
     .header .banner .cne{
         display: inline-block;
-        font-size: 0.9rem !important;
+        font-size: 0.6rem !important;
         color: var(--green);
         font-weight: bold;
         position: absolute;
@@ -466,7 +466,7 @@ and (max-device-width : 767px){
     }
     .header .banner  .cnt{
         display: inline-block;
-        font-size: 0.9rem !important;
+        font-size: 0.6rem !important;
         font-weight: bold;
         position: absolute;
         color: var(--green);
@@ -485,7 +485,7 @@ and (max-device-width : 767px){
         padding-bottom: 1rem;
         text-transform: uppercase;
         color: var(--black);
-        font-size: 1.2rem !important;
+        font-size: 1rem !important;
         padding-top: 4rem;
         letter-spacing: .2rem;
     }
@@ -493,7 +493,7 @@ and (max-device-width : 767px){
     .heading span{
         text-transform: uppercase;
         color: var(--green);
-        font-size: 1.2rem!important;
+        font-size: 1rem!important;
         letter-spacing: .2rem;
     }
 
@@ -540,7 +540,7 @@ and (min-device-width : 360px)
 and (max-device-width : 640px){
     #menu-btn{
         display: initial !important;
-        font-size: 1.2rem;
+        font-size: 1rem;
         border-radius: .5rem;
         background: #eee;
         color:var(--green);
@@ -810,7 +810,7 @@ and (max-width: 1231px) {
         padding-bottom: 1rem;
         text-transform: uppercase;
         color: var(--black);
-        font-size: 1.2rem !important;
+        font-size: 1.3rem !important;
         padding-top: 4rem;
         letter-spacing: .2rem;
     }
@@ -818,7 +818,7 @@ and (max-width: 1231px) {
     .heading span{
         text-transform: uppercase;
         color: var(--green);
-        font-size: 1.2rem!important;
+        font-size: 1.3rem!important;
         letter-spacing: .2rem;
     }
 
@@ -899,7 +899,7 @@ and (max-width: 1143px) {
         padding-bottom: 1rem;
         text-transform: uppercase;
         color: var(--black);
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
         padding-top: 4rem;
         letter-spacing: .2rem;
     }
@@ -907,7 +907,7 @@ and (max-width: 1143px) {
     .heading span{
         text-transform: uppercase;
         color: var(--green);
-        font-size: 1rem!important;
+        font-size: 1.1rem!important;
         letter-spacing: .2rem;
     }
 
