@@ -42,6 +42,9 @@
       @eventAdded="eventAdded"
       :event="selectedEvent"
     ></edit-event>
+
+    <info-event :event="infoEvent" />
+
   </div>
 </template>
 
@@ -54,6 +57,7 @@ export default {
     filterDentist: [""],
     events: [],
     selectedEvent: [],
+    infoEvent: [],
     doctorOptions: [],
     showAppointments: false,
   }),
@@ -96,13 +100,16 @@ export default {
         var end = fetched[i].time_to * 1000;
         this.events.push({
           id: fetched[i].id,
-          name: (fetched[1].patient ? fetched[1].patient + ', ' : '') + fetched[i].doctor,
+          name: (fetched[i].patient ? fetched[i].patient + ', ' : '') + fetched[i].doctor,
           color: color,
           eventType,
           start,
           end,
           timed,
+          dentist: fetched[i].doctor,
           fk_dentist: fetched[i].fk_dentist,
+          patient: (fetched[i].patient ? fetched[i].patient : ''),
+          fk_patient: (fetched[i].fk_patient ? fetched[i].fk_patient : '')
         });
       }
     },
@@ -122,7 +129,8 @@ export default {
       this.$bvModal.show("edit-event");
     },
     showEventInfo(event) {
-        console.log(event);
+        this.infoEvent = event.event;
+      this.$bvModal.show("info-event");
     },
     eventUpdated(event) {
       this.fetchEvents(this.value);
