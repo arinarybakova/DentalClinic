@@ -44,6 +44,42 @@ class AppointmentController extends Controller {
         return ['appointments' => $appointments, 'total' => $total];
     }
 
+    public function appointmentEvents(Request $request)
+    {
+        if(isset($request->start)) {
+            $dateFrom = date('Y-m-d', strtotime($request->start . " monday this week"));
+            $dateTo = date('Y-m-d', strtotime($request->start . " sunday this week"));
+        } else {
+            $dateFrom = date('Y-m-d', strtotime('monday this week'));
+            $dateTo = date('Y-m-d', strtotime('sunday this week'));
+        }
+        $query = DB::table('appointments')
+            ->join('users as d', 'd.id', '=', 'appointments.fk_dentist')
+            ->join('users as p', 'p.id', '=', 'appointments.fk_patient')
+            ->select(
+                'appointments.*', 
+                DB::raw('UNIX_TIMESTAMP(appointments.time_from) as time_from'),
+                DB::raw('UNIX_TIMESTAMP(appointments.time_to) as time_to'),
+                DB::raw('CONCAT(d.firstname, " ", d.lastname) AS doctor'),
+                DB::raw('CONCAT(p.firstname, " ", p.lastname) AS patient')
+                )
+            ->where('appointments.time_from', '>=', $dateFrom)
+            ->where('appointments.time_to', '<=', $dateTo);
+
+        if(isset($request->doctors)) {
+            $doctors = explode(",", $request->doctors);
+            foreach($doctors as $key => $doctor) {
+                if($doctor === '') {
+                    unset($doctors[$key]);
+                }
+            }
+            $query->whereIn('fk_dentist', $doctors);
+        }
+
+        $appointments = $query->get();
+        return $appointments;
+    }
+
     /**
      * Display the specified resource.
      *

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Schedule;
 use DateTime;
-use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller

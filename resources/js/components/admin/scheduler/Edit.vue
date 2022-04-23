@@ -16,7 +16,6 @@ export default {
     },
     methods: {
         onSubmit(event) {
-            console.log(event);
             if (event.id) {
                 this.updateEvent(event);
             } else {

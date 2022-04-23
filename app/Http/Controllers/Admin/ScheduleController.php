@@ -62,7 +62,6 @@ class ScheduleController extends Controller
         try {
             $schedule = Schedule::create($this->parseData($request->post()));
         } catch (\Illuminate\Database\QueryException $exception) {
-            dd($exception);
             return response()->json([
                 'success'   => false,
                 'event' => []
