@@ -21,21 +21,23 @@ class AppointmentController extends Controller
         if ($request->get('page') !== null && Auth::hasUser()) {
             $limit = $request->get('limit') ?? 10;
             $appointments = Appointment::select(
-                'appointments.*',
+                'appointments.*', 'appointment_status.status',
                 DB::raw('DATE(appointments.time_from) as date'),
                 DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
                 DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
             )
+                ->join('appointment_status', 'appointment_status.id', 'appointments.fk_status')
                 ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist')
                 ->where('fk_patient', '=', Auth::user()->id);
 
-            if ($request->get('filter') !== null) {
-                $appointments->where('CONCAT(dentist.firstname, " ", dentist.lastname)', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('status');
-            } else {
-                $appointments->orderBy('time_from');
-            }
+                if ($request->get('filter') !== null) {
+                    $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orderBy('status');
+                } else {
+                    $appointments->orderBy('time_from');
+                }
             $pagination = $appointments->paginate($limit)->toArray();
             $appointments = $pagination['data'];
             $total = $pagination['total'];

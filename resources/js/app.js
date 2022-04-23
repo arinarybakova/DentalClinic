@@ -83,7 +83,7 @@ Vue.component('approve-appointment', require('./components/admin/appointment/App
 Vue.component('cancel-appointment', require('./components/admin/appointment/Cancel.vue').default);
 
 //Admin profile
-Vue.component('profile', require('./components/admin/profile/Index.vue').default);
+Vue.component('profile', require('./components/admin/profile/index.vue').default);
 
 //Frontend procedures
 Vue.component('procedures', require('./components/frontend/procedures.vue').default);

@@ -21,9 +21,10 @@ class TreatmentController extends Controller {
         if ($request->get('page') !== null && Auth::hasUser()) {
             $limit = $request->get('limit') ?? 10;
             $treatments = Treatment::select(
-                'treatments.*', 'treatment_stage_status.status')
+                'treatments.*', 'treatment_stage_status.status', 'procedures.title', 'procedures.price')
             
             ->join('treatment_stage_status', 'treatment_stage_status.id', 'treatments.fk_status')
+            ->join('procedures', 'procedures.id', 'treatments.fk_procedure')
             ->where('fk_patient', '=', Auth::user()->id);
             
 

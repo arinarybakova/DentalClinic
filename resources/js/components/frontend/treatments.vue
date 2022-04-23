@@ -63,13 +63,13 @@ export default {
           sortable: true,
         },
         {
-          key: "procedure",
+          key: "title",
           label: "Procedūra",
           sortable: true,
           thClass: 'Pcolumn'
         },
         {
-          key: "cost",
+          key: "price",
           label: "Kaina",
           sortable: true,
         },
@@ -115,13 +115,13 @@ export default {
   computed: {
      total() {
        return this.items.reduce((acc, ele) => {
-       if (ele.fk_status != 3){
-       return acc + parseFloat(ele.cost);
-       }
-       else{
-         return acc + parseFloat(0);
-       }
-  }, 0);
+            if (ele.fk_status != 3){
+                return acc + parseFloat(ele.price);   
+            }
+            else{
+              return acc + parseFloat(0);
+            }
+        }, 0);
      },
   },
   watch: {
