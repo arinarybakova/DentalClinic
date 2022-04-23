@@ -1,25 +1,49 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
-    <user-form
-      :bus="bus"
-      :id="formId"
-      :disabled=true
-      title="Tikrai norite patvirtinti šį vizitą?"
-      submitTitle="Taip"
-      :appointment="appointment"
-      @formSubmit="onSubmit"
-    ></user-form>
+    <b-modal :id="id" title="Tikrai norite patvirtinti šį vizitą?" centered hide-footer>
+   <b-form @submit="onSubmit">
+        <b-form-group
+          id="patient-group"
+          label="Pacientas:"
+          label-for="patient-input"
+        >
+          <b-form-input
+            id="patient-input"
+            v-model="appointment.patient"
+            type="text"
+            placeholder="Pacientas"
+            disabled
+          ></b-form-input>
+        </b-form-group>
+      
+        <b-form-group
+          id="dentist-group"
+          label="Dentist:"
+          label-for="dentist-input"
+        >
+          <b-form-input
+            id="dentist-input"
+            v-model="appointment.dentist"
+            type="text"
+            placeholder="Gyd. odontologas"
+            disabled
+          ></b-form-input>
+        </b-form-group>
+
+        <b-button type="submit" variant="secondary" class="mt-3">
+          Taip
+        </b-button>
+      </b-form>
+    </b-modal>
   </div>
 </template>
 <script>
 export default {
-  props: ["appointment"],
-  data() {
-    return {
-      bus: new Vue(),
-      formId: "approve-appointment",
-    };
+ props: {
+    id: { required: true },
+    appointment: { required: false },
   },
+  
   methods: {
     onSubmit(form) {
       this.axios
@@ -28,7 +52,6 @@ export default {
           if (response.data.success) {
             this.$emit("appointmentApproved");
             this.$bvModal.hide(this.formId);
-            this.bus.$emit("resetForm");
           } else {
             this.errorToast.message =
               "Atsprašome įvyko klaida, nepavyko patvirtinti vizito";

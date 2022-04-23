@@ -17,7 +17,7 @@ class ProfileController extends Controller {
     public function profile(Request $request)
     {
         
-        return auth('api')->user();
+        return Auth::user();
     }
 
     /**

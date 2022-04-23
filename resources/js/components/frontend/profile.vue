@@ -9,38 +9,37 @@
         <b-form-group class = "label"
         id="fieldset-1"
         label ="Vardas"
-        label-for="input-1"
-        :state="state"
+        label-for="input-1"  
         >
-        <b-form-input id="input-1"  v-model="name" :state="state" trim></b-form-input>
+        <b-form-input id="input-1"  v-model="user.firstname" trim></b-form-input>
         </b-form-group>
         <b-form-group class = "label"
         id="fieldset-1"
         label="Pavardė"
         label-for="input-2"
-        :state="state"
+        
         >
-        <b-form-input id="input-2" v-model="name" :state="state" trim></b-form-input>
+        <b-form-input id="input-2" v-model="name"  trim></b-form-input>
         </b-form-group>
         <b-form-group class = "label"
         id="fieldset-1"
         label="El. paštas"
         label-for="input-2"
-        :state="state">
-        <b-form-input  id="input-2" v-model="name" :state="state" trim></b-form-input>
+     >
+        <b-form-input  id="input-2" v-model="name"  trim></b-form-input>
         </b-form-group>
         <b-form-group class = "label"
         id="fieldset-1"
         label="Tel. numeris"
         label-for="input-2"
-        :state="state">
-        <b-form-input id="input-2" v-model="name" :state="state" trim></b-form-input>
+        >
+        <b-form-input id="input-2" v-model="name" trim></b-form-input>
         </b-form-group>
         <b-form-group class = "label"
         id="fieldset-1"
         label="Slaptažodis"
         label-for="input-2"
-        :state="state">
+        >
         <b-form-input id="input-2"  input type = "password" v-model="name" :state="state" trim></b-form-input>
         </b-form-group>
         <b-form-group class = "label"
@@ -98,14 +97,11 @@
 <script>
 export default {
  
-  field: {                  
-    firstname: '',
-    lastname: '',
-    email: '',
-    phone: '',
-    password: '',
-  },
-    
+  data: ()=>({
+    user:[  
+    ]                 
+  }),
+
   created() {
     this.fetchUser();
   },
@@ -114,8 +110,8 @@ export default {
       this.axios
         .get("/api/front/profile")
         .then((response) => {
-          this.items = response.data;
-          
+          this.user = response.data;
+          console.log(this.user.firstname);
         });
     },
   },

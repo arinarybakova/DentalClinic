@@ -1,6 +1,6 @@
 <template>
      <div class="card-body">
-      <approve-appointment @appointmentApproved="appointmentApproved" :appointment="selectedAppointment"></approve-appointment>
+      <approve-appointment @appointmentApproved="appointmentApproved" :appointment="selectedAppointment" id="approve-appointment"></approve-appointment>
       <cancel-appointment @appointmentCancelled="appointmentCancelled" :appointment="selectedAppointment"></cancel-appointment>
         <toast
           type="success"
@@ -78,6 +78,7 @@ export default {
         message: "",
         show: false,
       },
+      selectedAppointment: [],
       fields: [
         {
           key: "id",
@@ -157,6 +158,7 @@ export default {
     approveAppointment(appointment) {
       this.selectedAppointment = appointment;
       this.$bvModal.show("approve-appointment");
+      console.log(this.selectedAppointment);
     },
     appointmentApproved(appointment) {
       this.filter = "";

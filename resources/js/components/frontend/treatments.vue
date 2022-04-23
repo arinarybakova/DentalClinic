@@ -14,7 +14,7 @@
           Prašome įvesti paieškos raktažodį
           </div>
        
-        <b-table class ="ttable" hover :items="items" :fields="fields" :perPage="0" :cell-class-name="classChecker">
+        <b-table class ="ttable" hover :items="items" :fields="fields" :perPage="0">
         <template #cell(id)="data">
           <b>{{ getTreatmentId(data.value) }}</b>
         </template>
@@ -74,7 +74,7 @@ export default {
           sortable: true,
         },
         {
-          key: "fk_status",
+          key: "status",
           label: "Būsena",
           sortable: true,
         },
@@ -115,7 +115,12 @@ export default {
   computed: {
      total() {
        return this.items.reduce((acc, ele) => {
+       if (ele.fk_status != 3){
        return acc + parseFloat(ele.cost);
+       }
+       else{
+         return acc + parseFloat(0);
+       }
   }, 0);
      },
   },
