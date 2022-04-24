@@ -29,7 +29,9 @@ class TreatmentController extends Controller {
             
 
             if ($request->get('filter') !== null) {
-                $treatments
+                $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('status');
             } else {
                 $treatments->orderBy('id');

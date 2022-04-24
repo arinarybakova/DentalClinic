@@ -5,7 +5,7 @@
     <!--font awesome cdn link-->
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
      <!--custom css file link-->
-     
+     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" >
 </head>
 <x-guest-layout>
     <x-jet-authentication-card>
@@ -98,7 +98,8 @@
         display: inline-block;  
         padding-bottom: 1rem;
         white-space: nowrap;
-        padding: 15px 163px 0px 1px;
+        margin-left: 0 !important; 
+        margin-right: auto !important;
         color: #444;
         font-size: 1rem;
         font-weight: bold;
@@ -318,24 +319,19 @@ and (max-device-width : 640px){
     /* priminti */
     .lb-psw{
         display: inline-block;  
-        padding-bottom: 1rem;
+        padding-bottom: 0.5rem;
         white-space: nowrap;
-        margin-left:auto;
-        margin-right:auto;
-        text-align: center;
-        padding: 30px;
-        /*padding: 10px 364px 10px 1px;*/
+        margin-left: 0; 
+        margin-right: auto;
         font-size: 0.8rem;
     }
     /* neturite paskyros */
     .lb-psws{
         display: inline-block;  
-        padding-bottom: 1rem;
+        padding-bottom: 0.5rem;
         white-space: nowrap;
         margin-left:auto !important;
         margin-right:auto !important;
-      
-        
         font-size: 0.8rem;    
     }
     .text-sm{
@@ -349,10 +345,63 @@ and (max-device-width : 640px){
 } 
 /* For mobile 480 Resolution */  
 @media only screen   
-and (min-device-width : 320px)   
+and (min-device-width : 401px)   
 and (max-device-width : 480px){
-    
 
+    #icon {   
+        margin-top: 1rem;   
+    }
+    .txt-lg{
+        padding-top: 3px;
+        padding-bottom: 50px;
+        font-size: 1.4rem;
+        
+    }
+    .txt-lb{
+        padding-top: 10px;
+        font-size: 1rem;  
+    }
+    .ml-4{
+       background-color: #2fbab8;
+       border-radius: 12px;
+       font-size: 0.7rem;
+       margin-top: 30px;
+       margin-left: 30%;
+       margin-right: 30%;
+    
+        padding: 30px;
+    }
+    .ml-4:hover{
+       background-color: #444;
+    }
+    /* priminti */
+    .lb-psw{
+        display: inline-block;  
+        padding-bottom: 0.5rem;
+        white-space: nowrap;
+        margin-left: 0 !important; 
+        margin-right: auto !important;
+        font-size: 0.8rem;
+        
+    }
+    /* neturite paskyros */
+    .lb-psws{
+        display: inline-block;  
+        padding-bottom: 0.5rem;
+        white-space: nowrap;
+        margin-left:auto !important;
+        margin-right:auto !important;
+     
+        
+        font-size: 0.8rem;    
+    }
+    .text-sm{
+        font-size: 0.8rem;
+    }
+    .text-smi{
+        font-size: 0.8rem;
+        margin-left: 0.5rem;        
+    }    
 }
 @media only screen   
 and (min-width: 1144px)   
@@ -367,5 +416,112 @@ and (min-width: 1025px)
 and (max-width: 1143px) {
     
 
+}
+
+@media only screen   
+and (min-device-width : 320px)   
+and (max-device-width : 400px){
+
+    #icon {   
+        margin-top: 1rem;   
+    }
+    .txt-lg{
+        padding-top: 3px;
+        padding-bottom: 30px;
+        font-size: 1rem;
+        
+    }
+    .txt-lb{
+        padding-top: 10px;
+        font-size: 1rem;  
+    }
+    .ml-4{
+       background-color: #2fbab8;
+       border-radius: 12px;
+       font-size: 0.7rem;
+       margin-top: 30px;
+       margin-left: 30%;
+       margin-right: 30%;
+    
+        padding: 30px;
+    }
+    .ml-4:hover{
+       background-color: #444;
+    }
+    /* priminti */
+    .lb-psw{
+        display: inline-block;  
+        padding-bottom: 0.5rem;
+        white-space: nowrap;
+        margin-left: 10px; 
+        margin-right: auto;
+        font-size: 0.8rem;
+        left: 0 !important;
+      
+        
+    }
+    /* neturite paskyros */
+    .lb-psws{
+        display: inline-block;  
+        padding-bottom: 0.5rem;
+        white-space: nowrap;
+          
+        font-size: 0.8rem;    
+    }
+    .text-sm{
+        font-size: 0.8rem;
+    }
+    .text-smi{
+        font-size: 0.8rem;
+        margin-left: 0.5rem;        
+    }
+}
+@media only screen   
+and (min-device-width : 180px)   
+and (max-device-width : 327px){
+
+    #icon {   
+        margin-top: 0.6rem;   
+    }
+    .txt-lg{
+        padding-top: 3px;
+        padding-bottom: 30px;
+        font-size: 0.8rem;
+        
+    }
+    .txt-lb{
+        padding-top: 10px;
+        font-size: 1rem;  
+    }
+    .ml-4{
+       background-color: #2fbab8;
+       border-radius: 12px;
+       font-size: 0.5rem;
+       margin-top: 30px;
+       margin-left: 30%;
+       margin-right: 30%;
+    
+        padding: 30px;
+    }
+    .ml-4:hover{
+       background-color: #444;
+    }
+    /* priminti */
+    .lb-psw{
+        padding-bottom: 0.5rem;
+        font-size: 0.7rem;  
+    }
+    /* neturite paskyros */
+    .lb-psws{ 
+        padding-bottom: 0.5rem;
+        font-size: 0.7rem;    
+    }
+    .text-sm{
+        font-size: 0.7rem;
+    }
+    .text-smi{
+        font-size: 0.7rem;
+        margin-left: 0.5rem;        
+    }
 }
 </style>

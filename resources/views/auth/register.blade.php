@@ -20,31 +20,31 @@
 
             <div class="mt-4">
                 <x-jet-label for="firstname" value="{{ __('Vardas') }}" />
-                <x-jet-input id="firstname" class="block mt-1 w-full" type="text" name="name" :value="old('firstname')" required autofocus autocomplete="firstname" />
+                <x-jet-input id="firstname" class="inputF w-full" type="text" name="name" :value="old('firstname')" required autofocus autocomplete="firstname" />
             </div>
             <div class="mt-4">
                 <x-jet-label for="lastname" value="{{ __('Pavardė') }}" />
-                <x-jet-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
+                <x-jet-input id="lastname" class="inputF w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('El. paštas') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-input id="email" class="inputF w-full" type="email" name="email" :value="old('email')" required />
             </div>
             
             <div>
                 <x-jet-label for="phone" value="{{ __('Tel. numeris') }}" />
-                <x-jet-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
+                <x-jet-input id="phone" class="inputF w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Slaptažodis') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-jet-input id="password" class="inputF w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Pakartokite slaptažodį') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-jet-input id="password_confirmation" class="inputF w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -85,7 +85,7 @@
         padding-top: 5px;
         padding-bottom: 12px;
         color: #2fbab8;
-        font-size: 3.2rem;     
+        font-size: 2rem;     
     }
     .mt-4{
        margin-bottom: 1rem;
@@ -93,59 +93,197 @@
     .txt-lb{
         text-align: center;
         padding-top: 8px;
-        font-size: 1.9rem;
+        font-size: 1.4rem;
         color: #444;
         font-weight: bold;     
     }
     .ml-4{
        background-color: #2fbab8;
        border-radius: 12px;
-       font-size: 1rem;
-       margin-top: 15px;
-       margin-left: 30%;
-       margin-right: 30%
+       font-size: 0.9rem;
+       text-align: center;
+       margin: auto;
+       display: flex;
+       margin-top: 35px !important;
     }
     .ml-4:hover{
        background-color: #444;
     }
-    .lb-psw{
-        display: inline-block;  
-        padding-bottom: 1rem;
-        white-space: nowrap;
-        padding: 15px 137px 0px 1px;
-        color: #444;
-        font-size: 1.12rem;
-        font-weight: bold;
-        float: left;    
-    }
+
     .lb-psws{
         display: inline-block;  
-        padding-bottom: 1rem;
+        padding-bottom: 0.5rem;
         white-space: nowrap;
-        padding: 5px 76px 0px 1px;
+        margin-left: 0 !important; 
+        margin-right: auto !important;
         color: #444;
-        font-size: 1.12rem;
-        font-weight: bold;      
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: 0.5rem;     
     }
     .text-sm{
         text-decoration:none;
         color: #444;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     .text-smi{
         text-decoration:none;
         color: #2fbab8;
-        font-size: 1.12rem;
+        font-size: 1.1rem;
         font-weight: bold;
         margin-left: 0.5rem;   
-        
+        margin-top: 0.5rem;    
     }
     .text-smi:hover{
         text-decoration:none;
         color: #444;
     }
-    .label{
-        font-size: 5rem;
-        color: #444;
+    
+    .inputF{
+        border: 1px solid #e5e4e2 !important;
+        box-shadow: 2px 2px 2px 2px #f4f0ec !important;
     }
+
+       /* For laptop 1366 Resolution */  
+@media only screen   
+and (min-width: 1030px)   
+and (max-width: 1366px) {
+
+    .txt-lg{
+        padding-top: 5px;
+        padding-bottom: 12px;
+        font-size: 1.8rem;     
+    }
+    .mt-4{
+       margin-bottom: 0.8rem;
+    }
+    .txt-lb{
+        padding-top: 8px;
+        font-size: 1.4rem;    
+    }
+    .ml-4{
+       font-size: 0.9rem;
+       margin-top: 30px !important;
+    }
+
+    .lb-psws{
+        padding-bottom: 0.5rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;     
+    }
+    .text-sm{
+        font-size: 1rem;
+    }
+    .text-smi{
+        font-size: 1rem;
+        margin-left: 0.5rem;   
+        margin-top: 0.5rem;    
+    } 
+} 
+/* For laptop 1024 Resolution */  
+@media only screen   
+and (min-device-width : 768px)   
+and (max-device-width : 1024px)  {
+    .txt-lg{
+        padding-top: 5px;
+        padding-bottom: 12px;
+        font-size: 1.6rem;     
+    }
+    .mt-4{
+       margin-bottom: 0.8rem;
+    }
+    .txt-lb{
+        padding-top: 8px;
+        font-size: 1.2rem;    
+    }
+    .ml-4{
+       font-size: 0.8rem;
+       margin-top: 30px !important;
+    }
+
+    .lb-psws{
+        padding-bottom: 0.5rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;     
+    }
+    .text-sm{
+        font-size: 1rem;
+    }
+    .text-smi{
+        font-size: 1rem;
+        margin-left: 0.5rem;   
+        margin-top: 0.5rem;    
+    } 
+}
+@media only screen   
+and (min-device-width : 641px)   
+and (max-device-width : 767px){
+
+    .txt-lg{
+        padding-top: 5px;
+        padding-bottom: 12px;
+        font-size: 1.6rem;     
+    }
+    .mt-4{
+       margin-bottom: 0.8rem;
+    }
+    .txt-lb{
+        padding-top: 8px;
+        font-size: 1.2rem;    
+    }
+    .ml-4{
+       font-size: 0.8rem;
+       margin-top: 30px !important;
+    }
+
+    .lb-psws{
+        padding-bottom: 0.5rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;     
+    }
+    .text-sm{
+        font-size: 1rem;
+    }
+    .text-smi{
+        font-size: 1rem;
+        margin-left: 0.5rem;   
+        margin-top: 0.5rem;    
+    }     
+}
+/* For mobile 640 Resolution */  
+@media only screen   
+and (min-device-width : 360px)   
+and (max-device-width : 640px){
+
+    .txt-lg{
+        padding-top: 5px;
+        padding-bottom: 12px;
+        font-size: 1.6rem;     
+    }
+    .mt-4{
+       margin-bottom: 0.8rem;
+    }
+    .txt-lb{
+        padding-top: 8px;
+        font-size: 1.2rem;    
+    }
+    .ml-4{
+       font-size: 0.8rem;
+       margin-top: 30px !important;
+    }
+
+    .lb-psws{
+        padding-bottom: 0.5rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;     
+    }
+    .text-sm{
+        font-size: 1rem;
+    }
+    .text-smi{
+        font-size: 1rem;
+        margin-left: 0.5rem;   
+        margin-top: 0.5rem;    
+    } 
+} 
 </style>

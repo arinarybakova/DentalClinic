@@ -30,14 +30,13 @@ class AppointmentController extends Controller
                 ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist')
                 ->where('fk_patient', '=', Auth::user()->id);
 
-                if ($request->get('filter') !== null) {
-                    $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                        ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                        ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                        ->orderBy('status');
-                } else {
+            if ($request->get('filter') !== null) {
+                $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orderBy('status');
+            } else {
                     $appointments->orderBy('time_from');
-                }
+            }
             $pagination = $appointments->paginate($limit)->toArray();
             $appointments = $pagination['data'];
             $total = $pagination['total'];
