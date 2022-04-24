@@ -17,7 +17,7 @@
             <div class="box-container">
                 <toast type="error" :msg="errorToast.message" :show="errorToast.show" @toastClosed="errorToast.show = false"></toast>
                 <b-form @submit="onSubmit">
-                    <b-form-group id="doctor-group" label="Pasirinkite gyd. odontologą:" label-for="doctor-input">
+                    <b-form-group id="doctor-group" class="doctors" label="Pasirinkite gyd. odontologą:" label-for="doctor-input">
                         <b-form-select 
                             id="doctor-input" 
                             v-model="form.doctor" 
@@ -100,11 +100,11 @@ export default {
             form: {
                 doctor: {
                     required: helpers.withMessage(
-                        "Prašome pasirinkti gydytoją",
+                        "Prašome pasirinkti gyd. odontologą",
                         required
                     ),
                     minValue: helpers.withMessage(
-                        "Prašome pasirinkti gydytoją",
+                        "Prašome pasirinkti gyd. odontologą",
                         minValue(1)
                     ),
                 },
@@ -214,11 +214,11 @@ export default {
             this.axios.post("/api/front/appointments/store", this.form).then((response) => {
                 if (response.data.success) {
                     this.successToast.message =
-                        "Vizitas sėkmingai pridėtas (" + response.data['appointment'].time_from + ")";
+                        "Vizito rezervacija sėkminga (" + response.data['appointment'].time_from + ")";
                     this.successToast.show = true;
                 } else {
                     this.errorToast.message =
-                        "Atsiprašome įvyko klaida, nepavyko pridėti vizito";
+                        "Atsiprašome įvyko klaida, nepavyko užrezervuoti vizito";
                     this.errorToast.show = true;
                 }
                 this.fetchAvailableTimes();

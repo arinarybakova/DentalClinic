@@ -1,7 +1,7 @@
 <template>
      <div class="card-body">
       <approve-appointment @appointmentApproved="appointmentApproved" :appointment="selectedAppointment" id="approve-appointment"></approve-appointment>
-      <cancel-appointment @appointmentCancelled="appointmentCancelled" :appointment="selectedAppointment"></cancel-appointment>
+      <cancel-appointment @appointmentCancelled="appointmentCancelled" :appointment="selectedAppointment" id="cancel-appointment"></cancel-appointment>
         <toast
           type="success"
           :msg="success.message"
@@ -14,6 +14,7 @@
             placeholder="Įveskite paieškos raktažodį"
         ></b-form-input>
         <b-button v-on:click="filterTable()">Ieškoti</b-button>
+        <b-button v-on:click="resetTable()">Išvalyti</b-button>
         </div>
         <div v-if="v$.filter.$error" class="text-danger mt-1">
         Prašome įvesti paieškos raktažodį
@@ -147,6 +148,9 @@ export default {
       if (this.v$.$validate() && !this.v$.filter.$error) {
         this.fetchAppointments();
       }
+    },
+    resetTable() {
+       
     },
     getAppointmentId(value) {
       return "V" + value.toString().padStart(3, "0");

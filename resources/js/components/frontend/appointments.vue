@@ -25,7 +25,7 @@
           </span>
           </template>
          </b-table>
-        <b-pagination
+        <b-pagination class ="paginationapp"
         :total-rows="totalRows"
         :per-page="perPage"
         v-model="currentPage"

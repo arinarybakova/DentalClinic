@@ -803,9 +803,18 @@ input[readonly]{
 }
 .modal input[type="text"]{
     
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
         
 }
+
+.paginationapp{
+    flex: 1 0 auto !important;
+    align-items: flex-end !important;
+    display: flex !important;
+    font-size: 0.9rem!important;
+        
+}
+
 /* For laptop 1366 Resolution */  
 @media only screen   
 and (min-width: 1264px)   
@@ -922,6 +931,7 @@ and (max-width: 1366px) {
           color: var(--color-dark) !important;
           
       }
+     
 } 
 /* For laptop 1024 Resolution */  
 @media only screen   

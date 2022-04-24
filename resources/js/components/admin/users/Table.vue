@@ -15,6 +15,7 @@
         placeholder="Įveskite paieškos raktažodį"
       ></b-form-input>
       <b-button v-on:click="filterTable()">Ieškoti</b-button>
+      <b-button v-on:click="filterTable()">Išvalyti</b-button>
     </div>
     <div v-if="v$.filter.$error" class="text-danger mt-1">
       Prašome įvesti paieškos raktažodį
@@ -29,6 +30,14 @@
       </template>
       <template #cell(actions)="data">
         <div class="buttons">
+          <b-button
+            v-on:click="showTreatment(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Gydymo planas"
+            ><i class="fas fa-list"></i
+          ></b-button>
           <b-button
             v-on:click="updateUser(data.item)"
             variant="outline-info"
@@ -115,7 +124,7 @@ export default {
         },
         {
           key: "created_at",
-          label: "Dirba nuo",
+          label: "Registracija",
           sortable: true,
         },
         {
