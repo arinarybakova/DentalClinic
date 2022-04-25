@@ -9,6 +9,7 @@
             placeholder="Įveskite paieškos raktažodį"
         ></b-form-input>
         <b-button v-on:click="filterTable()">Ieškoti</b-button>
+        <b-button v-on:click="resetTable()">Išvalyti</b-button>
         </div>
         <div v-if="v$.filter.$error" class="text-danger mt-1">
         Prašome įvesti paieškos raktažodį

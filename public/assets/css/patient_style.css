@@ -395,7 +395,7 @@ td .status {
     margin: auto;
     font-size: 1rem;
     font-family: sans-serif;
-    width: 1000px !important;
+    max-width: 1000px !important;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .Pcolumn{
@@ -485,24 +485,7 @@ a { color: inherit; }
       border-bottom-left-radius: 4px;
       -moz-border-radius-bottom-right: 4px;
       -webkit-border-radius-bottom-right: 4px;
-          cursor:pointer;
-         /* Paieskos mygtukas vizitu border: 0px;
-          background: none;
-          background-color: var(--main-color);
-          color: #fff;
-          float: right;
-          padding: 4.8px 20px;
-          font-size: 1.1rem !important;
-          border-top-right-radius: 5px;
-          border-top-left-radius: 5px;
-          -moz-border-radius-top-right: 5px;
-          -webkit-border-radius-top-right: 5px;
-          border-bottom-right-radius: 5px;
-          border-bottom-left-radius: 5px;
-          -moz-border-radius-bottom-right: 5px;
-          -webkit-border-radius-bottom-right: 5px;
-          cursor:pointer;*/
-       
+          cursor:pointer;    
   }
 
   /*tekstui prasome ivesti paieskot raktazodi*/
@@ -512,17 +495,17 @@ a { color: inherit; }
   }
   .search
   {
-      height: 44px;
-      margin: auto;
-      max-width: 1200px;
-      display: flex;
-      border: 1px solid var(--main-color);
-      overflow: auto;
-      border-radius: 6px;
-      -moz-border-radius: 6px;
-      -webkit-border-radius: 6px;
-      background: #fff;
-      margin-bottom: 1rem;
+    height: 44px !important;
+    margin: auto !important;
+    max-width: 1200px !important;
+    margin-bottom: 1rem !important;
+    display: flex !important;
+    border: 1px solid var(--main-color);
+    overflow: auto !important;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    background: #fff;
   }
   .search:focus-within {
     box-shadow:0 0 0 .15rem var(--main-color25);
@@ -531,7 +514,7 @@ a { color: inherit; }
   .search input[type="text"]
   {
       border: 0px;
-      width: 95.8%;
+      width: 85.8%;
       padding: 10px 10px;
   }
   
@@ -541,25 +524,26 @@ a { color: inherit; }
       outline: 0;
   }
   
-  .search input[type="submit"], .btn.btn-secondary
+  .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
   {
-      border: 0px;
-      background: none;
-      background-color: var(--main-color);
-      color: #fff;
-      float: right;
-      padding: 7.7px 26px;
-      font-size: 1.1rem !important;
-      border-top-right-radius: 5px;
-      border-top-left-radius: 5px;
-      -moz-border-radius-top-right: 5px;
-      -webkit-border-radius-top-right: 5px;
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
-      -moz-border-radius-bottom-right: 5px;
-      -webkit-border-radius-bottom-right: 5px;
-          cursor:pointer;
+    border: 2px solid var(--button-hover);
+    background-color: var(--main-color);
+    color: #fff;
+    float: right !important;
+    margin-left:0 !important;
+    font-size: 1rem !important;
+    padding: 6.8px 15px !important;
+    border-top-right-radius: 1px;
+    border-top-left-radius: 1px;
+    -moz-border-radius-top-right: 1px;
+    -webkit-border-radius-top-right: 1px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 1px;
+    -moz-border-radius-bottom-right: 1px;
+    -webkit-border-radius-bottom-right: 1px;
+        cursor:pointer !important;
   }
+ 
   /*.search
   {
      margin:auto;
@@ -623,7 +607,7 @@ a { color: inherit; }
   .search input[type="submit"]:focus, .btn.btn-secondary:focus, .card-header button:focus,
   .search input[type="submit"]:active, .btn.btn-secondary:active, .card-header button:active {
     background-color: var(--button-hover);
-    border: 0px solid var(--button-hover);
+    border: 2px solid var(--button-hover);
   }
 
 
@@ -697,12 +681,20 @@ a { color: inherit; }
 .user-wrapper ul li ul.dropdown li{
     display: block;
 }
-
+.totalcost .info{
+    margin-bottom: 20px !important;
+    margin-left: 0.5rem !important;
+    border-radius: 16px !important;
+    padding: 3px 10px;
+    color: #fff;
+    font-size: 0.7rem !important;
+    background-color: var(--main-color);
+}
 .totalcost{
     
     display: inline center;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 550;
     color: var(--color-dark);
     display:flex; flex-direction: row; text-align:center;
@@ -714,7 +706,7 @@ a { color: inherit; }
 .totalcost .price{
     color: var(--main-color) !important;
     padding-left: 0.8rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 .text-green {
     color: #fff;
@@ -792,29 +784,31 @@ input[readonly]{
     
 }
 .modal-header{
-    border: none !important;
-    
+    border: none !important;  
 }
 .modal-title{
     font-size: 1.3rem !important;
     margin: auto !important;
-    color: var(--color-dark) !important;
-    
+    color: var(--color-dark) !important;    
 }
 .modal input[type="text"]{
     
-    font-size: 0.9rem !important;
-        
+    font-size: 0.9rem !important;      
 }
+
 
 .paginationapp{
-    flex: 1 0 auto !important;
-    align-items: flex-end !important;
-    display: flex !important;
     font-size: 0.9rem!important;
-        
 }
-
+@media only screen   
+and (min-width: 1904px)   
+and (max-width: 2900px) {
+    .paginationapp{
+        font-size: 0.9rem!important;
+        margin-left: 16.5rem !important;
+    }
+    
+}
 /* For laptop 1366 Resolution */  
 @media only screen   
 and (min-width: 1264px)   
@@ -847,34 +841,6 @@ and (max-width: 1366px) {
         border: 1.8px solid var(--color-dark);
         padding: 2px; 
     }
-    /*.search
-    {
-        margin:auto;
-        height: 42px !important;
-        display: flex;
-        max-width: 1200px; /*width of search field
-        margin-bottom: 1rem;
-    }*/
-    /*.search input[type="text"]
-    {
-      border: 0px;
-      width: 75.90%;
-      padding: 5px 5px;
-      font-size: 0.9rem;
-    }*/
-    /*.search input[type="text"]
-  {
-      border: 0px;
-      width: 95.8%;
-      padding: 10px 10px;
-      font-size: 1rem;
-  }*/
-    /*.search input[type="submit"], .btn.btn-secondary
-    {
-      font-size: 1rem !important;
-      padding: 8px 20px !important;
-    }*/
-    /*tekstui prasome ivesti paieskot raktazodi*/
     .mt-1{
         padding-left: 5px !important;
         font-size: 0.9rem;  
@@ -931,7 +897,28 @@ and (max-width: 1366px) {
           color: var(--color-dark) !important;
           
       }
-     
+      .paginationapp{
+        font-size: 0.8rem!important;
+    }
+    .totalcost .info{
+        margin-bottom: 18px !important;
+        margin-left: 0.5rem !important;
+        border-radius: 16px !important;
+        padding: 3px 10px;
+        color: #fff;
+        font-size: 0.7rem !important;
+        background-color: var(--main-color);
+    }
+    .totalcost{
+        
+        font-size: 1.1rem;
+        padding-top: 15px;
+    
+    }
+    .totalcost .price{
+        padding-left: 0.8rem;
+        font-size: 1.1rem;
+    }
 } 
 /* For laptop 1024 Resolution */  
 @media only screen   
@@ -975,12 +962,16 @@ and (max-device-width : 1024px)  {
         padding: 10px 10px;
         font-size: 0.8rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/
     }
-    
-    .search input[type="submit"], .btn.btn-secondary
+    .searcht
     {
-      padding: 4px 20px;
-      margin-left: 0 !important;
-      font-size: 0.8rem !important;
+        height: 29px !important;
+        margin-bottom: 1rem;
+    }
+    .searcht input[type="text"]
+    {
+        
+        padding: 10px 10px;
+        font-size: 0.8rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/
     }
     /*tekstui prasome ivesti paieskot raktazodi*/
     .mt-1{
@@ -1046,6 +1037,38 @@ and (max-device-width : 1024px)  {
           font-size: 0.9rem !important;
         
       }
+      .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
+        {
+            border: 2px solid var(--button-hover);
+            background-color: var(--main-color);
+            color: #fff;
+            float: right !important;
+            margin-left:0 !important;
+            font-size: 0.7rem !important;
+            padding: 3px 10px !important;
+        }
+        .paginationapp{
+            font-size: 0.7rem!important;
+        }
+        .totalcost .info{
+            margin-bottom: 20px !important;
+            margin-left: 0.5rem !important;
+            border-radius: 16px !important;
+            padding: 2px 8px;
+            color: #fff;
+            font-size: 0.6rem !important;
+            background-color: var(--main-color);
+        }
+        .totalcost{
+            
+            font-size: 0.9rem;
+            padding-top: 15px;
+        
+        }
+        .totalcost .price{
+            padding-left: 0.8rem;
+            font-size: 0.9rem;
+        }
 }
 @media only screen   
 and (min-device-width : 641px)   
@@ -1087,13 +1110,26 @@ and (max-device-width : 767px){
         padding: 10px 10px;
         font-size: 0.6rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/     
     }
-    
-    .search input[type="submit"], .btn.btn-secondary
+    .searcht
     {
-      padding: 4px 18px;
-      margin-left: 0 !important;
-      font-size: 0.7rem !important;
+        height: 27px !important;
+        margin-bottom: 1rem;
     }
+    .searcht input[type="text"]
+    {
+        padding: 10px 10px;
+        font-size: 0.6rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/     
+    }
+    .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
+        {
+            border: 2px solid var(--button-hover);
+            background-color: var(--main-color);
+            color: #fff;
+            float: right !important;
+            margin-left:0 !important;
+            font-size: 0.6rem !important;
+            padding: 3px 10px !important;
+        }
     /*tekstui prasome ivesti paieskot raktazodi*/
     .mt-1{
         padding-left: 5px !important;
@@ -1157,6 +1193,28 @@ and (max-device-width : 767px){
           font-size: 0.8rem !important;
         
       }
+      .paginationapp{
+        font-size: 0.6rem!important;
+    }
+    .totalcost .info{
+        margin-bottom: 18px !important;
+        margin-left: 0.5rem !important;
+        border-radius: 18px !important;
+        padding: 2px 8px;
+        color: #fff;
+        font-size: 0.5rem !important;
+        background-color: var(--main-color);
+    }
+    .totalcost{
+        
+        font-size: 0.8rem;
+        padding-top: 15px;
+    
+    }
+    .totalcost .price{
+        padding-left: 0.8rem;
+        font-size: 0.8rem;
+    }
 }
 /* For mobile 640 Resolution */  
 @media only screen   
@@ -1164,34 +1222,34 @@ and (min-device-width : 360px)
 and (max-device-width : 640px){
     .ptable thead tr, .b-table thead tr {
 
-        font-size: 0.5rem !important; /*font size of column labels*/
+        font-size: 0.6rem !important; /*font size of column labels*/
     }
     .ptable td, .b-table td {
-        font-size: 0.4rem !important; /*font size of table rows*/
+        font-size: 0.6rem !important; /*font size of table rows*/
     }
     .text-green {      
         font-weight: 500;
-        font-size: 0.4rem;
+        font-size: 0.5rem;
         border: 1.8px solid var(--color-dark);
         padding: 1px;   
     }
     .text-red {
         font-weight: 500;
-        font-size: 0.4rem;
+        font-size: 0.5rem;
         border-radius: 10px;
         border: 1.8px solid var(--color-dark);
         padding: 1px; 
     }
     .text-grey{
         font-weight: 500;
-        font-size: 0.4rem;
+        font-size: 0.5rem;
         border-radius: 10px;
         border: 1.8px solid var(--color-dark);
         padding: 1px; 
     }
     .search
     {
-        height: 24px !important;
+        height: 27px !important;
         margin-bottom: 1rem;
     }
     .search input[type="text"]
@@ -1200,13 +1258,27 @@ and (max-device-width : 640px){
         font-size: 0.6rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/
       
     }
-    
-    .search input[type="submit"], .btn.btn-secondary
+    .searcht
     {
-      padding: 3.8px 15px;
-      margin-left: 0 !important;
-      font-size: 0.6rem !important;
+        height: 27px !important;
+        margin-bottom: 1rem;
     }
+    .searcht input[type="text"]
+    {
+        padding: 10px 10px;
+        font-size: 0.6rem !important;/*reikia prideti font-size mazesni, neveikia cia priskyrus*/
+      
+    }
+    .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
+        {
+            border: 2px solid var(--button-hover);
+            background-color: var(--main-color);
+            color: #fff;
+            float: right !important;
+            margin-left:0 !important;
+            font-size: 0.6rem !important;
+            padding: 3.2px 8px !important;
+        }
     /*tekstui prasome ivesti paieskot raktazodi*/
     .mt-1{
         padding-left: 5px !important;
@@ -1270,6 +1342,28 @@ and (max-device-width : 640px){
           font-size: 0.8rem !important;
           height: 30px;
       }
+      .paginationapp{
+        font-size: 0.5rem!important;
+    }
+    .totalcost .info{
+        margin-bottom: 18px !important;
+        margin-left: 0.5rem !important;
+        border-radius: 18px !important;
+        padding: 2px 6px;
+        color: #fff;
+        font-size: 0.5rem !important;
+        background-color: var(--main-color);
+    }
+    .totalcost{
+        
+        font-size: 0.7rem;
+        padding-top: 15px;
+    
+    }
+    .totalcost .price{
+        padding-left: 0.8rem;
+        font-size: 0.7rem;
+    }
 } 
 /* For mobile 480 Resolution */  
 @media only screen   
@@ -1334,6 +1428,38 @@ and (max-device-width : 480px){
           font-size: 0.7rem !important;
           height: 25px;
       }
+      .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
+        {
+            border: 2px solid var(--button-hover);
+            background-color: var(--main-color);
+            color: #fff;
+            float: right !important;
+            margin-left:0 !important;
+            font-size: 0.6rem !important;
+            padding: 3.6px 8px !important;
+        }
+        .paginationapp{
+            font-size: 0.5rem!important;
+        }
+        .totalcost .info{
+            margin-bottom: 18px !important;
+            margin-left: 0.5rem !important;
+            border-radius: 18px !important;
+            padding: 2px 6px;
+            color: #fff;
+            font-size: 0.5rem !important;
+            background-color: var(--main-color);
+        }
+        .totalcost{
+            
+            font-size: 0.7rem;
+            padding-top: 15px;
+        
+        }
+        .totalcost .price{
+            padding-left: 0.8rem;
+            font-size: 0.7rem;
+        }
 
 }
 @media only screen   
@@ -1393,6 +1519,19 @@ and (max-width: 1263px) {
           color: var(--color-dark) !important;
           
       }
+      .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
+        {
+            border: 2px solid var(--button-hover);
+            background-color: var(--main-color);
+            color: #fff;
+            float: right !important;
+            margin-left:0 !important;
+            font-size: 0.9rem !important;
+            padding: 4.2px 15px !important;
+        }
+        .paginationapp{
+            font-size: 0.8rem!important;
+        }
 
 }
 @media only screen   
@@ -1402,21 +1541,23 @@ and (max-width: 1263px) {
     {
         height: 36px !important;
         margin-bottom: 1rem;
-    }*/
-    .search input[type="text"]
-    {
-        max-width: fit-content;
-        padding: 10px 10px;
-        font-size: 0.8rem !important;
-        display: flex;
-       
     }
-    .search input[type="submit"], .btn.btn-secondary
+    .searcht
     {
-      padding: 5px 20px;
-      margin-left: 0 !important;
-      font-size: 1rem !important;
+        height: 36px !important;
+        margin-bottom: 1rem;
     }
+
+    .search input[type="submit"], .search .btn.btn-secondary, .searcht .btn.btn-secondary
+        {
+            border: 2px solid var(--button-hover);
+            background-color: var(--main-color);
+            color: #fff;
+            float: right !important;
+            margin-left:0 !important;
+            font-size: 0.9rem !important;
+            padding: 4.2px 15px !important;
+        }
     /*tekstui prasome ivesti paieskot raktazodi*/
     .mt-1{
         padding-left: 5px !important;
@@ -1501,4 +1642,7 @@ and (max-width: 1263px) {
           color: var(--color-dark) !important;
           
       }
+      .paginationapp{
+        font-size: 0.8rem!important;
+    }
 }

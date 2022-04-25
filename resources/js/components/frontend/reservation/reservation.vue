@@ -16,7 +16,7 @@
             <h1 class="heading">Vizito <span>rezervacija</span></h1>
             <div class="box-container">
                 <toast type="error" :msg="errorToast.message" :show="errorToast.show" @toastClosed="errorToast.show = false"></toast>
-                <b-form @submit="onSubmit">
+                <b-form class = "bookapp" @submit="onSubmit">
                     <b-form-group id="doctor-group" class="doctors" label="Pasirinkite gyd. odontologą:" label-for="doctor-input">
                         <b-form-select 
                             id="doctor-input" 
