@@ -81,6 +81,42 @@ class AppointmentController extends Controller {
         return $appointments;
     }
 
+    public function approve(int $id)
+    {
+       //return redirect()->back();
+       try {
+        $appointment = Appointment::find($id);
+        $appointment->status='2';
+        $appointment->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'appointment' => []
+            ]);
+            }
+            return response()->json([
+                'success'   => true,
+                'appointment' => $appointment
+            ]);
+    }
+    public function cancel($id)
+    {
+        try {
+            $appointment = Appointment::find($id);
+            $appointment->status='3';
+            $appointment->save();
+            } catch (\Illuminate\Database\QueryException $exception) {
+                return response()->json([
+                    'success'   => false,
+                    'appointment' => []
+                ]);
+                }
+                return response()->json([
+                    'success'   => true,
+                    'appointment' => $appointment
+                ]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -92,4 +128,5 @@ class AppointmentController extends Controller {
         return response()->json($appointment);
     }
 
+    
 }

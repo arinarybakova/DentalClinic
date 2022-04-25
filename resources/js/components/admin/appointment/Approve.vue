@@ -74,7 +74,7 @@ export default {
   methods: {
     onSubmit(form) {
       this.axios
-        .post("/api/appointments/approve/" + this.appointment.id)
+        .post("/api/appointments/approve/" + this.appointments.id, form)
         .then((response) => {
           if (response.data.success) {
             this.$emit("appointmentApproved");

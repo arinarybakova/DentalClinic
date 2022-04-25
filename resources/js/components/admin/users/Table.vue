@@ -3,6 +3,7 @@
     <add-user @userAdded="userAdded" v-if="usertype == 3"></add-user>
     <edit-user @userUpdated="userUpdated" :user="selectedUser"></edit-user>
     <delete-user @userDeleted="userDeleted" :user="selectedUser"></delete-user>
+    
     <toast
       type="success"
       :msg="success.message"
@@ -30,7 +31,7 @@
       </template>
       <template #cell(actions)="data">
         <div class="buttons">
-          <b-button
+          <b-button v-if="usertype == 2"
             v-on:click="showTreatment(data.item)"
             variant="outline-info"
             size="sm"
@@ -185,6 +186,10 @@ export default {
     deleteUser(user) {
       this.selectedUser = user;
       this.$bvModal.show("delete-user");
+    },
+    showTreatment(user){
+      this.selectedUser = user;
+      this.$bvModal.show("treatment-user");
     },
     updateUser(user) {
       this.selectedUser = user;

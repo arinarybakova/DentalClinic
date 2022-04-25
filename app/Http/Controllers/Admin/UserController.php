@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -130,5 +131,27 @@ class UserController extends Controller
                 'success'   => false
             ]);
         }
+    }
+
+    public function treatment(int $id, Request $request)
+    {
+            $user = User::find($id);
+            $treatments = Treatment::select(
+                'treatments.*', 'treatment_stage_status.status', 'procedures.title', 'procedures.price')
+            
+            ->join('treatment_stage_status', 'treatment_stage_status.id', 'treatments.fk_status')
+            ->join('procedures', 'procedures.id', 'treatments.fk_procedure')
+            ->where('fk_patient', '=', Treatment::user()->id);
+            
+
+            if ($request->get('filter') !== null) {
+                $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orderBy('status');
+            } else {
+                $treatments->orderBy('id');
+            }
+        return ['treatments' => $treatments];
     }
 }

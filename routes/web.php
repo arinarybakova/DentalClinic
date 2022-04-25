@@ -75,17 +75,19 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::post('/users/store', [UserController::class, 'store'])->name('api.admin.users.store');
     Route::patch('/users/update/{id}', [UserController::class, 'update'])->name('api.admin.users.update');
     Route::post('/users/destroy/{id}', [UserController::class, 'destroy'])->name('api.admin.users.destroy');
+    Route::post('/users/treatment/{id}', [UserController::class, 'treatment'])->name('api.admin.users.treatment');
 
     Route::get('/schedules', [ScheduleController::class, 'schedules'])->name('api.admin.schedules');
     Route::post('/schedules/store', [ScheduleController::class, 'store'])->name('api.admin.schedules.store');
     Route::patch('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('api.admin.schedules.update');
 
     Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('api.admin.appointments');
-    Route::get('/appointments/approve{id}', [AppointmentController::class, 'approve'])->name('api.admin.appointments.approve');
-    Route::get('/appointments/cancel{id}', [AppointmentController::class, 'cancel'])->name('api.admin.appointments.cancel');
+    Route::get('/appointments/approve/{id}', [AppointmentController::class, 'approve'])->name('api.admin.appointments.approve');
+    Route::get('/appointments/cancel/{id}', [AppointmentController::class, 'cancel'])->name('api.admin.appointments.cancel');
     Route::get('/appointmentEvents', [AppointmentController::class, 'appointmentEvents'])->name('api.admin.appointmentEvents');
 
     Route::get('/profile', [ProfileController::class, 'profile'])->name('api.admin.profile');
+    
 });
 
 Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
