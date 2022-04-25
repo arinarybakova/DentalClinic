@@ -764,7 +764,7 @@ input[readonly]{
     margin: 40px auto !important;
     display: flex !important;
     padding: 7px 36px !important;
-    font-size: 1.2rem;
+    font-size: 1rem !important;
 }
 
 .modal-footer{
@@ -795,10 +795,69 @@ input[readonly]{
     
     font-size: 0.9rem !important;      
 }
+.bookapp .doctors{
+    max-width: 1000px;
+    margin: auto;
+    color: var(--color-dark) !important;
+    font-size: 1.1rem;
+}
 
+.bookapp .row{
+    max-width: 1026px!important;
+    margin:auto;
+    display: flex;
+}
+.bookapp .col-6 .booka{
+    float: left !important;
+    
+}
+.btn-outline-info{
+    background-color:var(--main-color) !important;
+    border-color: var(--main-color) !important;
+    color: #fff !important;
+}
+.bookapp .resb .btn-secondary {
+    font-size: 1.2rem !important;
+    display:flex !important;
+    
+    margin-right: auto !important;
+    float: right !important;
+    
+   
+}
+.bookapp .resb{
+    max-width: 1380px !important;
+}
+
+.bookapp .reservation-table{
+    max-width: 1000px !important;
+}
+.bookapp .reservation-table .days{
+    font-size: 1.2rem !important;
+}
+.bookapp .reservation-table .date{
+    font-size: 0.9rem !important;
+}
 
 .paginationapp{
     font-size: 0.9rem!important;
+}
+@media only screen   
+and (min-width: 1200px)   
+and (max-width: 2900px) {
+
+    .bookapp .resb .btn-secondary {
+        font-size: 1.2rem !important;
+        display:flex !important;
+        
+        margin-right: auto !important;
+        float: right !important;
+        
+       
+    }
+    .bookapp .resb{
+        max-width: 1380px !important;
+    }
 }
 @media only screen   
 and (min-width: 1904px)   
@@ -807,7 +866,6 @@ and (max-width: 2900px) {
         font-size: 0.9rem!important;
         margin-left: 16.5rem !important;
     }
-    
 }
 /* For laptop 1366 Resolution */  
 @media only screen   

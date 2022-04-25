@@ -261,7 +261,9 @@ td {
 
 tr td:last-child > .buttons {
     display: flex;
-    
+}
+tr td:last-child > .buttons > button:last-of-type {
+    margin-left: 0.8rem !important;
 }
 
 tr td:last-child > .buttons > button:first-of-type {

@@ -14,11 +14,12 @@
         ></toast>
         <section class="services" id="services">
             <h1 class="heading">Vizito <span>rezervacija</span></h1>
+        </section>
             <div class="box-container">
                 <toast type="error" :msg="errorToast.message" :show="errorToast.show" @toastClosed="errorToast.show = false"></toast>
                 <b-form class = "bookapp" @submit="onSubmit">
                     <b-form-group id="doctor-group" class="doctors" label="Pasirinkite gyd. odontologą:" label-for="doctor-input">
-                        <b-form-select 
+                        <b-form-select
                             id="doctor-input" 
                             v-model="form.doctor" 
                             :options="doctorOptions" 
@@ -28,17 +29,17 @@
                     <form-error :validation="v$.form.doctor"></form-error>
                     <div class="row" v-if="form.doctor != ''">
                         <div class="col-6">
-                            <b-button variant="outline-info" v-on:click="prev()" v-if="minDate < monday">Atgal</b-button>
+                            <b-button variant="outline-info" class="booka" v-on:click="prev()" v-if="minDate < monday">Atgal</b-button>
                         </div>
                         <div class="col-6 text-right">
-                            <b-button variant="outline-info" v-on:click="next()">Pirmyn</b-button>
+                            <b-button variant="outline-info" class="bookp" v-on:click="next()">Pirmyn</b-button>
                         </div>
                     </div>
                     <table class="table b-table atable reservation-table my-3" v-if="form.doctor != ''">
                         <thead>
                             <tr>
-                                <th v-for="index in 5" :key="index" 
-                                    :class="getDisabled(index)">{{ dayShortFormat[index] }} <div v-text="getDay(index)"></div>
+                                <th class ="days" v-for="index in 5" :key="index" 
+                                    :class="getDisabled(index)">{{ dayShortFormat[index] }} <div class ="date" v-text="getDay(index)"></div>
                                 </th>
                             </tr>
                         </thead>
@@ -51,10 +52,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <b-button type="submit" variant="secondary" class="mt-3" v-if="form.doctor != ''">Rezervuoti</b-button>
+                    <div class = "resb">
+                    <b-button type="submit" variant="secondary" class="mt-3" v-if="form.doctor != ''">Rezervuoti</b-button></div>
                 </b-form>
             </div>
-        </section>
     </div>
 </template>
 <script>
