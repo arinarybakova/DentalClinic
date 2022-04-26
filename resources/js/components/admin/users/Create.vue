@@ -1,10 +1,10 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
-    <b-button v-b-modal.add-user>Pridėti gydytoją</b-button>
+    <b-button v-b-modal.add-user>Pridėti odontologą</b-button>
     <user-form
       :bus="bus"
       :id="formId"
-      title="Pridėti gydytoją"
+      title="Pridėti gyd. odontologą"
       submitTitle="Pridėti"
       @formSubmit="onSubmit"
     ></user-form>

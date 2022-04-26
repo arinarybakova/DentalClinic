@@ -1,7 +1,7 @@
 <template>
      <div class="card-body">
       <approve-appointment @appointmentApproved="appointmentApproved" :appointment="selectedAppointment" id="approve-appointment"></approve-appointment>
-      <cancel-appointment @appointmentCancelled="appointmentCancelled" :appointment="selectedAppointment"></cancel-appointment>
+      <cancel-appointment @appointmentCancelled="appointmentCancelled" :appointment="selectedAppointment" id="cancel-appointment"></cancel-appointment>
         <toast
           type="success"
           :msg="success.message"
@@ -14,6 +14,7 @@
             placeholder="Įveskite paieškos raktažodį"
         ></b-form-input>
         <b-button v-on:click="filterTable()">Ieškoti</b-button>
+        <b-button v-on:click="resetTable()">Išvalyti</b-button>
         </div>
         <div v-if="v$.filter.$error" class="text-danger mt-1">
         Prašome įvesti paieškos raktažodį
@@ -25,20 +26,22 @@
           </template>
            <template #cell(actions)="data">
         <div class="buttons">
-          <b-button class = "approve_appointment"
+          <b-button v-if="status !== 2"
             v-on:click="approveAppointment(data.item)"
             variant="outline-info"
             size="sm"
             v-b-tooltip.hover
             title="Patvirtinti vizitą"
+            class = "approve_appointment" 
             ><i class="fas fa-check"></i
           ></b-button>
-          <b-button class = "cancel_appointment"
+          <b-button
             v-on:click="cancelAppointment(data.item)"
             variant="outline-info"
             size="sm"
             v-b-tooltip.hover
             title="Atšaukti vizitą"
+             class = "cancel_appointment"
             ><i class="fa fa-times"></i
           ></b-button>
         </div>
@@ -63,6 +66,9 @@ import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 
 export default {
+  props: {
+    status: { required: true },
+  },
   setup() {
     return {
       v$: useVuelidate(),
@@ -147,6 +153,9 @@ export default {
       if (this.v$.$validate() && !this.v$.filter.$error) {
         this.fetchAppointments();
       }
+    },
+    resetTable() {
+       
     },
     getAppointmentId(value) {
       return "V" + value.toString().padStart(3, "0");

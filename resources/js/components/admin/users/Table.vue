@@ -3,6 +3,7 @@
     <add-user @userAdded="userAdded" v-if="usertype == 3"></add-user>
     <edit-user @userUpdated="userUpdated" :user="selectedUser"></edit-user>
     <delete-user @userDeleted="userDeleted" :user="selectedUser"></delete-user>
+    
     <toast
       type="success"
       :msg="success.message"
@@ -15,6 +16,7 @@
         placeholder="Įveskite paieškos raktažodį"
       ></b-form-input>
       <b-button v-on:click="filterTable()">Ieškoti</b-button>
+      <b-button v-on:click="filterTable()">Išvalyti</b-button>
     </div>
     <div v-if="v$.filter.$error" class="text-danger mt-1">
       Prašome įvesti paieškos raktažodį
@@ -29,6 +31,14 @@
       </template>
       <template #cell(actions)="data">
         <div class="buttons">
+          <b-button v-if="usertype == 2"
+            v-on:click="showTreatment(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Gydymo planas"
+            ><i class="fas fa-list"></i
+          ></b-button>
           <b-button
             v-on:click="updateUser(data.item)"
             variant="outline-info"
@@ -115,7 +125,7 @@ export default {
         },
         {
           key: "created_at",
-          label: "Dirba nuo",
+          label: "Registracija",
           sortable: true,
         },
         {
@@ -176,6 +186,10 @@ export default {
     deleteUser(user) {
       this.selectedUser = user;
       this.$bvModal.show("delete-user");
+    },
+    showTreatment(user){
+      this.selectedUser = user;
+      this.$bvModal.show("treatment-user");
     },
     updateUser(user) {
       this.selectedUser = user;

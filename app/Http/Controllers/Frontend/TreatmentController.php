@@ -21,14 +21,17 @@ class TreatmentController extends Controller {
         if ($request->get('page') !== null && Auth::hasUser()) {
             $limit = $request->get('limit') ?? 10;
             $treatments = Treatment::select(
-                'treatments.*', 'treatment_stage_status.status')
+                'treatments.*', 'treatment_stage_status.status', 'procedures.title', 'procedures.price')
             
             ->join('treatment_stage_status', 'treatment_stage_status.id', 'treatments.fk_status')
+            ->join('procedures', 'procedures.id', 'treatments.fk_procedure')
             ->where('fk_patient', '=', Auth::user()->id);
             
 
             if ($request->get('filter') !== null) {
-                $treatments
+                $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('status');
             } else {
                 $treatments->orderBy('id');

@@ -66,6 +66,7 @@ Vue.component('user-form', require('./components/admin/users/Form.vue').default)
 Vue.component('add-user', require('./components/admin/users/Create.vue').default);
 Vue.component('edit-user', require('./components/admin/users/Edit.vue').default);
 Vue.component('delete-user', require('./components/admin/users/Delete.vue').default);
+Vue.component('treatment-user', require('./components/admin/users/Treatment.vue').default);
 
 //Admin scheduler
 Vue.component('schedule', require('./components/admin/scheduler/Index.vue').default);
@@ -83,7 +84,7 @@ Vue.component('approve-appointment', require('./components/admin/appointment/App
 Vue.component('cancel-appointment', require('./components/admin/appointment/Cancel.vue').default);
 
 //Admin profile
-Vue.component('profile', require('./components/admin/profile/Index.vue').default);
+Vue.component('profile', require('./components/admin/profile.vue').default);
 
 //Frontend procedures
 Vue.component('procedures', require('./components/frontend/procedures.vue').default);

@@ -4,7 +4,7 @@
    <b-form @submit="onSubmit">
         <b-form-group
           id="patient-group"
-          label="Pacientas:"
+          label="Pacientas"
           label-for="patient-input"
         >
           <b-form-input
@@ -18,7 +18,7 @@
       
         <b-form-group
           id="dentist-group"
-          label="Dentist:"
+          label="Gyd. odontologas"
           label-for="dentist-input"
         >
           <b-form-input
@@ -29,6 +29,33 @@
             disabled
           ></b-form-input>
         </b-form-group>
+
+        <b-form-group
+          id="date-group"
+          label="Data"
+          label-for="date-input">
+          <b-form-input
+            id="date-input"
+            v-model="appointment.date"
+            type="text"
+            placeholder="Data"
+            disabled
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="time-group"
+          label="Laikas"
+          label-for="time-input">
+          <b-form-input
+            id="time-input"
+            v-model="appointment.time"
+            type="text"
+            placeholder="Laikas"
+            disabled
+          ></b-form-input>
+        </b-form-group>
+
 
         <b-button type="submit" variant="secondary" class="mt-3">
           Taip
@@ -47,7 +74,7 @@ export default {
   methods: {
     onSubmit(form) {
       this.axios
-        .post("/api/appointments/approve/" + this.appointment.id)
+        .post("/api/appointments/approve/" + this.appointments.id, form)
         .then((response) => {
           if (response.data.success) {
             this.$emit("appointmentApproved");

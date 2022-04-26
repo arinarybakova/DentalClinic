@@ -252,6 +252,7 @@ thead tr {
 thead td {
     font-weight: 700;
 }
+
 td {
     padding: .5rem 1rem;
     font-size: .9rem;
@@ -260,25 +261,61 @@ td {
 
 tr td:last-child > .buttons {
     display: flex;
-    justify-content: space-between;
+}
+tr td:last-child > .buttons > button:last-of-type {
+    margin-left: 0.8rem !important;
 }
 
 tr td:last-child > .buttons > button:first-of-type {
-    margin-right: 0.3rem;
+    margin-right: 0.8rem !important;
 }
 
 .approve_appointment{
-    margin-right: 0.5rem;
+    
     font-size: 1rem !important;
 
 }
 .cancel_appointment{
+    width: 2rem;
     font-size: 1rem !important;
-   
     
 }
 .Pdesc{
-    width: 68% !important;
+    width: 60% !important;
+}
+
+#firstname-group{
+    margin-bottom: 0.8rem !important;
+}
+#lastname-group{
+    margin-bottom: 0.8rem !important;
+}
+#email-group{
+    margin-bottom: 0.8rem !important;
+}
+#phone-group{
+    margin-bottom: 0.8rem !important;
+}
+#patient-group{
+    margin-bottom: 0.8rem !important;
+}
+#dentist-group{
+    margin-bottom: 0.8rem !important;
+}
+#date-group{
+    margin-bottom: 0.8rem !important;
+}
+#time-group{
+    margin-bottom: 0.8rem !important;
+}
+#title-group{
+    margin-bottom: 0.8rem !important;
+}
+#price-group{
+    margin-bottom: 0.8rem !important;
+}
+#details-group{
+    margin-bottom: 0.8rem !important;
 }
 td .status {
     display: inline-block;
@@ -337,7 +374,34 @@ td .status {
     padding-right: 0.5rem;
     color: #2fbab8;
 }
-
+.profile{
+    display:flex; flex-direction: column; text-align: left;
+    width: 90%;
+    max-width: 500px;
+    margin:auto;  
+  }
+  .profile .label{
+      color: var(--color-dark);
+      font-size: 1.2rem;
+      margin-top: 1rem;
+  }
+  input[readonly]{
+      background-color: #fff !important;
+      border-color: var(--main-color);
+      font-size: 1rem;
+      max-width: 500px;
+      height: 38px;
+  }
+  .heading{
+      display: none;
+  }
+  .profile .kbutton{
+      
+      margin: 40px auto !important;
+      display: flex !important;
+      padding: 7px 36px !important;
+      font-size: 1.2rem;
+  }
 @media only screen and (max-width: 1200px){
 
     .sidebar-brand h2 span:last-child,
@@ -470,6 +534,25 @@ a { color: inherit; }
       -webkit-border-radius-bottom-right: 5px;
           cursor:pointer;
   }
+  .search input[type="submit"], .search .btn.btn-secondary
+  {
+      border: 2px solid var(--button-hover);
+      background: none;
+      background-color: var(--main-color);
+      color: #fff;
+      float: right;
+      padding: 11px 20px !important;
+      border-top-right-radius: 1px;
+      border-top-left-radius: 1px;
+      -moz-border-radius-top-right: 1px;
+      -webkit-border-radius-top-right: 1px;
+      border-bottom-right-radius: 1px;
+      border-bottom-left-radius: 1px;
+      -moz-border-radius-bottom-right: 1px;
+      -webkit-border-radius-bottom-right: 1px;
+          cursor:pointer;
+  }
+  
   .main-content .btn-outline-info {
     color: var(--main-color);
     border-color: var(--main-color);
@@ -764,4 +847,17 @@ a { color: inherit; }
 #nav-ul .dropdown #nav-li #out #out{
     padding-right: 4px;
     
-} 
+}
+
+.modal .close{
+    font-size: 2.2rem;
+    position: absolute !important;
+    top: -5px !important;
+    right: 8px !important;
+}
+.modal-title{
+    font-size: 1.2rem !important;
+    margin: auto !important;
+    color: var(--color-dark) !important;
+    
+}

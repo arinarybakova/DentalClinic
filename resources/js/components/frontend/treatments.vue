@@ -9,6 +9,7 @@
               placeholder="Įveskite paieškos raktažodį"
           ></b-form-input>
           <b-button v-on:click="filterTable()">Ieškoti</b-button>
+          <b-button v-on:click="resetTable()">Išvalyti</b-button>
           </div>
           <div v-if="v$.filter.$error" class="text-danger mt-1">
           Prašome įvesti paieškos raktažodį
@@ -32,7 +33,15 @@
           v-if="totalRows / perPage > 1"
        />
        <div class = "totalcost">
+       
           Preliminari gydymo plano kaina: <div class = "price">{{ total }} Eur</div>
+           <b-button  class = "info"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title='Į gydymo plano preliminarią kainą neįtraukiami etapai, kurių būsena yra "Atšaukta"'
+            ><i class="fas fa-info"></i
+          ></b-button>
        </div>
   </div>      
 </template>
@@ -63,13 +72,13 @@ export default {
           sortable: true,
         },
         {
-          key: "procedure",
+          key: "title",
           label: "Procedūra",
           sortable: true,
           thClass: 'Pcolumn'
         },
         {
-          key: "cost",
+          key: "price",
           label: "Kaina",
           sortable: true,
         },
@@ -115,13 +124,13 @@ export default {
   computed: {
      total() {
        return this.items.reduce((acc, ele) => {
-       if (ele.fk_status != 3){
-       return acc + parseFloat(ele.cost);
-       }
-       else{
-         return acc + parseFloat(0);
-       }
-  }, 0);
+            if (ele.fk_status != 3){
+                return acc + parseFloat(ele.price);   
+            }
+            else{
+              return acc + parseFloat(0);
+            }
+        }, 0);
      },
   },
   watch: {

@@ -2,7 +2,6 @@
 <div>
   <section class="services" id="services">
     <h1 class="heading">jūsų <span>paskyra</span></h1>
-    <b-button v-b-modal.modal-1 class ="kbutton">Keisti</b-button>
     <b-modal id="modal-1" :no-close-on-backdrop="true" title ="Keisti paskyros duomenis"
      ok-only ok-variant="secondary" ok-title="Išsauogti">
       <div class = "profile">
@@ -10,44 +9,21 @@
         id="fieldset-1"
         label ="Vardas"
         label-for="input-1"  
-        >
-        <b-form-input id="input-1"  v-model="user.firstname" trim></b-form-input>
+        ><b-form-input id="input-1"  v-model="user.firstname" trim></b-form-input>
         </b-form-group>
+
         <b-form-group class = "label"
         id="fieldset-1"
         label="Pavardė"
-        label-for="input-2"
-        
-        >
-        <b-form-input id="input-2" v-model="name"  trim></b-form-input>
+        label-for="input-2">
+        <b-form-input id="input-2" v-model="user.lastname"  trim></b-form-input>
         </b-form-group>
-        <b-form-group class = "label"
-        id="fieldset-1"
-        label="El. paštas"
-        label-for="input-2"
-     >
-        <b-form-input  id="input-2" v-model="name"  trim></b-form-input>
-        </b-form-group>
+
         <b-form-group class = "label"
         id="fieldset-1"
         label="Tel. numeris"
-        label-for="input-2"
-        >
-        <b-form-input id="input-2" v-model="name" trim></b-form-input>
-        </b-form-group>
-        <b-form-group class = "label"
-        id="fieldset-1"
-        label="Slaptažodis"
-        label-for="input-2"
-        >
-        <b-form-input id="input-2"  input type = "password" v-model="name" :state="state" trim></b-form-input>
-        </b-form-group>
-        <b-form-group class = "label"
-        id="fieldset-1"
-        label="Pakartokite slaptažodį"
-        label-for="input-2"
-        :state="state">
-        <b-form-input id="input-2" input type = "password" v-model="name" :state="state" trim></b-form-input>
+        label-for="input-2">
+        <b-form-input id="input-2" v-model="user.phone" trim></b-form-input>
         </b-form-group>
         </div>
     </b-modal>
@@ -56,40 +32,31 @@
         <b-form-group class = "label"
         id="fieldset-1"
         label ="Vardas"
-        label-for="input-1"
-        :state="state"
-        >
-        <b-form-input readonly id="input-1" v-model="name" :state="state" trim></b-form-input>
+        label-for="input-1">
+        <b-form-input readonly id="input-1" v-model="user.firstname" trim></b-form-input>
         </b-form-group>
+
         <b-form-group class = "label"
         id="fieldset-1"
         label="Pavardė"
-        label-for="input-2"
-        :state="state"
-        >
-        <b-form-input readonly id="input-2" v-model="name" :state="state" trim></b-form-input>
+        label-for="input-2">
+        <b-form-input readonly id="input-2" v-model="user.lastname" trim></b-form-input>
         </b-form-group>
+
         <b-form-group class = "label"
         id="fieldset-1"
         label="El. paštas"
-        label-for="input-2"
-        :state="state">
-        <b-form-input readonly id="input-2" v-model="name" :state="state" trim></b-form-input>
+        label-for="input-2">
+        <b-form-input readonly id="input-2" v-model="user.email" trim></b-form-input>
         </b-form-group>
+
         <b-form-group class = "label"
         id="fieldset-1"
         label="Tel. numeris"
-        label-for="input-2"
-        :state="state">
-        <b-form-input readonly id="input-2" v-model="name" :state="state" trim></b-form-input>
+        label-for="input-2">
+        <b-form-input readonly id="input-2" v-model="user.phone" trim></b-form-input>
         </b-form-group>
-        <b-form-group class = "label"
-        id="fieldset-1"
-        label="Slaptažodis"
-        label-for="input-2"
-        :state="state">
-        <b-form-input readonly id="input-2" v-model="name" :state="state" trim></b-form-input>
-        </b-form-group>
+         <b-button v-b-modal.modal-1 class ="kbutton">Keisti</b-button>
     </div>
      
   </div>
@@ -111,7 +78,6 @@ export default {
         .get("/api/front/profile")
         .then((response) => {
           this.user = response.data;
-          console.log(this.user.firstname);
         });
     },
   },

@@ -17,12 +17,13 @@ class AppointmentController extends Controller {
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            $appointments = Appointment::select('appointments.*',
+            $appointments = Appointment::select('appointments.*', 'appointment_status.status',
                     DB::raw('DATE(appointments.time_from) as date'),
                     DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
                     DB::raw('CONCAT(patient.firstname, " ", patient.lastname) as patient'),
                     DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
                 )
+                ->join('appointment_status', 'appointment_status.id', 'appointments.fk_status')
                 ->join('users as patient', 'patient.id', '=', 'appointments.fk_patient')
                 ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist');
 
@@ -80,6 +81,42 @@ class AppointmentController extends Controller {
         return $appointments;
     }
 
+    public function approve(int $id)
+    {
+       //return redirect()->back();
+       try {
+        $appointment = Appointment::find($id);
+        $appointment->status='2';
+        $appointment->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'appointment' => []
+            ]);
+            }
+            return response()->json([
+                'success'   => true,
+                'appointment' => $appointment
+            ]);
+    }
+    public function cancel($id)
+    {
+        try {
+            $appointment = Appointment::find($id);
+            $appointment->status='3';
+            $appointment->save();
+            } catch (\Illuminate\Database\QueryException $exception) {
+                return response()->json([
+                    'success'   => false,
+                    'appointment' => []
+                ]);
+                }
+                return response()->json([
+                    'success'   => true,
+                    'appointment' => $appointment
+                ]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -91,4 +128,5 @@ class AppointmentController extends Controller {
         return response()->json($appointment);
     }
 
+    
 }
