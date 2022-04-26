@@ -69,6 +69,7 @@ class AppointmentController extends Controller
         try {
             $appointment = Appointment::create($this->parseStore($request->post()));
         } catch (\Illuminate\Database\QueryException $exception) {
+            dd($exception);
             return response()->json([
                 'success'   => false,
                 'appointment' => []
@@ -87,7 +88,7 @@ class AppointmentController extends Controller
             'fk_dentist' => $post['doctor'],
             'time_from' => $post['date'] . " " . $post['time'],
             'time_to' => $post['date'] . " " . $this->getTimeTo($post['time']),
-            'status' => ''
+            'fk_status' => config('app.reserved_status_id')
         ];
     }
 

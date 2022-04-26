@@ -240,4 +240,5 @@ return [
     'usertype_admin' => 1,
     'usertype_patient' => 2,
     'usertype_dentist' => 3,
+    'reserved_status_id' => 1,
 ];
