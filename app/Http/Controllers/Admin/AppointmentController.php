@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class AppointmentController extends Controller {
+class AppointmentController extends Controller
+{
     public function index()
     {
         return view('admin.appointments');
@@ -17,12 +18,14 @@ class AppointmentController extends Controller {
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            $appointments = Appointment::select('appointments.*', 'appointment_status.status',
-                    DB::raw('DATE(appointments.time_from) as date'),
-                    DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
-                    DB::raw('CONCAT(patient.firstname, " ", patient.lastname) as patient'),
-                    DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
-                )
+            $appointments = Appointment::select(
+                'appointments.*',
+                'appointment_status.status',
+                DB::raw('DATE(appointments.time_from) as date'),
+                DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
+                DB::raw('CONCAT(patient.firstname, " ", patient.lastname) as patient'),
+                DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
+            )
                 ->join('appointment_status', 'appointment_status.id', 'appointments.fk_status')
                 ->join('users as patient', 'patient.id', '=', 'appointments.fk_patient')
                 ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist');
@@ -47,7 +50,7 @@ class AppointmentController extends Controller {
 
     public function appointmentEvents(Request $request)
     {
-        if(isset($request->start)) {
+        if (isset($request->start)) {
             $dateFrom = date('Y-m-d', strtotime($request->start . " monday this week"));
             $dateTo = date('Y-m-d', strtotime($request->start . " sunday this week"));
         } else {
@@ -58,19 +61,19 @@ class AppointmentController extends Controller {
             ->join('users as d', 'd.id', '=', 'appointments.fk_dentist')
             ->join('users as p', 'p.id', '=', 'appointments.fk_patient')
             ->select(
-                'appointments.*', 
+                'appointments.*',
                 DB::raw('UNIX_TIMESTAMP(appointments.time_from) as time_from'),
                 DB::raw('UNIX_TIMESTAMP(appointments.time_to) as time_to'),
                 DB::raw('CONCAT(d.firstname, " ", d.lastname) AS doctor'),
                 DB::raw('CONCAT(p.firstname, " ", p.lastname) AS patient')
-                )
+            )
             ->where('appointments.time_from', '>=', $dateFrom)
             ->where('appointments.time_to', '<=', $dateTo);
 
-        if(isset($request->doctors)) {
+        if (isset($request->doctors)) {
             $doctors = explode(",", $request->doctors);
-            foreach($doctors as $key => $doctor) {
-                if($doctor === '') {
+            foreach ($doctors as $key => $doctor) {
+                if ($doctor === '') {
                     unset($doctors[$key]);
                 }
             }
@@ -83,38 +86,37 @@ class AppointmentController extends Controller {
 
     public function approve(int $id)
     {
-       //return redirect()->back();
-       try {
-        $appointment = Appointment::find($id);
-        $appointment->status='2';
-        $appointment->save();
+        try {
+            $appointment = Appointment::find($id);
+            $appointment->fk_status = config('app.approved_status_id');
+            $appointment->save();
         } catch (\Illuminate\Database\QueryException $exception) {
             return response()->json([
                 'success'   => false,
                 'appointment' => []
             ]);
-            }
-            return response()->json([
-                'success'   => true,
-                'appointment' => $appointment
-            ]);
+        }
+        return response()->json([
+            'success'   => true,
+            'appointment' => $appointment
+        ]);
     }
     public function cancel($id)
     {
         try {
             $appointment = Appointment::find($id);
-            $appointment->status='3';
+            $appointment->fk_status = config('app.canceled_status_id');
             $appointment->save();
-            } catch (\Illuminate\Database\QueryException $exception) {
-                return response()->json([
-                    'success'   => false,
-                    'appointment' => []
-                ]);
-                }
-                return response()->json([
-                    'success'   => true,
-                    'appointment' => $appointment
-                ]);
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'appointment' => []
+            ]);
+        }
+        return response()->json([
+            'success'   => true,
+            'appointment' => $appointment
+        ]);
     }
 
     /**
@@ -127,6 +129,4 @@ class AppointmentController extends Controller {
     {
         return response()->json($appointment);
     }
-
-    
 }

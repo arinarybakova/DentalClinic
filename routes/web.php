@@ -81,8 +81,8 @@ Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 
     Route::patch('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('api.admin.schedules.update');
 
     Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('api.admin.appointments');
-    Route::get('/appointments/approve/{id}', [AppointmentController::class, 'approve'])->name('api.admin.appointments.approve');
-    Route::get('/appointments/cancel/{id}', [AppointmentController::class, 'cancel'])->name('api.admin.appointments.cancel');
+    Route::post('/appointments/approve/{id}', [AppointmentController::class, 'approve'])->name('api.admin.appointments.approve');
+    Route::post('/appointments/cancel/{id}', [AppointmentController::class, 'cancel'])->name('api.admin.appointments.cancel');
     Route::get('/appointmentEvents', [AppointmentController::class, 'appointmentEvents'])->name('api.admin.appointmentEvents');
 
     Route::get('/profile', [ProfileController::class, 'profile'])->name('api.admin.profile');

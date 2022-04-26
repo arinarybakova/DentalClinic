@@ -1,7 +1,18 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
-    <b-modal :id="id" title="Tikrai norite patvirtinti šį vizitą?" centered hide-footer>
-   <b-form @submit="onSubmit">
+    <toast
+      type="error"
+      :msg="errorToast.message"
+      :show="errorToast.show"
+      @toastClosed="errorToast.show = false"
+    ></toast>
+    <b-modal
+      :id="id"
+      title="Tikrai norite patvirtinti šį vizitą?"
+      centered
+      hide-footer
+    >
+      <b-form @submit="onSubmit">
         <b-form-group
           id="patient-group"
           label="Pacientas"
@@ -15,7 +26,7 @@
             disabled
           ></b-form-input>
         </b-form-group>
-      
+
         <b-form-group
           id="dentist-group"
           label="Gyd. odontologas"
@@ -30,10 +41,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="date-group"
-          label="Data"
-          label-for="date-input">
+        <b-form-group id="date-group" label="Data" label-for="date-input">
           <b-form-input
             id="date-input"
             v-model="appointment.date"
@@ -43,10 +51,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="time-group"
-          label="Laikas"
-          label-for="time-input">
+        <b-form-group id="time-group" label="Laikas" label-for="time-input">
           <b-form-input
             id="time-input"
             v-model="appointment.time"
@@ -55,7 +60,6 @@
             disabled
           ></b-form-input>
         </b-form-group>
-
 
         <b-button type="submit" variant="secondary" class="mt-3">
           Taip
@@ -66,19 +70,27 @@
 </template>
 <script>
 export default {
- props: {
+  props: {
     id: { required: true },
     appointment: { required: false },
   },
-  
+  data() {
+    return {
+      errorToast: {
+        message: "",
+        show: false,
+      },
+    };
+  },
   methods: {
-    onSubmit(form) {
+    onSubmit(event) {
+      event.preventDefault();
       this.axios
-        .post("/api/appointments/approve/" + this.appointments.id, form)
+        .post("/api/appointments/approve/" + this.appointment.id)
         .then((response) => {
           if (response.data.success) {
             this.$emit("appointmentApproved");
-            this.$bvModal.hide(this.formId);
+            this.$bvModal.hide(this.id);
           } else {
             this.errorToast.message =
               "Atsprašome įvyko klaida, nepavyko patvirtinti vizito";

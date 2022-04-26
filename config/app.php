@@ -241,4 +241,6 @@ return [
     'usertype_patient' => 2,
     'usertype_dentist' => 3,
     'reserved_status_id' => 1,
+    'approved_status_id' => 2,
+    'canceled_status_id' => 3,
 ];
