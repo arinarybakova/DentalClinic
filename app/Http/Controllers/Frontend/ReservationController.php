@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Appointment;
-use App\Models\Schedule;
 use DateTime;
+use DateTimeZone;
+use App\Models\Schedule;
+use App\Models\Appointment;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller
@@ -59,7 +60,7 @@ class ReservationController extends Controller
             }
             $time = sprintf('%s:%s', $timeExploded[0], $timeExploded[1]);
             $key = array_search($time, $times[$date]);
-            if ($key) {
+            if ($key !== false) {
                 unset($times[$date][$key]);
             }
         }
@@ -68,14 +69,19 @@ class ReservationController extends Controller
 
     protected function getTimesFromSchedule(array $schedule)
     {
-        $from = new DateTime($schedule['work_time_from']);
-        $to = new DateTime($schedule['work_time_to']);
+        $from = new DateTime($schedule['work_time_from'], new DateTimeZone(config('app.timezone')));
+        $to = new DateTime($schedule['work_time_to'], new DateTimeZone(config('app.timezone')));
         $diff = date_diff($to, $from)->h;
 
         $result = [];
-        $result[] = $from->format('H:i');
+        if($from->format('Y-m-d H:i:s') > date('Y-m-d H:i:s')) {
+            $result[] = $from->format('H:i');
+        }
         for ($i = 1; $i < $diff; $i++) {
-            $result[] = $from->modify('+1 hour')->format('H:i');
+            $from->modify('+1 hour');
+            if($from->format('Y-m-d H:i:s') > date('Y-m-d H:i:s')) {
+                $result[] = $from->format('H:i');
+            }
         }
         return $result;
     }

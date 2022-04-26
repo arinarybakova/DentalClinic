@@ -44,16 +44,15 @@ Route::get('register', [AuthController::class, 'registration'])->name('register'
 Route::post('post-register', [AuthController::class, 'postRegister'])->name('register.post');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout'); 
 
-Route::group(['namespace' => 'Frontend'], function () {
+Route::group(['middleware' => ['is.patient.or.guest'], 'namespace' => 'Frontend'], function () {
     Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
     Route::get('appointments', [FrontendAppointmentController::class, 'index'])->name('appointments');
     Route::get('treatments', [FrontendTreatmentController::class, 'index'])->name('treatments');
     Route::get('reservations', [ReservationController::class, 'index'])->name('reservation');
     Route::get('profile', [FrontendProfileController::class, 'index'])->name('profile');
-    
+    Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');
 });
 
-Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');
 
 Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
