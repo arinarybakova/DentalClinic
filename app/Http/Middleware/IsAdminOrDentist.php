@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class IsAdminOrDentist
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() != null && Auth::user()->usertype == config('app.usertype_admin')) {
+        if (Auth::user() !== null && Auth::user()->usertype !== config('app.usertype_patient')) {
             return $next($request);
         }
 

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -30,6 +31,11 @@ class AppointmentController extends Controller
                 ->join('users as patient', 'patient.id', '=', 'appointments.fk_patient')
                 ->join('users as dentist', 'dentist.id', '=', 'appointments.fk_dentist');
 
+            if ($this->isDentist()) {
+                $appointments->where('fk_dentist', '=', Auth::user()->id);
+            }
+            
+            /** @todo fix filter where clauses when user is dentist */
             if ($request->get('filter') !== null) {
                 $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')

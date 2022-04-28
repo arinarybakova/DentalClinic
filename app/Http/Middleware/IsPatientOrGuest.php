@@ -17,7 +17,7 @@ class IsPatientOrGuest
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() === null || Auth::user()->usertype !== config('app.usertype_admin')) {
+        if (Auth::user() === null || Auth::user()->usertype === config('app.usertype_patient')) {
             return $next($request);
         }
 

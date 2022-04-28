@@ -158,7 +158,6 @@ export default {
             var d = new Date();
             d.setDate(this.monday.getDate() + day - 1);
             if(this.times[this.formatDate(d)] !== 'undefined') {
-                console.log(this.times[this.formatDate(d)]);
                 return this.times[this.formatDate(d)];
             } else {
                 return [];
