@@ -44,15 +44,34 @@ Route::get('register', [AuthController::class, 'registration'])->name('register'
 Route::post('post-register', [AuthController::class, 'postRegister'])->name('register.post');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout'); 
 
+// Frontend routes available to guest and patient
 Route::group(['middleware' => ['is.patient.or.guest'], 'namespace' => 'Frontend'], function () {
     Route::get('procedures', [FrontendProcedureController::class, 'index'])->name('procedures');
+    Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');
+});
+
+// Frontend routes available only to logged in patient
+Route::group(['middleware' => ['is.patient'], 'namespace' => 'Frontend'], function () {
     Route::get('appointments', [FrontendAppointmentController::class, 'index'])->name('appointments');
     Route::get('treatments', [FrontendTreatmentController::class, 'index'])->name('treatments');
     Route::get('reservations', [ReservationController::class, 'index'])->name('reservation');
     Route::get('profile', [FrontendProfileController::class, 'index'])->name('profile');
-    Route::get('/', [FrontendProcedureController::class, 'index'])->name('index');
 });
 
+// Frontend API routes available to guest and patient
+Route::group(['middleware' => ['is.patient.or.guest'], 'namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
+    Route::get('/procedures', [FrontendProcedureController::class, 'procedures'])->name('api.procedures');
+});
+
+// Frontend API routes available only to logged in patient
+Route::group(['middleware' => ['is.patient'], 'namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
+    Route::get('/appointments', [FrontendAppointmentController::class, 'appointments'])->name('api.appointments');
+    Route::get('/treatments', [FrontendTreatmentController::class, 'treatments'])->name('api.treatments');
+    Route::get('/profile', [FrontendProfileController::class, 'profile'])->name('api.profile');
+    Route::get('/doctors', [DoctorsController::class, 'index'])->name('api.doctors');
+    Route::get('/availableTimes', [ReservationController::class, 'availableTimes'])->name('api.availableTimes');
+    Route::post('/appointments/store', [FrontendAppointmentController::class, 'store'])->name('api.appointments.store');
+});
 
 Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
@@ -87,16 +106,6 @@ Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', '
 
     Route::get('/profile', [ProfileController::class, 'profile'])->name('api.admin.profile');
     
-});
-
-Route::group(['namespace' => 'Frontend', 'prefix' => 'api/front'], function () {
-    Route::get('/procedures', [FrontendProcedureController::class, 'procedures'])->name('api.procedures');
-    Route::get('/appointments', [FrontendAppointmentController::class, 'appointments'])->name('api.appointments');
-    Route::get('/treatments', [FrontendTreatmentController::class, 'treatments'])->name('api.treatments');
-    Route::get('/profile', [FrontendProfileController::class, 'profile'])->name('api.profile');
-    Route::get('/doctors', [DoctorsController::class, 'index'])->name('api.doctors');
-    Route::get('/availableTimes', [ReservationController::class, 'availableTimes'])->name('api.availableTimes');
-    Route::post('/appointments/store', [FrontendAppointmentController::class, 'store'])->name('api.appointments.store');
 });
 
 // Route::get('/home', [HomeController::class, 'redirect']);
