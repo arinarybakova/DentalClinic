@@ -34,7 +34,7 @@ class AppointmentController extends Controller
                 $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('status');
+                    ->orderBy('fk_status');
             } else {
                 $appointments->orderBy('time_from');
             }
@@ -78,6 +78,10 @@ class AppointmentController extends Controller
                 }
             }
             $query->whereIn('fk_dentist', $doctors);
+        }
+
+        if(isset($request->approved)) {
+            $query->where('fk_status', '=', config('app.approved_status_id'));
         }
 
         $appointments = $query->get();

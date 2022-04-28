@@ -82,7 +82,7 @@ export default {
       });
     },
     fetchAppointments(value) {
-      var url = "/api/appointmentEvents?start=" + value;
+      var url = "/api/appointmentEvents?start=" + value + "&approved=1";
       if (this.filterDentist.length !== 0) {
         url += "&doctors=" + this.filterDentist.join();
       }
