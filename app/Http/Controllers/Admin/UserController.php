@@ -7,7 +7,7 @@ use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -30,17 +30,19 @@ class UserController extends Controller
     {
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
-            $users = User::select(DB::raw('*, concat(firstname, " ", lastname) as name'));
+            $users = User::select(DB::raw('users.*, concat(users.firstname, " ", users.lastname) as name'));
+            if($this->isDentist()) {
+                $users->join('appointments', 'appointments.fk_patient', 'users.id')
+                    ->where('appointments.fk_dentist', '=', Auth::user()->id);
+            }
             if($request->get('usertype') !== null) {
                 $users->where('usertype', $request->get('usertype'));
             }
             if ($request->get('filter') !== null) {
                 $users->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('name');
-            } else {
-                $users->orderBy('name');
+                    ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
             }
+            $users->distinct()->orderBy('name');
             $pagination = $users->paginate($limit)->toArray();
             $users = $pagination['data'];
             $total = $pagination['total'];

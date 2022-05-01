@@ -10,20 +10,9 @@ use App\Http\Controllers\Frontend\ProfileController as FrontendProfileController
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Dentist\UserController as DentistUserController;
-use App\Http\Controllers\Dentist\ProcedureController as DentistProcedureController;
-use App\Http\Controllers\Dentist\ScheduleController as DentistScheduleController;
-use App\Http\Controllers\Dentist\AppointmentController as DentistAppointmentController;
-use App\Http\Controllers\Dentist\ProfileController as DentistProfileController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\ReservationController;
 use App\Http\Controllers\Frontend\DoctorsController;
-use App\Models\Procedure;
-use App\Models\Appointment;
-use App\Models\Schedule;
-use App\Models\Treatment;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
