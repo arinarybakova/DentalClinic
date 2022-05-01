@@ -1,37 +1,39 @@
 <template>
   <div>
-    <b-form-group
-      id="fieldset-filter"
-      label-cols-sm="4"
-      label-cols-lg="3"
-      content-cols-sm
-      content-cols-lg="7"
-      label="Gydytojas (-ai)"
-      label-for="input-doctor-filter"
-    >
-      <b-form-select
-        id="input-doctor-filter"
-        v-model="filterDentist"
+    <b-form>
+      <b-form-group
+        id="fieldset-filter"
+        v-if="!isDentist"
+        label-cols-sm="4"
+        label-cols-lg="3"
+        content-cols-sm
+        content-cols-lg="7"
+        label="Gydytojas (-ai)"
+        label-for="input-doctor-filter"
+      >
+        <b-form-select
+          id="input-doctor-filter"
+          v-model="filterDentist"
+          v-on:change="filterEvents"
+          :options="doctorOptions"
+          class="form-select"
+        />
+      </b-form-group>
+      <b-form-checkbox
+        id="checkbox-appointments"
+        v-model="showAppointments"
+        name="checkbox-appointments"
+        value="true"
+        unchecked-value="false"
+        class="mb-3 mx-3"
         v-on:change="filterEvents"
-        :options="doctorOptions"
-        :select-size="3"
-        multiple
-        class="form-select"
-      />
-    </b-form-group>
-    <b-form-checkbox
-      id="checkbox-appointments"
-      v-model="showAppointments"
-      name="checkbox-appointments"
-      value="true"
-      unchecked-value="false"
-      class="mb-3 mx-3"
-      v-on:change="filterEvents"
-    >
-      Rodyti patvirtintus vizitus
-    </b-form-checkbox>
+      >
+        Rodyti patvirtintus vizitus
+      </b-form-checkbox>
+    </b-form>
     <calendar
       :events="events"
+      :isDentist="isDentist"
       @fetchEvents="fetchEvents"
       @updateEvent="updateEvent"
       @showEventInfo="showEventInfo"
@@ -44,7 +46,6 @@
     ></edit-event>
 
     <info-event :event="infoEvent" />
-
   </div>
 </template>
 
@@ -54,12 +55,13 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 export default {
   data: () => ({
     value: "",
-    filterDentist: [""],
+    filterDentist: "",
     events: [],
     selectedEvent: [],
     infoEvent: [],
     doctorOptions: [],
     showAppointments: false,
+    isDentist: true,
   }),
   created() {
     this.fetchDoctors();
@@ -74,20 +76,21 @@ export default {
     },
     fetchSchedules(value) {
       var url = "/api/schedules?start=" + value;
-      if (this.filterDentist.length !== 0) {
-        url += "&doctors=" + this.filterDentist.join();
+      if (this.filterDentist !== "") {
+        url += "&doctors=" + this.filterDentist;
       }
       this.axios.get(url).then((response) => {
-        this.mapEvents(response.data, "#3f51b5", 'schedule');
+        this.mapEvents(response.data.schedules, "#3f51b5", "schedule");
+        this.isDentist = response.data.isDentist;
       });
     },
     fetchAppointments(value) {
       var url = "/api/appointmentEvents?start=" + value + "&approved=1";
-      if (this.filterDentist.length !== 0) {
-        url += "&doctors=" + this.filterDentist.join();
+      if (this.filterDentist !== "") {
+        url += "&doctors=" + this.filterDentist;
       }
       this.axios.get(url).then((response) => {
-        this.mapEvents(response.data, "#a2ebca", 'appoinment');
+        this.mapEvents(response.data, "#a2ebca", "appoinment");
       });
     },
     filterEvents() {
@@ -100,7 +103,9 @@ export default {
         var end = fetched[i].time_to * 1000;
         this.events.push({
           id: fetched[i].id,
-          name: (fetched[i].patient ? fetched[i].patient + ', ' : '') + fetched[i].doctor,
+          name:
+            (fetched[i].patient ? fetched[i].patient + ", " : "") +
+            fetched[i].doctor,
           color: color,
           eventType,
           start,
@@ -108,8 +113,8 @@ export default {
           timed,
           dentist: fetched[i].doctor,
           fk_dentist: fetched[i].fk_dentist,
-          patient: (fetched[i].patient ? fetched[i].patient : ''),
-          fk_patient: (fetched[i].fk_patient ? fetched[i].fk_patient : '')
+          patient: fetched[i].patient ? fetched[i].patient : "",
+          fk_patient: fetched[i].fk_patient ? fetched[i].fk_patient : "",
         });
       }
     },
@@ -129,7 +134,7 @@ export default {
       this.$bvModal.show("edit-event");
     },
     showEventInfo(event) {
-        this.infoEvent = event.event;
+      this.infoEvent = event.event;
       this.$bvModal.show("info-event");
     },
     eventUpdated(event) {

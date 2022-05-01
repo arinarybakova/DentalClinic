@@ -33,7 +33,7 @@
         <b>{{ getAppointmentId(data.value) }}</b>
       </template>
       <template #cell(actions)="data">
-        <div class="buttons">
+        <div v-if="!isDentist" class="buttons">
           <b-button
             v-if="data.item.fk_status != 2"
             v-on:click="approveAppointment(data.item)"
@@ -135,6 +135,7 @@ export default {
         },
       ],
       items: [],
+      isDentist: false,
     };
   },
   validations() {
@@ -159,6 +160,7 @@ export default {
         .then((response) => {
           this.items = response.data.appointments;
           this.totalRows = response.data.total;
+          this.isDentist = response.data.isDentist;
         });
     },
     filterTable() {

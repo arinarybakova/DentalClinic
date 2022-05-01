@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Schedule;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -19,7 +21,7 @@ class ScheduleController extends Controller
 
     public function schedules(Request $request)
     {
-        if(isset($request->start)) {
+        if (isset($request->start)) {
             $dateFrom = date('Y-m-d', strtotime($request->start . " monday this week"));
             $dateTo = date('Y-m-d', strtotime($request->start . " sunday this week"));
         } else {
@@ -29,18 +31,22 @@ class ScheduleController extends Controller
         $query = DB::table('schedule')
             ->join('users', 'users.id', '=', 'schedule.fk_dentist')
             ->select(
-                'schedule.*', 
+                'schedule.*',
                 DB::raw('UNIX_TIMESTAMP(schedule.work_time_from) as time_from'),
                 DB::raw('UNIX_TIMESTAMP(schedule.work_time_to) as time_to'),
                 DB::raw('CONCAT(users.firstname, " ", users.lastname) AS doctor')
-                )
+            )
             ->where('schedule.work_time_from', '>=', $dateFrom)
             ->where('schedule.work_time_to', '<=', $dateTo);
 
-        if(isset($request->doctors)) {
+        if ($this->isDentist()) {
+            $query->where('users.id', '=', Auth::user()->id);
+        }
+
+        if (isset($request->doctors)) {
             $doctors = explode(",", $request->doctors);
-            foreach($doctors as $key => $doctor) {
-                if($doctor === '') {
+            foreach ($doctors as $key => $doctor) {
+                if ($doctor === '') {
                     unset($doctors[$key]);
                 }
             }
@@ -48,7 +54,10 @@ class ScheduleController extends Controller
         }
 
         $schedules = $query->get();
-        return $schedules;
+        return [
+            'schedules' => $schedules,
+            'isDentist' => $this->isDentist(),
+        ];
     }
 
     /**
@@ -73,7 +82,7 @@ class ScheduleController extends Controller
         ]);
     }
 
-    protected function parseData(array $post) 
+    protected function parseData(array $post)
     {
         return [
             'work_days' => '',

@@ -5,10 +5,12 @@
     <div class="sidebar-menu">
         <ul>
             @foreach ($links as $link)
-                <li>
-                    <a href="{{ $link->href }}" class="{{ (request()->is($link->route)) ? 'active' : '' }}"><span class="{{ $link->icon }}"></span>
-                        <span>{{ $link->name }}</span></a>
-                </li>
+                @if (!$link->dentistHidden || auth()->user()->usertype == Config::get('app.usertype_admin'))
+                    <li>
+                        <a href="{{ $link->href }}" class="{{ (request()->is($link->route)) ? 'active' : '' }}"><span class="{{ $link->icon }}"></span>
+                            <span>{{ $link->name }}</span></a>
+                    </li>
+                @endif
             @endforeach
         </ul>
     </div>

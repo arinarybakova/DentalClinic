@@ -146,16 +146,19 @@ export default {
         },
         getDay(day) {
             var d = new Date();
+            d.setMonth(this.monday.getMonth());
             d.setDate(this.monday.getDate() + day - 1);
             return this.formatDate(d);
         },
         getDisabled(day) {
             var d = new Date();
+            d.setMonth(this.monday.getMonth());
             d.setDate(this.monday.getDate() + day - 1);
             return d < new Date() ? 'disabled' : '';
         },
         getTimes(day) {
             var d = new Date();
+            d.setMonth(this.monday.getMonth());
             d.setDate(this.monday.getDate() + day - 1);
             if(this.times[this.formatDate(d)] !== 'undefined') {
                 return this.times[this.formatDate(d)];
@@ -165,17 +168,19 @@ export default {
         },
         formatDate(date) {
             return date.getFullYear() 
-                + "-" + (date.getMonth() + 1).toString().padStart(2, "0") 
+                + "-" + (date.getUTCMonth() + 1).toString().padStart(2, "0") 
                 + "-" + date.getDate().toString().padStart(2, "0");
         },
         next() {
             var d = new Date();
+            d.setMonth(this.monday.getMonth());
             d.setDate(this.monday.getDate() + 7);
             this.monday = d;
             this.fetchAvailableTimes();
         },
         prev() {
             var d = new Date();
+            d.setMonth(this.monday.getMonth());
             d.setDate(this.monday.getDate() - 7);
             this.monday = d;
             this.fetchAvailableTimes();

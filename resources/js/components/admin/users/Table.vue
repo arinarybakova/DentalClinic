@@ -45,6 +45,7 @@
             size="sm"
             v-b-tooltip.hover
             title="Redaguoti naudotoją"
+            v-if="!isDentist"
             ><i class="fas fa-pencil-alt"></i
           ></b-button>
           <b-button
@@ -53,6 +54,7 @@
             size="sm"
             v-b-tooltip.hover
             title="Ištrinti naudotoją"
+            v-if="!isDentist"
             ><i class="fas fa-trash"></i
           ></b-button>
         </div>
@@ -135,6 +137,7 @@ export default {
         },
       ],
       items: [],
+      isDentist: false,
     };
   },
   validations() {
@@ -160,6 +163,7 @@ export default {
         .then((response) => {
           this.items = response.data.users;
           this.totalRows = response.data.total;
+          this.isDentist = response.data.isDentist;
         });
     },
     filterTable() {

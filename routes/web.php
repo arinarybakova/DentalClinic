@@ -65,11 +65,14 @@ Route::group(['middleware' => ['is.patient'], 'namespace' => 'Frontend', 'prefix
 Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::get('', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
     Route::get('/procedure', [ProcedureController::class, 'index'])->name('admin.procedure');
-    Route::get('/doctors', [UserController::class, 'doctors'])->name('admin.doctors');
     Route::get('/patients', [UserController::class, 'patients'])->name('admin.patients');
     Route::get('/schedule', [ScheduleController::class, 'index'])->name('admin.schedule');
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('admin.appointment');
     Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+});
+
+Route::group(['middleware' => ['is.admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::get('/doctors', [UserController::class, 'doctors'])->name('admin.doctors');
 });
 
 Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', 'prefix' => 'api'], function () {

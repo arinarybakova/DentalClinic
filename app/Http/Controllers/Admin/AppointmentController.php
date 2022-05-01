@@ -34,7 +34,7 @@ class AppointmentController extends Controller
             if ($this->isDentist()) {
                 $appointments->where('fk_dentist', '=', Auth::user()->id);
             }
-            
+
             /** @todo fix filter where clauses when user is dentist */
             if ($request->get('filter') !== null) {
                 $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
@@ -51,7 +51,11 @@ class AppointmentController extends Controller
             $appointments = [];
             $total = 0;
         }
-        return ['appointments' => $appointments, 'total' => $total];
+        return [
+            'appointments' => $appointments,
+            'total' => $total,
+            'isDentist' => $this->isDentist(),
+        ];
     }
 
     public function appointmentEvents(Request $request)
@@ -76,6 +80,10 @@ class AppointmentController extends Controller
             ->where('appointments.time_from', '>=', $dateFrom)
             ->where('appointments.time_to', '<=', $dateTo);
 
+        if ($this->isDentist()) {
+            $query->where('d.id', '=', Auth::user()->id);
+        }
+
         if (isset($request->doctors)) {
             $doctors = explode(",", $request->doctors);
             foreach ($doctors as $key => $doctor) {
@@ -86,7 +94,7 @@ class AppointmentController extends Controller
             $query->whereIn('fk_dentist', $doctors);
         }
 
-        if(isset($request->approved)) {
+        if (isset($request->approved)) {
             $query->where('fk_status', '=', config('app.approved_status_id'));
         }
 

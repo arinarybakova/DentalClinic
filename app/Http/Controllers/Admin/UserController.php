@@ -50,7 +50,11 @@ class UserController extends Controller
             $users = [];
             $total = 0;
         }
-        return ['users' => $users, 'total' => $total];
+        return [
+            'users' => $users, 
+            'total' => $total,
+            'isDentist' => $this->isDentist(),
+        ];
     }
 
     /**

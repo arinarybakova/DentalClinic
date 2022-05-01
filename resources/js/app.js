@@ -110,6 +110,6 @@ Vue.component('reservation-day', require('./components/frontend/reservation/rese
  */
 
 const app = new Vue({
-    el: '#app',
-    vuetify: new Vuetify()
+  el: '#app',
+  vuetify: new Vuetify(),
 });

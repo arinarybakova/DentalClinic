@@ -21,6 +21,7 @@
         v-model="value"
         color="primary"
         type="week"
+        v-if="!isDentist"
         first-interval="7"
         interval-count="12"
         :max-days="maxDays"
@@ -48,6 +49,27 @@
           ></div>
         </template>
       </v-calendar>
+      <v-calendar
+        ref="calendar"
+        v-model="value"
+        color="primary"
+        type="week"
+        v-if="isDentist"
+        first-interval="7"
+        interval-count="12"
+        :max-days="maxDays"
+        :events="events"
+        :event-color="getEventColor"
+        :event-ripple="false"
+        :interval-height="intervalHeight"
+        :weekdays="weekdays"
+        @change="fetchEvents"
+        @click:event="updateEvent"
+      >
+        <template v-slot:event="{ eventSummary }">
+          <div class="v-event-draggable" v-html="eventSummary()"></div>
+        </template>
+      </v-calendar>
     </v-col>
   </v-row>
 </template>
@@ -58,6 +80,7 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 export default {
   props: {
     events: { required: true },
+    isDentist: { required: true },
   },
   data: () => ({
     value: "",
@@ -262,7 +285,7 @@ export default {
       });
     },
     updateEvent(event) {
-      if (event.event.eventType == "schedule") {
+      if (event.event.eventType == "schedule" && !this.isDentist) {
         this.$emit("updateEvent", event);
       } else {
         this.$emit("showEventInfo", event);
