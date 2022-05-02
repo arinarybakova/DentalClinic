@@ -33,7 +33,7 @@
         <b>{{ getAppointmentId(data.value) }}</b>
       </template>
       <template #cell(actions)="data">
-        <div v-if="!isDentist" class="buttons">
+        <div v-if="!isDentist" class="appointment_buttons">
           <b-button
             v-if="data.item.fk_status != 2"
             v-on:click="approveAppointment(data.item)"

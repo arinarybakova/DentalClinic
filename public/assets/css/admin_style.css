@@ -258,9 +258,15 @@ td {
     font-size: .9rem;
     color: #222;
 }
-
+tr td .appointment_buttons{
+    display: block !important;
+    width: 80px !important;
+    
+}
 tr td:last-child > .buttons {
-    display: flex;
+    display: flex !important;
+   
+    
 }
 tr td:last-child > .buttons > button:last-of-type {
     margin-left: 0.8rem !important;
@@ -273,11 +279,14 @@ tr td:last-child > .buttons > button:first-of-type {
 .approve_appointment{
     
     font-size: 1rem !important;
+    float: left !important;
+    margin: auto;
 
 }
 .cancel_appointment{
     width: 2rem;
     font-size: 1rem !important;
+    float: right !important;
     
 }
 .Pdesc{
@@ -402,6 +411,18 @@ td .status {
       padding: 7px 36px !important;
       font-size: 1.2rem;
   }
+  .theme--light.v-calendar-daily .v-calendar-daily__day-interval {
+    
+}
+.v-calendar-daily__interval{
+    
+}
+.mb-3 .custom-control-input{
+    margin-right: 0.5rem !important;
+}
+.v-present .v-btn {
+    background-color: var(--main-color) !important;
+}
 @media only screen and (max-width: 1200px){
 
     .sidebar-brand h2 span:last-child,

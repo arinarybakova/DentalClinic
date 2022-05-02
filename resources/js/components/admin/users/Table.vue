@@ -211,7 +211,7 @@ export default {
       this.filter = "";
       this.currentPage = 1;
       this.success.message =
-        'Naudotojas "' +
+        'Gyd. odontologas "' +
         user.firstname +
         " " +
         user.lastname +

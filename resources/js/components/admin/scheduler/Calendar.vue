@@ -2,9 +2,6 @@
   <v-row data-app>
     <v-col>
       <v-toolbar flat>
-        <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday"
-          >Today</v-btn
-        >
         <v-btn fab text small color="grey darken-2" @click="prev">
           <v-icon small> mdi-chevron-left </v-icon>
         </v-btn>
@@ -123,8 +120,8 @@ export default {
       } else {
         this.createStart = this.roundTime(mouse);
         this.createEvent = {
-          name: `Event #${this.events.length}`,
-          color: "#3f51b5",
+          name: `Grafikas #${this.events.length}`,
+          color: "#c6e2e9",
           start: this.createStart,
           end: this.createStart,
           eventType: "schedule",

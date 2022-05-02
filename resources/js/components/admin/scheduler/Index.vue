@@ -80,7 +80,7 @@ export default {
         url += "&doctors=" + this.filterDentist;
       }
       this.axios.get(url).then((response) => {
-        this.mapEvents(response.data.schedules, "#3f51b5", "schedule");
+        this.mapEvents(response.data.schedules, "#c6e2e9", "schedule");
         this.isDentist = response.data.isDentist;
       });
     },
