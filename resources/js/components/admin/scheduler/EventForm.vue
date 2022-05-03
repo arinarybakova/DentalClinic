@@ -118,7 +118,7 @@ export default {
       form: {
         fk_dentist: {
           required: helpers.withMessage(
-            "Prašome pasirinkti gydytoją",
+            "Prašome pasirinkti gyd. odontologą",
             required
           ),
         },

@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'Įvestas el. paštas arba slaptažodis nėra užregistruotas sistemoje.',
-    'password' => 'The provided password is incorrect.',
+    'password' => ' Slaptažodį turi sudaryti bent 8 simboliai.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

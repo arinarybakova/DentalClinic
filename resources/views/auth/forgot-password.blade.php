@@ -32,7 +32,9 @@
 
             <div class="block">
                 <x-jet-label for="email" value="{{ __('El. paštas') }}" />
-                <x-jet-input id="email" class="inputF w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-jet-input id="email" class="inputF w-full" type="email" name="email" :value="old('email')" required placeholder="Įveskite el. paštą" 
+                oninvalid="this.setCustomValidity('Neteisingas el. pašto formatas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
 
             <div class="flex items-center justify-end mt-4">

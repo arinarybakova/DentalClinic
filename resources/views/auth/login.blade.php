@@ -29,12 +29,16 @@
             @csrf
             <div>
                <x-jet-label for="email" value="{{ __('El. paštas') }}" /></div>
-                <x-jet-input id="email" class="inputF w-full " type="email" name="email" :value="old('email')" required autofocus />
-            </id>
+                <x-jet-input id="email" class="inputF w-full " type="email" name="email" :value="old('email')"  required placeholder="Įveskite el. paštą" 
+                oninvalid="this.setCustomValidity('Neteisingas el. pašto formatas')"
+                oninput="this.setCustomValidity('')"/>
+            
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Slaptažodis') }}" />
-                <x-jet-input id="password" class="inputF w-full" type="password" name="password" required autocomplete="current-password"/>
+                <x-jet-input id="password" class="inputF w-full" type="password" name="password" autocomplete="current-password" required placeholder="Įveskite slaptažodį" 
+                oninvalid="this.setCustomValidity('Laukas slaptažodis yra privalomas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
 
             <!--<div class="block mt-4">

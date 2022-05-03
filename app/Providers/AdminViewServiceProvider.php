@@ -29,13 +29,13 @@ class AdminViewServiceProvider extends ServiceProvider
         View::composer('admin.sidebar', function ($view) {
             $links = [];
 
-            $links[] = (object)[
+            /*$links[] = (object)[
                 'href'      => route('admin'),
                 'icon'      => 'fas fa-home',
                 'name'      => 'Pagrindinis',
                 'route'     => 'admin',
                 'dentistHidden' => false,
-            ];
+            ];*/
             $links[] = (object)[
                 'href'      => route('admin.patients'),
                 'icon'      => 'fas fa-users',

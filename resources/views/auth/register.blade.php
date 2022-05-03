@@ -10,41 +10,55 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <!--<x-jet-authentication-card-logo />-->
-     
+            <div>
+        </div>
         <div class = "txt-lg"><i id = icon class="fas fa-tooth"></i>Odontologijos klinika</div>
         <div class = "txt-lb"> Registracija </div>
-        <x-jet-validation-errors class="mb-4" />
+        
         </x-slot>
+        <x-jet-validation-errors class="mb-4" />
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div class="mt-4">
                 <x-jet-label for="firstname" value="{{ __('Vardas') }}" />
-                <x-jet-input id="firstname" class="inputF w-full" type="text" name="name" :value="old('firstname')" required autofocus autocomplete="firstname" />
+                <x-jet-input id="firstname" class="inputF w-full" type="text" name="name" :value="old('firstname')" required placeholder="Įveskite vardą" 
+                oninvalid="this.setCustomValidity('Laukas vardas yra privalomas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
             <div class="mt-4">
                 <x-jet-label for="lastname" value="{{ __('Pavardė') }}" />
-                <x-jet-input id="lastname" class="inputF w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
+                <x-jet-input id="lastname" class="inputF w-full" type="text" name="lastname" :value="old('lastname')" required placeholder="Įveskite pavardę" 
+                oninvalid="this.setCustomValidity('Laukas pavardė yra privalomas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('El. paštas') }}" />
-                <x-jet-input id="email" class="inputF w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-input id="email" class="inputF w-full" type="email" name="email" :value="old('email')" required placeholder="Įveskite el. paštą" 
+                oninvalid="this.setCustomValidity('Neteisingas el. pašto formatas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
             
             <div>
                 <x-jet-label for="phone" value="{{ __('Tel. numeris') }}" />
-                <x-jet-input id="phone" class="inputF w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
+                <x-jet-input id="phone" class="inputF w-full" type="text" name="phone" :value="old('phone')" required placeholder="Įveskite tel. numerį" 
+                oninvalid="this.setCustomValidity('Laukas tel. numeris yra privalomas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Slaptažodis') }}" />
-                <x-jet-input id="password" class="inputF w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-jet-input id="password" class="inputF w-full" type="password" name="password" required placeholder="Įveskite slaptažodį" 
+                oninvalid="this.setCustomValidity('Laukas slaptažodis yra privalomas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Pakartokite slaptažodį') }}" />
-                <x-jet-input id="password_confirmation" class="inputF w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-jet-input id="password_confirmation" class="inputF w-full" type="password" name="password_confirmation" required placeholder="Dar kartą įveskite slaptažodį" 
+                oninvalid="this.setCustomValidity('Laukas pakartokite slaptažodį yra privalomas')"
+                oninput="this.setCustomValidity('')"/>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

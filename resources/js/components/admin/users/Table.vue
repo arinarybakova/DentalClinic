@@ -203,7 +203,7 @@ export default {
       this.filter = "";
       this.currentPage = 1;
       this.success.message =
-        'Naudotojo "' + user.name + '" redagavimas sėkmingas';
+        'Naudotojo "' + user.firstname + '" redagavimas sėkmingas';
       this.success.show = true;
       this.fetchUsers();
     },
@@ -222,7 +222,7 @@ export default {
     userDeleted() {
       this.filter = "";
       this.currentPage = 1;
-      this.success.message = "Naudotojas ištrintas";
+      this.success.message = "Naudotojas paskyra ištrinta";
       this.success.show = true;
       this.fetchUsers();
     },
