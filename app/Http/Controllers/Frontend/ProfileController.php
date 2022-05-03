@@ -1,23 +1,37 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProfileController extends Controller {
+class ProfileController extends Controller
+{
     public function index()
     {
         return view('user.profile');
-               
     }
 
     public function profile(Request $request)
     {
-        
-        return Auth::user();
+        $user = Auth::user()->toArray();
+
+        $keep = [
+            'id',
+            'firstname',
+            'lastname',
+            'email',
+            'phone',
+        ];
+        foreach (array_keys($user) as $key) {
+            if (!in_array($key, $keep)) {
+                unset($user[$key]);
+            }
+        }
+
+        return $user;
     }
 
     /**
@@ -28,8 +42,9 @@ class ProfileController extends Controller {
      */
     public function show(User $user)
     {
-       return response()->json($user);
+        return response()->json($user);
     }
+
     public function update(int $id, Request $request)
     {
         try {
@@ -46,5 +61,4 @@ class ProfileController extends Controller {
             'user' => $user
         ]);
     }
-
 }

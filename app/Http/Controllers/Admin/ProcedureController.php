@@ -17,19 +17,7 @@ class ProcedureController extends Controller
      */
     public function index()
     {
-        //    $procedures = Procedure::all();
-        //    return response()->json($procedures);
         return view("admin.procedures");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     public function procedures(Request $request)
@@ -51,7 +39,11 @@ class ProcedureController extends Controller
             $procedures = [];
             $total = 0;
         }
-        return ['procedures' => $procedures, 'total' => $total];
+        return [
+            'procedures' => $procedures, 
+            'total' => $total,
+            'isDentist' => $this->isDentist(),
+        ];
     }
 
     /**

@@ -57,6 +57,7 @@ Route::group(['middleware' => ['is.patient'], 'namespace' => 'Frontend', 'prefix
     Route::get('/appointments', [FrontendAppointmentController::class, 'appointments'])->name('api.appointments');
     Route::get('/treatments', [FrontendTreatmentController::class, 'treatments'])->name('api.treatments');
     Route::get('/profile', [FrontendProfileController::class, 'profile'])->name('api.profile');
+    Route::patch('/profile/update/{id}', [FrontendProfileController::class, 'update'])->name('api.profile.update');
     Route::get('/doctors', [DoctorsController::class, 'index'])->name('api.doctors');
     Route::get('/availableTimes', [ReservationController::class, 'availableTimes'])->name('api.availableTimes');
     Route::post('/appointments/store', [FrontendAppointmentController::class, 'store'])->name('api.appointments.store');

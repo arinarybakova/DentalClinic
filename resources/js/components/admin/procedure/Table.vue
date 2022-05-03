@@ -1,13 +1,15 @@
 <template>
   <div class="card-body">
-    <add-procedure @procedureAdded="procedureAdded"></add-procedure>
+    <add-procedure @procedureAdded="procedureAdded" v-if="!isDentist"></add-procedure>
     <edit-procedure
       @procedureUpdated="procedureUpdated"
       :procedure="selectedProcedure"
+       v-if="!isDentist"
     ></edit-procedure>
     <delete-procedure
       @procedureDeleted="procedureDeleted"
       :procedure="selectedProcedure"
+       v-if="!isDentist"
     ></delete-procedure>
     <toast
       type="success"
@@ -32,7 +34,7 @@
         <b>{{ getPatientId(data.value) }}</b>
       </template>
       <template #cell(actions)="data">
-        <div class="buttons">
+        <div class="buttons" v-if="!isDentist">
           <b-button
             v-on:click="updateProcedure(data.item)"
             variant="outline-info"
@@ -115,6 +117,7 @@ export default {
         },
       ],
       items: [],
+      isDentist: false,
     };
   },
   validations() {
@@ -139,6 +142,7 @@ export default {
         .then((response) => {
           this.items = response.data.procedures;
           this.totalRows = response.data.total;
+          this.isDentist = response.data.isDentist;
         });
     },
     filterTable() {
