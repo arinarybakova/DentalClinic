@@ -404,6 +404,9 @@ td .status {
   .heading{
       display: none;
   }
+  .modal-header{
+    border: none !important;  
+}
   .profile .kbutton{
       
       margin: 40px auto !important;
@@ -411,11 +414,11 @@ td .status {
       padding: 7px 36px !important;
       font-size: 1.2rem;
   }
-  .theme--light.v-calendar-daily .v-calendar-daily__day-interval {
-    
-}
-.v-calendar-daily__interval{
-    
+  .profile button.profile-submit {
+    margin-left: auto !important;
+    margin-top: 1rem !important;
+    font-size: 1rem !important;
+    padding: 8px 25px !important;
 }
 .mb-3 .custom-control-input{
     margin-right: 0.5rem !important;
