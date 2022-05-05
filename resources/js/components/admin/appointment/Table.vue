@@ -35,7 +35,7 @@
       <template #cell(actions)="data">
         <div v-if="!isDentist" class="appointment_buttons">
           <b-button
-            v-if="data.item.fk_status != 2"
+            :disabled="data.item.fk_status == 2"
             v-on:click="approveAppointment(data.item)"
             variant="outline-info"
             size="sm"
@@ -45,7 +45,7 @@
             ><i class="fas fa-check"></i
           ></b-button>
           <b-button
-            v-if="data.item.fk_status != 3"
+            :disabled="data.item.fk_status == 3"
             v-on:click="cancelAppointment(data.item)"
             variant="outline-info"
             size="sm"

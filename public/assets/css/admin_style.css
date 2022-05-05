@@ -103,7 +103,17 @@ header#main-header {
 #nav-toggle {
     display: none;
 }
-
+#checkbox-appointments{
+    outline: 2px solid var(--text-grey) !important;
+    border: none !important;
+  }
+#fieldset-filter{
+    display: flex;
+    max-width: 600px;
+}
+.form-select{
+    display:inline-block !important;
+}
 #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
 #nav-toggle:checked + .sidebar li a span:last-child{
     display: none;
@@ -404,6 +414,7 @@ td .status {
   .heading{
       display: none;
   }
+  
   .modal-header{
     border: none !important;  
 }
@@ -411,8 +422,8 @@ td .status {
       
       margin: 40px auto !important;
       display: flex !important;
-      padding: 7px 36px !important;
-      font-size: 1.2rem;
+      padding: 7px 30px !important;
+      font-size: 1.1rem;
   }
   .profile button.profile-submit {
     margin-left: auto !important;
@@ -816,38 +827,37 @@ a { color: inherit; }
     display: block;
 }
 .text-green {
-    color: #fff;
+    color: var(--color-dark);
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 15px;
     text-transform: uppercase;
     border-radius: 10px;
     border: 2px solid var(--color-dark);
-    padding: 3px; 
-    background-color:green ;
-    
-    
+    padding: 3px 6px;
+    background-color:#C7EEC0;
 }
 .text-red {
-    color: #fff;
+    color: var(--color-dark);
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 15px;
     text-transform: uppercase;
     border-radius: 10px;
     border: 2px solid var(--color-dark);
-    padding: 3px; 
-    background-color:red ;
+    padding: 3px 15px; 
+    background-color:#FBC4B9;
 
 }
 .text-grey{
-    color: #fff;
+    color: var(--color-dark);
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 15px;
     text-transform: uppercase;
     border-radius: 10px;
     border: 2px solid var(--color-dark);
-    padding: 3px; 
-    background-color:grey ;
+    padding: 3px 6px;
+    background-color: #d8d8d8;
 }
+
 #nav-ul .dropdown{
     font-size: 1rem;
     border-radius: 15px;

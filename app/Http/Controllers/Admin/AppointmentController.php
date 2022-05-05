@@ -42,7 +42,7 @@ class AppointmentController extends Controller
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('fk_status');
             } else {
-                $appointments->orderBy('time_from', 'DESC');
+                $appointments->orderBy('fk_status', 'ASC');
             }
             $pagination = $appointments->paginate($limit)->toArray();
             $appointments = $pagination['data'];

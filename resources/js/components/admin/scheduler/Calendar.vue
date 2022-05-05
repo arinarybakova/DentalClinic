@@ -89,9 +89,9 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    intervalHeight: 30,
+    intervalHeight: 40,
     maxDays: 5,
-    weekdays: [1, 2, 3, 4, 5, 6],
+    weekdays: [1, 2, 3, 4, 5],
   }),
   methods: {
     setToday() {

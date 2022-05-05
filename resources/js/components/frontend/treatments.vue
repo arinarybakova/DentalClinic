@@ -20,8 +20,8 @@
           <b>{{ getTreatmentId(data.value) }}</b>
         </template>
         <template v-slot:cell(status)="{ item }">
-        <span :class="{ 'text-green': item.status == 'Atlikta', 'text-red': item.status == 'Atšaukta',
-        'text-grey': item.status == 'Laukiama' }">
+        <span :class="{ 'text-greenp': item.status == 'Atlikta', 'text-redp': item.status == 'Atšaukta',
+        'text-greyp': item.status == 'Laukiama' }">
         {{ item.status }}
         </span>
         </template>
