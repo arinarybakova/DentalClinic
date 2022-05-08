@@ -66,7 +66,8 @@ Vue.component('user-form', require('./components/admin/users/Form.vue').default)
 Vue.component('add-user', require('./components/admin/users/Create.vue').default);
 Vue.component('edit-user', require('./components/admin/users/Edit.vue').default);
 Vue.component('delete-user', require('./components/admin/users/Delete.vue').default);
-Vue.component('treatment-user', require('./components/admin/users/Treatment.vue').default);
+Vue.component('treatment-admin-modal', require('./components/admin/treatment/AdminModal.vue').default);
+Vue.component('treatment-dentist-modal', require('./components/admin/treatment/DentistModal.vue').default);
 
 //Admin scheduler
 Vue.component('schedule', require('./components/admin/scheduler/Index.vue').default);

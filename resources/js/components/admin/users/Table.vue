@@ -3,6 +3,8 @@
     <add-user @userAdded="userAdded" v-if="usertype == 3"></add-user>
     <edit-user @userUpdated="userUpdated" :user="selectedUser"></edit-user>
     <delete-user @userDeleted="userDeleted" :user="selectedUser"></delete-user>
+    <treatment-admin-modal id="treatment-modal" :patientId="selectedUser.id" v-if="!isDentist"/>
+    <treatment-dentist-modal id="treatment-modal" :patientId="selectedUser.id" v-if="isDentist"/>
     
     <toast
       type="success"
@@ -193,7 +195,7 @@ export default {
     },
     showTreatment(user){
       this.selectedUser = user;
-      this.$bvModal.show("treatment-user");
+      this.$bvModal.show("treatment-modal");
     },
     updateUser(user) {
       this.selectedUser = user;

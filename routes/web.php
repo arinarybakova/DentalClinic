@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\ProfileController as FrontendProfileController
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\TreatmentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Frontend\ReservationController;
 use App\Http\Controllers\Frontend\DoctorsController;
@@ -98,6 +99,9 @@ Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', '
     Route::get('/appointmentEvents', [AppointmentController::class, 'appointmentEvents'])->name('api.admin.appointmentEvents');
 
     Route::get('/profile', [ProfileController::class, 'profile'])->name('api.admin.profile');
+
+    Route::get('/treatments', [TreatmentController::class, 'treatments'])->name('api.admin.treatments');
+    Route::post('/treatments/store', [TreatmentController::class, 'store'])->name('api.admin.treatments.store');
     
 });
 
