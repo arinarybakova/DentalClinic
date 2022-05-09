@@ -1,13 +1,23 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
+    <approve-treatment
+      @treatmentApproved="treatmentApproved"
+       :treatment="selectedTreatment"
+      id="approve-treatment"
+    ></approve-treatment>
+    <cancel-treatment
+      @treatmentCancelled="treatmentCancelled"
+      :treatment="selectedTreatment"
+      id="cancel-treatment"
+    ></cancel-treatment>
     <toast
       type="error"
       :msg="errorToast.message"
       :show="errorToast.show"
       @toastClosed="errorToast.show = false"
     ></toast>
-    <b-modal :id="id" :title="modalTitle" centered hide-footer>
-      <b-button v-on:click="addRow()" class="mb-3">Pridėti etapą</b-button>
+    <b-modal size="lg" :id="id" :title="modalTitle" centered hide-footer>
+      <b-button v-on:click="addRow()" class="stage">Pridėti etapą</b-button>
       <b-form @submit="submit">
         <b-table
           class="ttable"
@@ -43,8 +53,32 @@
               {{ item.status }}
             </span>
           </template>
+        <template #cell(actions)="data">
+        <div  class="appointment_buttons">
+          <b-button
+            :disabled="data.item.fk_status == 2"
+            v-on:click="approveTreatment(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Atlikti etapą"
+            class="approve_treatment"
+            ><i class="fas fa-check"></i
+          ></b-button>
+          <b-button
+            :disabled="data.item.fk_status == 3"
+            v-on:click="cancelTreatment(data.item)"
+            variant="outline-info"
+            size="sm"
+            v-b-tooltip.hover
+            title="Atšaukti etapą"
+            class="cancel_treatment"
+            ><i class="fa fa-times"></i
+          ></b-button>
+        </div>
+      </template>
         </b-table>
-        <b-button type="submit" variant="secondary" class="mt-3"
+        <b-button type="submit" variant="secondary" class="stage"
           >Išsaugoti</b-button
         >
       </b-form>
@@ -74,6 +108,7 @@ export default {
         message: "",
         show: false,
       },
+      selectedTreatment: [],
       fields: [
         {
           key: "id",
@@ -95,6 +130,11 @@ export default {
           key: "status",
           label: "Būsena",
           sortable: true,
+        },
+        {
+          key: "actions",
+          label: "",
+          sortable: false,
         },
       ],
       items: [],
@@ -180,6 +220,34 @@ export default {
           this.errorToast.show = true;
         }
       });
+    },
+      cancelTreatment(treatment) {
+      this.selectedTreatment = treatment;
+      this.$bvModal.show("cancel-treatment");
+    },
+    approveTreatment(treatment) {
+      this.selectedTreatment = treatment;
+      this.$bvModal.show("approve-treatment");
+    },
+    treatmentApproved() {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Etapui "' +
+        this.selectedTreatment.id +
+        '" sėkmingai priskirta atlikta būsena';
+      this.success.show = true;
+      this.fetchTreatments();
+    },
+    treatmentCancelled(appointment) {
+      this.filter = "";
+      this.currentPage = 1;
+      this.success.message =
+        'Etapas "' +
+        this.selectedTreatment.id +
+        '" sėkmingai priskirta atšaukta būsena';
+      this.success.show = true;
+      this.fetchTreatments();
     },
   },
 };

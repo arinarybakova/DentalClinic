@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
-    <b-modal :id="id" :title="modalTitle" centered hide-footer>
+    <b-modal size="lg" :id="id" :title="modalTitle" centered hide-footer>
       <b-table class="ttable" hover :items="items" :fields="fields" perPage="0">
         <template #cell(id)="data">
           <b>{{ getTreatmentId(data.value) }}</b>

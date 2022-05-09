@@ -102,6 +102,9 @@ Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', '
 
     Route::get('/treatments', [TreatmentController::class, 'treatments'])->name('api.admin.treatments');
     Route::post('/treatments/store', [TreatmentController::class, 'store'])->name('api.admin.treatments.store');
+    Route::post('/treatments/approve/{id}', [TreatmentController::class, 'approve'])->name('api.admin.treatments.approve');
+    Route::post('/treatments/cancel/{id}', [TreatmentController::class, 'cancel'])->name('api.admin.treatments.cancel');
+    
     
 });
 

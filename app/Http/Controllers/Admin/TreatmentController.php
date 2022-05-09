@@ -35,6 +35,8 @@ class TreatmentController extends Controller
             $pagination = $treatments->paginate($limit)->toArray();
             $treatments = $pagination['data'];
             $total = $pagination['total'];
+
+            
         } else {
             $treatments = [];
             $total = 0;
@@ -61,6 +63,40 @@ class TreatmentController extends Controller
         }
         return response()->json([
             'success'   => true
+        ]);
+    }
+    public function approve(int $id)
+    {
+        try {
+            $treatment = Treatment::find($id);
+            $treatment->fk_status = config('app.approved_status_id');
+            $treatment->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'treatment' => []
+            ]);
+        }
+        return response()->json([
+            'success'   => true,
+            'treatment' => $treatment
+        ]);
+    }
+    public function cancel($id)
+    {
+        try {
+            $treatment = Treatment::find($id);
+            $treatment->fk_status = config('app.canceled_status_id');
+            $treatment->save();
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'treatment' => []
+            ]);
+        }
+        return response()->json([
+            'success'   => true,
+            'treatment' => $treatment
         ]);
     }
 }
