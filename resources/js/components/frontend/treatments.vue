@@ -123,15 +123,16 @@ export default {
   },
   computed: {
      total() {
-       return this.items.reduce((acc, ele) => {
-            if (ele.fk_status != 3){
-                return acc + parseFloat(ele.price);   
-            }
-            else{
-              return acc + parseFloat(0);
-            }
-        }, 0);
-     },
+      var total = this.items.reduce((acc, ele) => {
+        if (ele.fk_status != 3) {
+          return acc + parseFloat(ele.price);
+        } else {
+          return acc + parseFloat(0);
+        }
+      }, 0);
+
+      return total.toFixed(2);
+    },
   },
   watch: {
     currentPage: {
