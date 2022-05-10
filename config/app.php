@@ -243,4 +243,7 @@ return [
     'reserved_status_id' => 1,
     'approved_status_id' => 2,
     'canceled_status_id' => 3,
+
+    'mailFooter' => 'Likite sveiki,',
+    'mailFooter2' => 'Odontologijos klinika',
 ];

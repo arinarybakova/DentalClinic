@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentCancelledMail;
 
 class AppointmentController extends Controller
 {
@@ -125,6 +127,11 @@ class AppointmentController extends Controller
             $appointment = Appointment::find($id);
             $appointment->fk_status = config('app.canceled_status_id');
             $appointment->save();
+
+            $appointment = Appointment::join('users', 'users.id', 'appointments.fk_dentist')
+                ->where('appointments.id', '=', $id)
+                ->first();
+            Mail::to(Auth::user()->email)->send(new AppointmentCancelledMail($appointment));
         } catch (\Illuminate\Database\QueryException $exception) {
             return response()->json([
                 'success'   => false,
