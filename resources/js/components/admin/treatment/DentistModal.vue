@@ -2,7 +2,7 @@
   <div class="w-100 mb-3 d-flex justify-content-end">
     <approve-treatment
       @treatmentApproved="treatmentApproved"
-       :treatment="selectedTreatment"
+      :treatment="selectedTreatment"
       id="approve-treatment"
     ></approve-treatment>
     <cancel-treatment
@@ -15,6 +15,12 @@
       :msg="errorToast.message"
       :show="errorToast.show"
       @toastClosed="errorToast.show = false"
+    ></toast>
+    <toast
+      type="success"
+      :msg="success.message"
+      :show="success.show"
+      @toastClosed="success.show = false"
     ></toast>
     <b-modal size="lg" :id="id" :title="modalTitle" centered hide-footer>
       <b-button v-on:click="addRow()" class="stage">Pridėti etapą</b-button>
@@ -53,32 +59,32 @@
               {{ item.status }}
             </span>
           </template>
-        <template #cell(actions)="data">
-        <div  class="appointment_buttons">
-          <b-button
-            :disabled="data.item.fk_status == 2"
-            v-on:click="approveTreatment(data.item)"
-            variant="outline-info"
-            size="sm"
-            v-b-tooltip.hover
-            title="Atlikti etapą"
-            class="approve_treatment"
-            ><i class="fas fa-check"></i
-          ></b-button>
-          <b-button
-            :disabled="data.item.fk_status == 3"
-            v-on:click="cancelTreatment(data.item)"
-            variant="outline-info"
-            size="sm"
-            v-b-tooltip.hover
-            title="Atšaukti etapą"
-            class="cancel_treatment"
-            ><i class="fa fa-times"></i
-          ></b-button>
-        </div>
-      </template>
+          <template #cell(actions)="data">
+            <div class="appointment_buttons" v-if="!data.item.new">
+              <b-button
+                :disabled="data.item.fk_status == 2"
+                v-on:click="approveTreatment(data.item)"
+                variant="outline-info"
+                size="sm"
+                v-b-tooltip.hover
+                title="Atlikti etapą"
+                class="approve_treatment"
+                ><i class="fas fa-check"></i
+              ></b-button>
+              <b-button
+                :disabled="data.item.fk_status == 3"
+                v-on:click="cancelTreatment(data.item)"
+                variant="outline-info"
+                size="sm"
+                v-b-tooltip.hover
+                title="Atšaukti etapą"
+                class="cancel_treatment"
+                ><i class="fa fa-times"></i
+              ></b-button>
+            </div>
+          </template>
         </b-table>
-        <b-button type="submit" variant="secondary" class="stage"
+        <b-button type="submit" variant="secondary" class="stage" v-if="newStagesAvailable()"
           >Išsaugoti</b-button
         >
       </b-form>
@@ -105,6 +111,10 @@ export default {
       totalRows: 0,
       procedures: [],
       errorToast: {
+        message: "",
+        show: false,
+      },
+      success: {
         message: "",
         show: false,
       },
@@ -211,17 +221,19 @@ export default {
     },
     submit(event) {
       event.preventDefault();
-      console.log(this.items);
       this.axios.post("/api/treatments/store", this.items).then((response) => {
         this.fetchTreatments();
         if (!response.data.success) {
           this.errorToast.message =
             "Atsprašome įvyko klaida, nepavyko pridėti gydymo plano etapo";
           this.errorToast.show = true;
+        } else {
+          this.success.message = "Etapas sėkmingai pridėtas!";
+          this.success.show = true;
         }
       });
     },
-      cancelTreatment(treatment) {
+    cancelTreatment(treatment) {
       this.selectedTreatment = treatment;
       this.$bvModal.show("cancel-treatment");
     },
@@ -249,6 +261,14 @@ export default {
       this.success.show = true;
       this.fetchTreatments();
     },
+    newStagesAvailable() {
+      for (var i = 0; i < this.items.length; i++) {
+        if(this.items[i].new) {
+          return true;
+        }
+      }
+      return false;
+    }
   },
 };
 </script>
