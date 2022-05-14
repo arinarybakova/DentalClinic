@@ -255,7 +255,7 @@ export default {
       this.filter = "";
       this.currentPage = 1;
       this.success.message =
-        'Etapas "' +
+        'Etapui "' +
         this.selectedTreatment.id +
         '" sėkmingai priskirta atšaukta būsena';
       this.success.show = true;
