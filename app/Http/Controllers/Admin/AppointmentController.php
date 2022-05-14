@@ -6,6 +6,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendAppointmentCancelledEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentCancelledMail;
@@ -128,10 +129,14 @@ class AppointmentController extends Controller
             $appointment->fk_status = config('app.canceled_status_id');
             $appointment->save();
 
-            $appointment = Appointment::join('users', 'users.id', 'appointments.fk_dentist')
+            $appointment = Appointment::select('appointments.time_from', 'd.firstname', 'd.lastname', 'p.email')
+                ->join('users as d', 'd.id', 'appointments.fk_dentist')
+                ->join('users as p', 'p.id', 'appointments.fk_patient')
                 ->where('appointments.id', '=', $id)
                 ->first();
-            Mail::to(Auth::user()->email)->send(new AppointmentCancelledMail($appointment));
+
+            Mail::to($appointment['email'])->send(new AppointmentCancelledMail($appointment));
+            // SendAppointmentCancelledEmail::dispatch($appointment['email'], $appointment);
         } catch (\Illuminate\Database\QueryException $exception) {
             return response()->json([
                 'success'   => false,

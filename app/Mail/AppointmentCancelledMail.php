@@ -11,7 +11,6 @@ class AppointmentCancelledMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /** @var Appointment */
     private $appointment;
 
     /**
@@ -19,7 +18,7 @@ class AppointmentCancelledMail extends Mailable
      *
      * @return void
      */
-    public function __construct(Appointment $appointment)
+    public function __construct($appointment)
     {
         $this->appointment = $appointment;
         $this->build();
@@ -34,7 +33,7 @@ class AppointmentCancelledMail extends Mailable
     {
         $data['visitDate'] = $this->appointment['time_from'] ?? '';
         $data['visitDentist'] = sprintf("%s %s", ($this->appointment['firstname'] ?? ''), ($this->appointment['lastname'] ?? ''));
-        
+
         return $this->markdown('emails.appointment-cancelled', $data);
     }
 }
