@@ -135,8 +135,7 @@ class AppointmentController extends Controller
                 ->where('appointments.id', '=', $id)
                 ->first();
 
-            Mail::to($appointment['email'])->send(new AppointmentCancelledMail($appointment));
-            // SendAppointmentCancelledEmail::dispatch($appointment['email'], $appointment);
+            Mail::to($appointment['email'])->queue(new AppointmentCancelledMail($appointment));
         } catch (\Illuminate\Database\QueryException $exception) {
             return response()->json([
                 'success'   => false,
