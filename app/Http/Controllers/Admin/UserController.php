@@ -7,7 +7,10 @@ use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Contracts\Auth\PasswordBroker;
 
 class UserController extends Controller
 {
@@ -71,6 +74,22 @@ class UserController extends Controller
                'password'   => md5(rand())
             ];
             $user = User::create(array_merge($request->post(), $data));
+
+            $callback = function($user, $token){
+                $user->sendPasswordCreateNotification($token);
+            };
+            $status = $this->broker()->sendResetLink(
+                $request->only('email'),
+                $callback
+            );
+
+            if($status !== Password::RESET_LINK_SENT) {
+                return response()->json([
+                    'success'   => false,
+                    'status' => $status,
+                    'user' => []
+                ]);
+            }
         } catch (\Illuminate\Database\QueryException $exception) {
             return response()->json([
                 'success'   => false,
@@ -81,6 +100,11 @@ class UserController extends Controller
             'success'   => true,
             'user' => $user
         ]);
+    }
+
+    protected function broker(): PasswordBroker
+    {
+        return Password::broker(config('fortify.passwords'));
     }
 
     /**

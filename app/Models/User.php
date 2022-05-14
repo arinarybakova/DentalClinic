@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Http\Controllers\Auth\Passwords\CanCreatePassword;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use CanCreatePassword;
 
     /**
      * The attributes that are mass assignable.

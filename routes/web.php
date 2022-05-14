@@ -107,14 +107,3 @@ Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', '
     
     
 });
-
-// Route::get('/home', [HomeController::class, 'redirect']);
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-// Route::get('{any}', function(){
-//     return view('app');
-// })->where('any', '.*');
-
