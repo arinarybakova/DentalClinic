@@ -116,6 +116,7 @@ class AppointmentController extends Controller
             ->count();
 
         $appointmentCount = Appointment::where('fk_dentist', '=', $post['doctor'])
+            ->where('fk_status', '!=', config('app.canceled_status_id'))
             ->whereBetween('time_from', [$dateTime, $dateTimeTo])
             ->whereBetween('time_to', [$dateTime, $dateTimeTo])
             ->count();

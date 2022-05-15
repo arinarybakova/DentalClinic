@@ -41,6 +41,7 @@ class ReservationController extends Controller
                 }
 
                 $appointments = Appointment::select('time_from', 'time_to')
+                    ->where('fk_status', '!=', config('app.canceled_status_id'))
                     ->where('fk_dentist', '=', $request->get('doctor'))
                     ->where('time_from', '>=', $request->get('dateFrom'))
                     ->where('time_from', '>=', date('Y-m-d'))
