@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\SendAppointmentReminders;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +16,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->job(new SendAppointmentReminders)
+            ->hourlyAt(20)
+            ->timezone('Europe/Vilnius')
+            ->between('8:00', '18:00');
     }
 
     /**

@@ -23,10 +23,10 @@ class ScheduleController extends Controller
     {
         if (isset($request->start)) {
             $dateFrom = date('Y-m-d', strtotime($request->start . " monday this week"));
-            $dateTo = date('Y-m-d', strtotime($request->start . " sunday this week"));
+            $dateTo = date('Y-m-d', strtotime($request->start . " wednesday next week"));
         } else {
             $dateFrom = date('Y-m-d', strtotime('monday this week'));
-            $dateTo = date('Y-m-d', strtotime('sunday this week'));
+            $dateTo = date('Y-m-d', strtotime('wednesday next week'));
         }
         $query = DB::table('schedule')
             ->join('users', 'users.id', '=', 'schedule.fk_dentist')
