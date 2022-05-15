@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new SendAppointmentReminders)
-            ->hourlyAt(20)
+            ->hourly()
             ->timezone('Europe/Vilnius')
             ->between('8:00', '18:00');
     }
