@@ -22,7 +22,7 @@
         placeholder="Įveskite paieškos raktažodį"
       ></b-form-input>
       <b-button v-on:click="filterTable()">Ieškoti</b-button>
-      <b-button v-on:click="resetTable()">Išvalyti</b-button>
+      <b-button v-on:click="clearTable()">Išvalyti</b-button>
     </div>
     <div v-if="v$.filter.$error" class="text-danger mt-1">
       Prašome įvesti paieškos raktažodį
@@ -168,7 +168,11 @@ export default {
         this.fetchAppointments();
       }
     },
-    resetTable() {},
+    clearTable() {
+      this.filter = "";
+      this.v$.filter.$reset();
+      this.fetchAppointments();
+    },
     getAppointmentId(value) {
       return "V" + value.toString().padStart(3, "0");
     },

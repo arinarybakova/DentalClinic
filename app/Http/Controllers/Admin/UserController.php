@@ -42,8 +42,10 @@ class UserController extends Controller
                 $users->where('usertype', $request->get('usertype'));
             }
             if ($request->get('filter') !== null) {
-                $users->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+                $users->where(function($q) use ($request) {
+                    $q->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+                });
             }
             $users->distinct()->orderBy('name');
             $pagination = $users->paginate($limit)->toArray();
