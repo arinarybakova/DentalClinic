@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Treatment;
+use App\Models\Procedure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +29,10 @@ class TreatmentController extends Controller {
             ->where('fk_patient', '=', Auth::user()->id);
             
 
-            if ($request->get('filter') !== null) {
-                $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+            if ($request->get('filter') !== null) {/*nesamone parasiau cia*/
+                $treatments = Procedure::where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+                    Treatment::where('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orderBy('status');
             } else {
                 $treatments->orderBy('id');
