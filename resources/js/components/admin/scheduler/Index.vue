@@ -23,7 +23,6 @@
         id="checkbox-appointments"
         v-model="showAppointments"
         name="checkbox-appointments"
-        value="true"
         unchecked-value="false"
         class="mb-3 mx-3"
         v-on:change="filterEvents"
@@ -70,7 +69,7 @@ export default {
     fetchEvents(value) {
       this.events = [];
       this.fetchSchedules(value);
-      if (this.showAppointments) {
+      if (this.showAppointments == true) {
         this.fetchAppointments(value);
       }
     },
