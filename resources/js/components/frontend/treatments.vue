@@ -9,7 +9,7 @@
               placeholder="Įveskite paieškos raktažodį"
           ></b-form-input>
           <b-button v-on:click="filterTable()">Ieškoti</b-button>
-          <b-button v-on:click="resetTable()">Išvalyti</b-button>
+          <b-button v-on:click="clearTable()">Išvalyti</b-button>
           </div>
           <div v-if="v$.filter.$error" class="text-danger mt-1">
           Prašome įvesti paieškos raktažodį
@@ -105,6 +105,9 @@ export default {
         page: this.currentPage,
         limit: this.perPage,
       };
+      if (this.filter !== "") {
+        requestParams = Object.assign(requestParams, { filter: this.filter });
+      }
       this.axios
         .get("/api/front/treatments", { params: requestParams })
         .then((response) => {
@@ -119,6 +122,11 @@ export default {
       if (this.v$.$validate() && !this.v$.filter.$error) {
         this.fetchTreatments();
       }
+    },
+     clearTable() {
+      this.filter = "";
+      this.v$.filter.$reset();
+      this.fetchTreatments();
     },
   },
   computed: {
