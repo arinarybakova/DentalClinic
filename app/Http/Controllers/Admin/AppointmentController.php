@@ -43,8 +43,7 @@ class AppointmentController extends Controller
                     ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('fk_status');
+                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
             }
             $columns = [
                 'id',

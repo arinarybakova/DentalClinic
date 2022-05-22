@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Treatment;
-use App\Models\Procedure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +19,7 @@ class TreatmentController extends Controller
     public function treatments(Request $request)
     {
         $totalPrice = 0;
-        /*statuso tai nevaizduoja cia, kaip prideti, kad pagal isorini rakta imtu reiksme is lenteles treatment_stage_status, column status pagal ID*/
+
         if ($request->get('page') !== null && Auth::hasUser()) {
             $limit = $request->get('limit') ?? 10;
             $treatments = Treatment::select(
@@ -29,16 +28,17 @@ class TreatmentController extends Controller
                 'procedures.title',
                 'procedures.price'
             )
-
                 ->join('treatment_stage_status', 'treatment_stage_status.id', 'treatments.fk_status')
                 ->join('procedures', 'procedures.id', 'treatments.fk_procedure')
                 ->where('fk_patient', '=', Auth::user()->id);
 
 
-            if ($request->get('filter') !== null) {/*nesamone parasiau cia*/
-                $treatments = Procedure::where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
-                Treatment::where('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+            if ($request->get('filter') !== null) {
+                $treatments->where(function ($query) use ($request) {
+                    return $query
+                        ->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('price', 'LIKE',  '%' . $this->escape_like($request->get('filter')) .  '%');
+                });
             }
 
             $totalPrice = DB::table(DB::raw("({$treatments->toSql()}) as sub"))
