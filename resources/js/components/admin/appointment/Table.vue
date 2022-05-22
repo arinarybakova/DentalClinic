@@ -101,7 +101,7 @@ export default {
       totalRows: 1,
       filter: "",
       noLocalSorting: true,
-      sortBy: "title",
+      sortBy: "date",
       sortDesc: true,
       success: {
         message: "",
@@ -222,6 +222,7 @@ export default {
       this.fetchAppointments();
     },
     sort(ctx) {
+      this.currentPage = 1;
       this.sortBy = ctx.sortBy;
       this.sortDesc = ctx.sortDesc;
       this.fetchAppointments();

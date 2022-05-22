@@ -205,6 +205,7 @@ export default {
       this.fetchProcedures();
     },
     sort(ctx) {
+      this.currentPage = 1;
       this.sortBy = ctx.sortBy;
       this.sortDesc = ctx.sortDesc;
       this.fetchProcedures();

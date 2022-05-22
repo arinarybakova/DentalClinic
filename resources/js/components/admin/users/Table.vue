@@ -106,7 +106,7 @@ export default {
       totalRows: 1,
       filter: "",
       noLocalSorting: true,
-      sortBy: "title",
+      sortBy: "id",
       sortDesc: true,
       success: {
         message: "",
@@ -255,6 +255,7 @@ export default {
       this.fetchUsers();
     },
     sort(ctx) {
+      this.currentPage = 1;
       this.sortBy = ctx.sortBy;
       this.sortDesc = ctx.sortDesc;
       this.fetchUsers();

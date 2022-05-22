@@ -5,43 +5,57 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Treatment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TreatmentController extends Controller
 {
     public function treatments(Request $request)
     {
+        $totalPrice = 0;
+
         if ($request->get('page') !== null && $request->get('patient')) {
             $limit = $request->get('limit') ?? 10;
             $treatments = Treatment::select(
                 'treatments.*',
                 'treatment_stage_status.status',
                 'procedures.title',
-                'procedures.price'
+                'procedures.price',
             )
-
                 ->join('treatment_stage_status', 'treatment_stage_status.id', 'treatments.fk_status')
                 ->join('procedures', 'procedures.id', 'treatments.fk_procedure')
-                ->where('fk_patient', '=', $request->get('patient'));
-
+                ->where('treatments.fk_patient', '=', $request->get('patient'));
 
             if ($request->get('filter') !== null) {
                 $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('status');
+                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+            }
+            $totalPrice = DB::table(DB::raw("({$treatments->toSql()}) as sub"))
+                ->select(DB::raw(DB::raw('SUM(case when fk_status != ' . config('app.canceled_status_id') . ' then price else 0 end) as totalPrice')))
+                ->mergeBindings($treatments->getQuery())->first();
+            $columns = [
+                'id',
+                'title',
+                'price',
+                'status',
+            ];
+            if ($request->get('sortBy') !== null && in_array($request->get('sortBy'), $columns)) {
+                $desc = $request->get('sortDesc') == 'true' ? 'DESC' : 'ASC';
+                $treatments->orderBy($request->get('sortBy'), $desc);
             } else {
-                $treatments->orderBy('id');
+                $treatments->orderBy('status');
             }
             $pagination = $treatments->paginate($limit)->toArray();
             $treatments = $pagination['data'];
-            $total = $pagination['total'];            
+            $total = $pagination['total'];
         } else {
             $treatments = [];
             $total = 0;
         }
         return [
-            'treatments' => $treatments, 
+            'treatments' => $treatments,
             'total' => $total,
+            'totalPrice' => $totalPrice->totalPrice,
             'isDentist' => $this->isDentist(),
         ];
     }
@@ -49,7 +63,7 @@ class TreatmentController extends Controller
     {
         $requiredKeys = ['fk_patient', 'fk_procedure', 'fk_status', 'new', 'status'];
         try {
-            foreach($request->post() as $treatmentData) {
+            foreach ($request->post() as $treatmentData) {
                 if (count(array_diff_key(array_keys($treatmentData), $requiredKeys)) === 0) {
                     Treatment::create($treatmentData);
                 }

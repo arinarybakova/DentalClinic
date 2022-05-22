@@ -1,7 +1,14 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
     <b-modal size="lg" :id="id" :title="modalTitle" centered hide-footer>
-      <b-table class="ttable" hover :items="items" :fields="fields" perPage="0">
+      <b-table
+        class="ttable"
+        hover
+        :items="items"
+        :fields="fields"
+        :no-local-sorting="noLocalSorting"
+        @sort-changed="sort"
+      >
         <template #cell(id)="data">
           <b>{{ getTreatmentId(data.value) }}</b>
         </template>
@@ -25,7 +32,7 @@
       />
       <div class="totalcost">
         Preliminari gydymo plano kaina:
-        <span class="price">{{ total }} Eur</span>
+        <span class="price">{{ totalPrice }} Eur</span>
       </div>
     </b-modal>
   </div>
@@ -42,6 +49,10 @@ export default {
       currentPage: 1,
       perPage: 5,
       totalRows: 0,
+      noLocalSorting: true,
+      sortBy: "id",
+      sortDesc: true,
+      totalPrice: 0,
       fields: [
         {
           key: "id",
@@ -82,19 +93,6 @@ export default {
       },
     },
   },
-  computed: {
-    total() {
-      var total = this.items.reduce((acc, ele) => {
-        if (ele.fk_status != 3) {
-          return acc + parseFloat(ele.price);
-        } else {
-          return acc + parseFloat(0);
-        }
-      }, 0);
-
-      return total.toFixed(2);
-    },
-  },
   created() {
     this.fetchTreatments();
   },
@@ -104,12 +102,15 @@ export default {
         page: this.currentPage,
         limit: this.perPage,
         patient: this.patientId,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
       };
       this.axios
         .get("/api/treatments", { params: requestParams })
         .then((response) => {
           this.items = response.data.treatments;
           this.totalRows = response.data.total;
+          this.totalPrice = response.data.totalPrice;
         });
     },
     getTreatmentId(value) {
@@ -119,6 +120,12 @@ export default {
       if (this.v$.$validate() && !this.v$.filter.$error) {
         this.fetchTreatments();
       }
+    },
+    sort(ctx) {
+      this.currentPage = 1;
+      this.sortBy = ctx.sortBy;
+      this.sortDesc = ctx.sortDesc;
+      this.fetchTreatments();
     },
   },
 };

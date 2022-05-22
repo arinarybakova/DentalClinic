@@ -30,7 +30,8 @@
           hover
           :items="items"
           :fields="fields"
-          perPage="0"
+          :no-local-sorting="noLocalSorting"
+          @sort-changed="sort"
         >
           <template #cell(id)="data">
             <b>{{ getTreatmentId(data.value) }}</b>
@@ -84,7 +85,11 @@
             </div>
           </template>
         </b-table>
-        <b-button type="submit" variant="secondary" class="stage" v-if="newStagesAvailable()"
+        <b-button
+          type="submit"
+          variant="secondary"
+          class="stage"
+          v-if="newStagesAvailable()"
           >Išsaugoti</b-button
         >
       </b-form>
@@ -109,6 +114,9 @@ export default {
       currentPage: 1,
       perPage: 5,
       totalRows: 0,
+      noLocalSorting: true,
+      sortBy: "id",
+      sortDesc: true,
       procedures: [],
       errorToast: {
         message: "",
@@ -173,6 +181,8 @@ export default {
         page: this.currentPage,
         limit: this.perPage,
         patient: this.patientId,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
       };
       this.axios
         .get("/api/treatments", { params: requestParams })
@@ -182,7 +192,7 @@ export default {
         });
     },
     getTreatmentId(value) {
-      return value !== "" ? "E" + value.toString().padStart(3, "0") : '';
+      return value !== "" ? "E" + value.toString().padStart(3, "0") : "";
     },
     filterTable() {
       if (this.v$.$validate() && !this.v$.filter.$error) {
@@ -266,14 +276,20 @@ export default {
       this.success.show = true;
       this.fetchTreatments();
     },
+    sort(ctx) {
+      this.currentPage = 1;
+      this.sortBy = ctx.sortBy;
+      this.sortDesc = ctx.sortDesc;
+      this.fetchTreatments();
+    },
     newStagesAvailable() {
       for (var i = 0; i < this.items.length; i++) {
-        if(this.items[i].new) {
+        if (this.items[i].new) {
           return true;
         }
       }
       return false;
-    }
+    },
   },
 };
 </script>
