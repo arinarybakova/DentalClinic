@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Carbon;
 use App\Models\Procedure;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Schema;
 
 
 class ProcedureController extends Controller
@@ -28,21 +29,25 @@ class ProcedureController extends Controller
             $limit = $request->get('limit') ?? 10;
             if ($request->get('filter') !== null) {
                 $procedures = Procedure::where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('details', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('title');
+                    ->orWhere('details', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
             } else {
-                $procedures = Procedure::orderBy('title');
+                $procedures = Procedure::where('id', '>', 0);
+            }
+            if ($request->get('sortBy') !== null && Schema::hasColumn('procedures', $request->get('sortBy'))) {
+                $desc = $request->get('sortDesc') == 'true' ? 'DESC' : 'ASC';
+                $procedures->orderBy($request->get('sortBy'), $desc);
+            } else {
+                $procedures->orderBy('title');
             }
             $pagination = $procedures->paginate($limit)->toArray();
             $procedures = $pagination['data'];
-            $total_pages = $pagination['to'];
             $total = $pagination['total'];
         } else {
             $procedures = [];
             $total = 0;
         }
         return [
-            'procedures' => $procedures, 
+            'procedures' => $procedures,
             'total' => $total,
             'isDentist' => $this->isDentist(),
         ];
@@ -125,7 +130,7 @@ class ProcedureController extends Controller
     public function destroy(int $id)
     {
         $procedure = Procedure::find($id);
-        if($procedure !== null) {
+        if ($procedure !== null) {
             $procedure->delete();
             return response()->json([
                 'success'   => true

@@ -6,10 +6,10 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Jobs\SendAppointmentCancelledEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentCancelledMail;
+use Illuminate\Support\Facades\Schema;
 
 class AppointmentController extends Controller
 {
@@ -42,10 +42,23 @@ class AppointmentController extends Controller
             if ($request->get('filter') !== null) {
                 $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('fk_status');
+                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+            }
+            $columns = [
+                'id',
+                'patient',
+                'dentist',
+                'date',
+                'time',
+            ];
+            if ($request->get('sortBy') !== null && in_array($request->get('sortBy'), $columns)) {
+                $desc = $request->get('sortDesc') == 'true' ? 'DESC' : 'ASC';
+                $appointments->orderBy($request->get('sortBy'), $desc);
+                if($request->get('sortBy') === 'date') {
+                    $appointments->orderBy('time', $desc);
+                }
             } else {
-                $appointments->orderBy('fk_status', 'ASC');
+                $appointments->orderBy('fk_status');
             }
             $pagination = $appointments->paginate($limit)->toArray();
             $appointments = $pagination['data'];

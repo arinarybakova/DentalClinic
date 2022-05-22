@@ -1,15 +1,18 @@
 <template>
   <div class="card-body">
-    <add-procedure @procedureAdded="procedureAdded" v-if="!isDentist"></add-procedure>
+    <add-procedure
+      @procedureAdded="procedureAdded"
+      v-if="!isDentist"
+    ></add-procedure>
     <edit-procedure
       @procedureUpdated="procedureUpdated"
       :procedure="selectedProcedure"
-       v-if="!isDentist"
+      v-if="!isDentist"
     ></edit-procedure>
     <delete-procedure
       @procedureDeleted="procedureDeleted"
       :procedure="selectedProcedure"
-       v-if="!isDentist"
+      v-if="!isDentist"
     ></delete-procedure>
     <toast
       type="success"
@@ -29,7 +32,14 @@
       Prašome įvesti paieškos raktažodį
     </div>
 
-    <b-table hover :items="items" :fields="fields" :perPage="0">
+    <b-table
+      hover
+      :items="items"
+      :fields="fields"
+      :perPage="0"
+      :no-local-sorting="noLocalSorting"
+      @sort-changed="sort"
+    >
       <template #cell(id)="data">
         <b>{{ getPatientId(data.value) }}</b>
       </template>
@@ -78,6 +88,9 @@ export default {
       perPage: 10,
       totalRows: 1,
       filter: "",
+      noLocalSorting: true,
+      sortBy: "title",
+      sortDesc: true,
       success: {
         message: "",
         show: false,
@@ -108,7 +121,7 @@ export default {
           key: "details",
           label: "Aprašymas",
           sortable: false,
-          thClass: 'Pdesc'
+          thClass: "Pdesc",
         },
         {
           key: "actions",
@@ -133,6 +146,8 @@ export default {
       var requestParams = {
         page: this.currentPage,
         limit: this.perPage,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
       };
       if (this.filter !== "") {
         requestParams = Object.assign(requestParams, { filter: this.filter });
@@ -187,6 +202,11 @@ export default {
       this.currentPage = 1;
       this.success.message = "Procedūra ištrinta";
       this.success.show = true;
+      this.fetchProcedures();
+    },
+    sort(ctx) {
+      this.sortBy = ctx.sortBy;
+      this.sortDesc = ctx.sortDesc;
       this.fetchProcedures();
     },
   },

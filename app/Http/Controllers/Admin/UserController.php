@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Closure;
 use App\Models\User;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Contracts\Auth\PasswordBroker;
 
@@ -34,20 +35,26 @@ class UserController extends Controller
         if ($request->get('page') !== null) {
             $limit = $request->get('limit') ?? 10;
             $users = User::select(DB::raw('users.*, concat(users.firstname, " ", users.lastname) as name'));
-            if($this->isDentist()) {
+            if ($this->isDentist()) {
                 $users->join('appointments', 'appointments.fk_patient', 'users.id')
                     ->where('appointments.fk_dentist', '=', Auth::user()->id);
             }
-            if($request->get('usertype') !== null) {
+            if ($request->get('usertype') !== null) {
                 $users->where('usertype', $request->get('usertype'));
             }
             if ($request->get('filter') !== null) {
-                $users->where(function($q) use ($request) {
+                $users->where(function ($q) use ($request) {
                     $q->where(DB::raw('concat(firstname, " ", lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                         ->orWhere('email', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
                 });
             }
-            $users->distinct()->orderBy('name');
+            $users->distinct();
+            if ($request->get('sortBy') !== null && Schema::hasColumn('users', $request->get('sortBy'))) {
+                $desc = $request->get('sortDesc') == 'true' ? 'DESC' : 'ASC';
+                $users->orderBy($request->get('sortBy'), $desc);
+            } else {
+                $users->orderBy('name');
+            }
             $pagination = $users->paginate($limit)->toArray();
             $users = $pagination['data'];
             $total = $pagination['total'];
@@ -56,7 +63,7 @@ class UserController extends Controller
             $total = 0;
         }
         return [
-            'users' => $users, 
+            'users' => $users,
             'total' => $total,
             'isDentist' => $this->isDentist(),
         ];
@@ -72,12 +79,12 @@ class UserController extends Controller
     {
         try {
             $data = [
-               'usertype'   => config('app.usertype_dentist'),
-               'password'   => md5(rand())
+                'usertype'   => config('app.usertype_dentist'),
+                'password'   => md5(rand())
             ];
             $user = User::create(array_merge($request->post(), $data));
 
-            $callback = function($user, $token){
+            $callback = function ($user, $token) {
                 $user->sendPasswordCreateNotification($token);
             };
             $status = $this->broker()->sendResetLink(
@@ -85,7 +92,7 @@ class UserController extends Controller
                 $callback
             );
 
-            if($status !== Password::RESET_LINK_SENT) {
+            if ($status !== Password::RESET_LINK_SENT) {
                 return response()->json([
                     'success'   => false,
                     'status' => $status,
@@ -153,7 +160,7 @@ class UserController extends Controller
     public function destroy(int $id)
     {
         $user = User::find($id);
-        if($user !== null) {
+        if ($user !== null) {
             $user->delete();
             return response()->json([
                 'success'   => true
@@ -167,23 +174,27 @@ class UserController extends Controller
 
     public function treatment(int $id, Request $request)
     {
-            $user = User::find($id);
-            $treatments = Treatment::select(
-                'treatments.*', 'treatment_stage_status.status', 'procedures.title', 'procedures.price')
-            
+        $user = User::find($id);
+        $treatments = Treatment::select(
+            'treatments.*',
+            'treatment_stage_status.status',
+            'procedures.title',
+            'procedures.price'
+        )
+
             ->join('treatment_stage_status', 'treatment_stage_status.id', 'treatments.fk_status')
             ->join('procedures', 'procedures.id', 'treatments.fk_procedure')
             ->where('fk_patient', '=', Treatment::user()->id);
-            
 
-            if ($request->get('filter') !== null) {
-                $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('status');
-            } else {
-                $treatments->orderBy('id');
-            }
+
+        if ($request->get('filter') !== null) {
+            $treatments->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                ->orWhere('price', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                ->orderBy('status');
+        } else {
+            $treatments->orderBy('id');
+        }
         return ['treatments' => $treatments];
     }
 }

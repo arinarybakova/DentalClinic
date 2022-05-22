@@ -3,9 +3,17 @@
     <add-user @userAdded="userAdded" v-if="usertype == 3"></add-user>
     <edit-user @userUpdated="userUpdated" :user="selectedUser"></edit-user>
     <delete-user @userDeleted="userDeleted" :user="selectedUser"></delete-user>
-    <treatment-admin-modal id="treatment-modal" :patientId="selectedUser.id" v-if="!isDentist"/>
-    <treatment-dentist-modal id="treatment-modal" :patientId="selectedUser.id" v-if="isDentist"/>
-    
+    <treatment-admin-modal
+      id="treatment-modal"
+      :patientId="selectedUser.id"
+      v-if="!isDentist"
+    />
+    <treatment-dentist-modal
+      id="treatment-modal"
+      :patientId="selectedUser.id"
+      v-if="isDentist"
+    />
+
     <toast
       type="success"
       :msg="success.message"
@@ -24,7 +32,14 @@
       Prašome įvesti paieškos raktažodį
     </div>
 
-    <b-table hover :items="items" :fields="fields" :perPage="0">
+    <b-table
+      hover
+      :items="items"
+      :fields="fields"
+      :perPage="0"
+      :no-local-sorting="noLocalSorting"
+      @sort-changed="sort"
+    >
       <template #cell(id)="data">
         <b>{{ getUsersId(data.value) }}</b>
       </template>
@@ -33,7 +48,8 @@
       </template>
       <template #cell(actions)="data">
         <div class="buttons">
-          <b-button v-if="usertype == 2"
+          <b-button
+            v-if="usertype == 2"
             v-on:click="showTreatment(data.item)"
             variant="outline-info"
             size="sm"
@@ -89,6 +105,9 @@ export default {
       perPage: 10,
       totalRows: 1,
       filter: "",
+      noLocalSorting: true,
+      sortBy: "title",
+      sortDesc: true,
       success: {
         message: "",
         show: false,
@@ -156,6 +175,8 @@ export default {
         page: this.currentPage,
         limit: this.perPage,
         usertype: this.usertype,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
       };
       if (this.filter !== "") {
         requestParams = Object.assign(requestParams, { filter: this.filter });
@@ -198,7 +219,7 @@ export default {
       this.selectedUser = user;
       this.$bvModal.show("delete-user");
     },
-    showTreatment(user){
+    showTreatment(user) {
       this.selectedUser = user;
       this.$bvModal.show("treatment-modal");
     },
@@ -231,6 +252,11 @@ export default {
       this.currentPage = 1;
       this.success.message = "Naudotojas paskyra ištrinta";
       this.success.show = true;
+      this.fetchUsers();
+    },
+    sort(ctx) {
+      this.sortBy = ctx.sortBy;
+      this.sortDesc = ctx.sortDesc;
       this.fetchUsers();
     },
   },

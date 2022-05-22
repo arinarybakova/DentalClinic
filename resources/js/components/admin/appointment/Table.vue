@@ -28,7 +28,15 @@
       Prašome įvesti paieškos raktažodį
     </div>
 
-    <b-table class="atable" hover :items="items" :fields="fields" :perPage="0">
+    <b-table
+      class="atable"
+      hover
+      :items="items"
+      :fields="fields"
+      :perPage="0"
+      :no-local-sorting="noLocalSorting"
+      @sort-changed="sort"
+    >
       <template #cell(id)="data">
         <b>{{ getAppointmentId(data.value) }}</b>
       </template>
@@ -92,6 +100,9 @@ export default {
       perPage: 10,
       totalRows: 1,
       filter: "",
+      noLocalSorting: true,
+      sortBy: "title",
+      sortDesc: true,
       success: {
         message: "",
         show: false,
@@ -151,6 +162,8 @@ export default {
       var requestParams = {
         page: this.currentPage,
         limit: this.perPage,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
       };
       if (this.filter !== "") {
         requestParams = Object.assign(requestParams, { filter: this.filter });
@@ -206,6 +219,11 @@ export default {
         this.selectedAppointment.dentist +
         '" atšauktas sėkmingai';
       this.success.show = true;
+      this.fetchAppointments();
+    },
+    sort(ctx) {
+      this.sortBy = ctx.sortBy;
+      this.sortDesc = ctx.sortDesc;
       this.fetchAppointments();
     },
   },
