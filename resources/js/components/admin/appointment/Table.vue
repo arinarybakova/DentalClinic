@@ -33,7 +33,6 @@
       hover
       :items="items"
       :fields="fields"
-      :perPage="0"
       :no-local-sorting="noLocalSorting"
       @sort-changed="sort"
     >

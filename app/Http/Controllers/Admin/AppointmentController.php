@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentCancelledMail;
-use Illuminate\Support\Facades\Schema;
 
 class AppointmentController extends Controller
 {

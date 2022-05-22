@@ -1,38 +1,51 @@
 <template>
-     <div class="card-body">
-        <section class="services" id="services">
-            <h1 class="heading">vizitų <span>istorija</span></h1>
-        </section>
-        <div class="search">
-        <b-form-input
-            v-model="filter"
-            placeholder="Įveskite paieškos raktažodį"
-        ></b-form-input>
-        <b-button v-on:click="filterTable()">Ieškoti</b-button>
-        <b-button v-on:click="clearTable()">Išvalyti</b-button>
-        </div>
-        <div v-if="v$.filter.$error" class="text-danger mt-1">
-        Prašome įvesti paieškos raktažodį
-        </div>
-       
-        <b-table class="atable" hover :items="items" :fields="fields" :perPage="0">
-          <template #cell(id)="data">
-            <b>{{ getAppointmentId(data.value) }}</b>
-          </template>
-          <template v-slot:cell(status)="{ item }">
-          <span :class="{ 'text-green': item.status == 'Patvirtinta', 'text-red': item.status == 'Atšaukta',
-          'text-grey': item.status == 'Rezervuota' }">
-          {{ item.status }}
-          </span>
-          </template>
-         </b-table>
-        <b-pagination class ="paginationapp"
-        :total-rows="totalRows"
-        :per-page="perPage"
-        v-model="currentPage"
-        v-if="totalRows / perPage > 1"
-    />
+  <div class="card-body">
+    <section class="services" id="services">
+      <h1 class="heading">vizitų <span>istorija</span></h1>
+    </section>
+    <div class="search">
+      <b-form-input
+        v-model="filter"
+        placeholder="Įveskite paieškos raktažodį"
+      ></b-form-input>
+      <b-button v-on:click="filterTable()">Ieškoti</b-button>
+      <b-button v-on:click="clearTable()">Išvalyti</b-button>
     </div>
+    <div v-if="v$.filter.$error" class="text-danger mt-1">
+      Prašome įvesti paieškos raktažodį
+    </div>
+
+    <b-table
+      class="atable"
+      hover
+      :items="items"
+      :fields="fields"
+      :no-local-sorting="noLocalSorting"
+      @sort-changed="sort"
+    >
+      <template #cell(id)="data">
+        <b>{{ getAppointmentId(data.value) }}</b>
+      </template>
+      <template v-slot:cell(status)="{ item }">
+        <span
+          :class="{
+            'text-green': item.status == 'Patvirtinta',
+            'text-red': item.status == 'Atšaukta',
+            'text-grey': item.status == 'Rezervuota',
+          }"
+        >
+          {{ item.status }}
+        </span>
+      </template>
+    </b-table>
+    <b-pagination
+      class="paginationapp"
+      :total-rows="totalRows"
+      :per-page="perPage"
+      v-model="currentPage"
+      v-if="totalRows / perPage > 1"
+    />
+  </div>
 </template>
 <script>
 import useVuelidate from "@vuelidate/core";
@@ -50,6 +63,9 @@ export default {
       perPage: 10,
       totalRows: 1,
       filter: "",
+      noLocalSorting: true,
+      sortBy: "date",
+      sortDesc: true,
       success: {
         message: "",
         show: false,
@@ -97,6 +113,8 @@ export default {
       var requestParams = {
         page: this.currentPage,
         limit: this.perPage,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
       };
       if (this.filter !== "") {
         requestParams = Object.assign(requestParams, { filter: this.filter });
@@ -120,6 +138,12 @@ export default {
     },
     getAppointmentId(value) {
       return "V" + value.toString().padStart(3, "0");
+    },
+    sort(ctx) {
+      this.currentPage = 1;
+      this.sortBy = ctx.sortBy;
+      this.sortDesc = ctx.sortDesc;
+      this.fetchAppointments();
     },
   },
   watch: {

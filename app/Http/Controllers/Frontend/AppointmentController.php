@@ -21,7 +21,8 @@ class AppointmentController extends Controller
         if ($request->get('page') !== null && Auth::hasUser()) {
             $limit = $request->get('limit') ?? 10;
             $appointments = Appointment::select(
-                'appointments.*', 'appointment_status.status',
+                'appointments.*',
+                'appointment_status.status',
                 DB::raw('DATE(appointments.time_from) as date'),
                 DB::raw('TIME_FORMAT(TIME(appointments.time_from), "%H:%i") as time'),
                 DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname) as dentist')
@@ -33,11 +34,26 @@ class AppointmentController extends Controller
             if ($request->get('filter') !== null) {
                 $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orderBy('status');
-            } else {
-                $appointments->orderBy('time_from', 'DESC');
+                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
             }
+            /** sort start */
+            $columns = [
+                'id',
+                'dentist',
+                'date',
+                'time',
+                'status'
+            ];
+            if ($request->get('sortBy') !== null && in_array($request->get('sortBy'), $columns)) {
+                $desc = $request->get('sortDesc') == 'true' ? 'DESC' : 'ASC';
+                $appointments->orderBy($request->get('sortBy'), $desc);
+                if ($request->get('sortBy') === 'date') {
+                    $appointments->orderBy('time', $desc);
+                }
+            } else {
+                $appointments->orderBy('appointments.time_from');
+            }
+            /** sort end */
             $pagination = $appointments->paginate($limit)->toArray();
             $appointments = $pagination['data'];
             $total = $pagination['total'];
@@ -93,7 +109,8 @@ class AppointmentController extends Controller
         ];
     }
 
-    protected function getTimeTo($time): string {
+    protected function getTimeTo($time): string
+    {
         $timeExploded = explode(":", $time);
         return ((int)$timeExploded[0] !== 23 ? (int)$timeExploded[0] + 1 : 0) . ":" . $timeExploded[1];
     }
@@ -102,8 +119,10 @@ class AppointmentController extends Controller
     protected function validateStore($post): bool
     {
         $requiredKeys = ['doctor', 'date', 'time'];
-        if (count(array_diff_key($post, $requiredKeys)) !== count($requiredKeys) 
-            || !Auth::hasUser()) {
+        if (
+            count(array_diff_key($post, $requiredKeys)) !== count($requiredKeys)
+            || !Auth::hasUser()
+        ) {
             return false;
         }
 
@@ -121,7 +140,7 @@ class AppointmentController extends Controller
             ->whereBetween('time_from', [$dateTime, $dateTimeTo])
             ->whereBetween('time_to', [$dateTime, $dateTimeTo])
             ->count();
-            
+
         return $scheduleCount > 0 && $appointmentCount === 0;
     }
 }
