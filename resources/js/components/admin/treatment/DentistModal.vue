@@ -107,7 +107,7 @@ export default {
     return {
       modalTitle: "",
       currentPage: 1,
-      perPage: 10,
+      perPage: 5,
       totalRows: 0,
       procedures: [],
       errorToast: {
@@ -158,6 +158,11 @@ export default {
         this.patientId.toString().padStart(3, "0") +
         ") gydymo planas";
     },
+    currentPage: {
+      handler: function (value) {
+        this.fetchTreatments();
+      },
+    },
   },
   created() {
     this.fetchProcedures();
@@ -177,7 +182,7 @@ export default {
         });
     },
     getTreatmentId(value) {
-      return "E" + value.toString().padStart(3, "0");
+      return value !== "" ? "E" + value.toString().padStart(3, "0") : '';
     },
     filterTable() {
       if (this.v$.$validate() && !this.v$.filter.$error) {

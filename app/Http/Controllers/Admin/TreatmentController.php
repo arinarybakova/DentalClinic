@@ -34,9 +34,7 @@ class TreatmentController extends Controller
             }
             $pagination = $treatments->paginate($limit)->toArray();
             $treatments = $pagination['data'];
-            $total = $pagination['total'];
-
-            
+            $total = $pagination['total'];            
         } else {
             $treatments = [];
             $total = 0;

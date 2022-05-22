@@ -40,7 +40,7 @@ export default {
     return {
       modalTitle: "",
       currentPage: 1,
-      perPage: 10,
+      perPage: 5,
       totalRows: 0,
       fields: [
         {
@@ -75,6 +75,11 @@ export default {
         "Paciento (P" +
         this.patientId.toString().padStart(3, "0") +
         ") gydymo planas";
+    },
+    currentPage: {
+      handler: function (value) {
+        this.fetchTreatments();
+      },
     },
   },
   computed: {
