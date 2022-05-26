@@ -97,16 +97,16 @@
     .txt-lg{
         text-align: center;
         padding-top: 5px;
-        padding-bottom: 12px;
+        padding-bottom: 8px;
         color: #2fbab8;
         font-size: 2rem;     
     }
     .mt-4{
-       margin-bottom: 1rem;
+       margin-bottom: 0.8rem !important;
     }
     .txt-lb{
         text-align: center;
-        padding-top: 8px;
+        padding-top: 6px;
         font-size: 1.4rem;
         color: #444;
         font-weight: bold;     
@@ -165,11 +165,11 @@ and (max-width: 1366px) {
 
     .txt-lg{
         padding-top: 5px;
-        padding-bottom: 12px;
+        padding-bottom: 10px;
         font-size: 1.8rem;     
     }
     .mt-4{
-       margin-bottom: 0.8rem;
+       margin-bottom: 0.6rem;
     }
     .txt-lb{
         padding-top: 8px;
@@ -177,7 +177,7 @@ and (max-width: 1366px) {
     }
     .ml-4{
        font-size: 0.9rem;
-       margin-top: 30px !important;
+       margin-top: 20px !important;
     }
 
     .lb-psws{
@@ -204,7 +204,7 @@ and (max-device-width : 1024px)  {
         font-size: 1.6rem;     
     }
     .mt-4{
-       margin-bottom: 0.8rem;
+       margin-bottom: 0.6rem;
     }
     .txt-lb{
         padding-top: 8px;

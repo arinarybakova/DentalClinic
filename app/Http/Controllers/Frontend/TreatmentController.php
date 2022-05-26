@@ -37,7 +37,8 @@ class TreatmentController extends Controller
                 $treatments->where(function ($query) use ($request) {
                     return $query
                         ->where('title', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                        ->orWhere('price', 'LIKE',  '%' . $this->escape_like($request->get('filter')) .  '%');
+                        ->orWhere('price', 'LIKE',  '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('status', 'LIKE',  '%' . $this->escape_like($request->get('filter')) .  '%');
                 });
             }
 
