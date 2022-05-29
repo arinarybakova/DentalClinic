@@ -1,5 +1,11 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
+    <toast
+      type="error"
+      :msg="errorToast.message"
+      :show="errorToast.show"
+      @toastClosed="errorToast.show = false"
+    ></toast>
     <b-button v-b-modal.add-user>Pridėti odontologą</b-button>
     <user-form
       :bus="bus"
@@ -16,6 +22,10 @@ export default {
     return {
       bus: new Vue(),
       formId: "add-user",
+      errorToast: {
+        message: "",
+        show: false,
+      },
     };
   },
   methods: {
@@ -26,8 +36,12 @@ export default {
           this.$bvModal.hide(this.formId);
           this.bus.$emit("resetForm");
         } else {
-          this.errorToast.message =
-            "Atsprašome įvyko klaida, nepavyko pridėti gydytojo";
+          if(response.data.errorMsg) {
+            this.errorToast.message = response.data.errorMsg;
+          } else {
+            this.errorToast.message =
+              "Atsprašome įvyko klaida, nepavyko pridėti gydytojo";
+          }
           this.errorToast.show = true;
         }
       });

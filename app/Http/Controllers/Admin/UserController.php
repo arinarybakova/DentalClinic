@@ -78,6 +78,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $usersWithSameEmailCount = User::where('email', '=', $request->post('email'))->count();
+        if($usersWithSameEmailCount > 0) {
+            return response()->json([
+                'success'   => false,
+                'errorMsg'  => 'Nepavyko pridėti naujos paskyros. Naudotojas su nurodytu el. paštu jau yra užregistruotas sistemoje'
+            ]);
+        }
         try {
             $data = [
                 'usertype'   => config('app.usertype_dentist'),
