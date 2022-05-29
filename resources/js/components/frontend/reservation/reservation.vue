@@ -167,6 +167,10 @@ export default {
       event.preventDefault();
       if (this.v$.$validate() && !this.v$.$error) {
         this.addReservation();
+      } else {
+        this.errorToast.message =
+          "Prašome pasirinkti vizito laiką";
+        this.errorToast.show = true;
       }
     },
     getDate() {
