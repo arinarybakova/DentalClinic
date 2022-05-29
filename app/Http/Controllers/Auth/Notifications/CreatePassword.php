@@ -47,8 +47,6 @@ class CreatePassword extends ResetPassword
             ->line('Jums buvo sukurta paskyra Odontologijos klinikos informacinėje sistemoje.')
             ->action('Slaptažodžio sukūrimo nuoroda', $url)
             ->line('Paspaudus šią nuorodą, būsite nukreiptas į slaptažodio sukūrimo langą.')
-            ->line(Lang::get('Nuoroda galios :count minučių.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line('Likite sveiki,')
-            ->line('Odontologijos klinika');
+            ->line(Lang::get('Nuoroda galios :count minučių.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]));
     }
 }
