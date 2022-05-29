@@ -92,6 +92,7 @@ Route::group(['middleware' => ['is.admin.or.dentist'], 'namespace' => 'Admin', '
     Route::get('/schedules', [ScheduleController::class, 'schedules'])->name('api.admin.schedules');
     Route::post('/schedules/store', [ScheduleController::class, 'store'])->name('api.admin.schedules.store');
     Route::patch('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('api.admin.schedules.update');
+    Route::delete('/schedules/delete/{id}', [ScheduleController::class, 'delete'])->name('api.admin.schedules.delete');
 
     Route::get('/appointments', [AppointmentController::class, 'appointments'])->name('api.admin.appointments');
     Route::post('/appointments/approve/{id}', [AppointmentController::class, 'approve'])->name('api.admin.appointments.approve');

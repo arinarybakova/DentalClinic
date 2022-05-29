@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Schedule;
 use DateTime;
-use Illuminate\Support\Facades\DB;
+use App\Models\Schedule;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
@@ -23,10 +24,10 @@ class ScheduleController extends Controller
     {
         if (isset($request->start)) {
             $dateFrom = date('Y-m-d', strtotime($request->start . " monday this week"));
-            $dateTo = date('Y-m-d', strtotime($request->start . " wednesday next week"));
+            $dateTo = date('Y-m-d', strtotime($request->start . " monday next week"));
         } else {
             $dateFrom = date('Y-m-d', strtotime('monday this week'));
-            $dateTo = date('Y-m-d', strtotime('wednesday next week'));
+            $dateTo = date('Y-m-d', strtotime('monday next week'));
         }
         $query = DB::table('schedule')
             ->join('users', 'users.id', '=', 'schedule.fk_dentist')
@@ -114,5 +115,41 @@ class ScheduleController extends Controller
             'success'   => true,
             'event' => $schedule
         ]);
+    }
+
+    public function delete(int $id) {
+        try {
+            $schedule = Schedule::find($id);
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json([
+                'success'   => false,
+                'errorMsg' => "Nepavyko ištrinti tvarkaraščio, tvarkaraštis nerastas",
+            ]);
+        }
+
+        if($schedule === null) {
+            return response()->json([
+                'success'   => false,
+                'errorMsg' => "Nepavyko ištrinti tvarkaraščio, tvarkaraštis nerastas",
+            ]);
+        }
+
+        $appointmentCount = Appointment::select('time_from', 'time_to')
+            ->where('fk_dentist', '=', $schedule->fk_dentist)
+            ->where('time_from', '>=', $schedule->work_time_from)
+            ->where('time_from', '<=', $schedule->work_time_to)
+            ->count();
+
+        if($appointmentCount === 0) {
+            $schedule->delete();
+            return response()->json([
+                'success'   => true,
+            ]);
+        } else {
+            return response()->json([
+                'success'   => false,
+                'errorMsg' => 'Tvarkaraštis negali būti ištrintas, nes yra aktyvių vizito rezervacijų nurodytu laiku'
+            ]);
+        }
     }
 }

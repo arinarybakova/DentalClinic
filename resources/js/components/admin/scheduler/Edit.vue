@@ -7,6 +7,7 @@
       submitTitle="Išsaugoti"
       :event="event"
       @formSubmit="onSubmit"
+      @eventDelete="eventDelete"
     ></event-form>
   </div>
 </template>
@@ -55,6 +56,9 @@ export default {
         }
       });
     },
+    eventDelete() {
+      this.$emit("eventDeleted");
+    }
   },
 };
 </script>

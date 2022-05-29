@@ -41,6 +41,7 @@
     <edit-event
       @eventUpdated="eventUpdated"
       @eventAdded="eventAdded"
+      @eventDeleted="eventUpdated"
       :event="selectedEvent"
     ></edit-event>
 
