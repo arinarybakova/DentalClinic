@@ -33,6 +33,6 @@ class AppointmentCancelledMail extends Mailable implements ShouldQueue
         $data['visitDate'] = $this->appointment['time_from'] ?? '';
         $data['visitDentist'] = sprintf("%s %s", ($this->appointment['firstname'] ?? ''), ($this->appointment['lastname'] ?? ''));
 
-        return $this->markdown('emails.appointment-cancelled', $data);
+        return $this->markdown('emails.appointment-cancelled', $data)->subject('Pranešimas apie atšauktą vizitą');
     }
 }

@@ -38,6 +38,6 @@ class AppointmentReminderMail extends Mailable implements ShouldQueue
         $appointmentEntity->reminder_sent = true;
         $appointmentEntity->save();
 
-        return $this->markdown('emails.appointment-reminder', $data);
+        return $this->markdown('emails.appointment-reminder', $data)->subject('Priminimas apie būsimą vizitą');
     }
 }
