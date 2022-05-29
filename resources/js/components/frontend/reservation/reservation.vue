@@ -246,7 +246,7 @@ export default {
     fetchAvailableTimes() {
       var url = "/api/front/availableTimes?doctor=" + this.form.doctor;
       url += "&dateFrom=" + this.getDay(1);
-      url += "&dateTo=" + this.getDay(5);
+      url += "&dateTo=" + this.getDay(6);
       this.axios.get(url).then((response) => {
         this.times = response.data;
       });

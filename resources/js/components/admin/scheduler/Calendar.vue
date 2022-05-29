@@ -99,9 +99,11 @@ export default {
     },
     prev() {
       this.$refs.calendar.prev();
+      this.$emit("valueChange", this.value);
     },
     next() {
       this.$refs.calendar.next();
+      this.$emit("valueChange", this.value);
     },
     startDrag({ event, timed }) {
       if (event && timed) {

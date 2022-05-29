@@ -6,6 +6,12 @@
       :show="errorToast.show"
       @toastClosed="errorToast.show = false"
     ></toast>
+    <toast
+      type="success"
+      :msg="successToast.message"
+      :show="successToast.show"
+      @toastClosed="successToast.show = false"
+    ></toast>
 
     <b-modal :id="id" :title="title" centered hide-footer>
       <b-form @submit="onSubmit">
@@ -68,6 +74,7 @@
 
         <form-error :validation="v$.form.timeFrom"></form-error>
 
+        <b-button variant="danger" class="mt-3" v-on:click="deleteEvent()" v-if="form.id != ''">Ištrinti</b-button>
         <b-button type="submit" variant="secondary" class="mt-3">{{
           submitTitle
         }}</b-button>
@@ -106,6 +113,10 @@ export default {
         timeTo: "",
       },
       errorToast: {
+        message: "",
+        show: false,
+      },
+      successToast: {
         message: "",
         show: false,
       },
@@ -209,6 +220,20 @@ export default {
         }
       });
     },
+    deleteEvent() {
+      this.axios.delete('/api/schedules/delete/' + this.form.id)
+        .then((response) => {
+          if(response.data.success) {
+            this.successToast.show = true;
+            this.successToast.message = 'Tvarkaraštis ištrintas';
+            this.$bvModal.hide(this.id);
+            this.$emit("eventDelete");
+          } else if(response.data.errorMsg) {
+            this.errorToast.show = true;
+            this.errorToast.message = response.data.errorMsg;
+          }
+        });
+    }
   },
   watch: {
     event: function (newVal) {
