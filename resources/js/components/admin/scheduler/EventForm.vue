@@ -74,7 +74,7 @@
 
         <form-error :validation="v$.form.timeFrom"></form-error>
 
-        <b-button variant="danger" class="mt-3" v-on:click="deleteEvent()" v-if="form.id != ''">Ištrinti</b-button>
+        <b-button variant="danger" class="button-delete" v-on:click="deleteEvent()" v-if="form.id != ''">Ištrinti</b-button>
         <b-button type="submit" variant="secondary" class="mt-3">{{
           submitTitle
         }}</b-button>
