@@ -1,5 +1,11 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
+    <toast
+      type="error"
+      :msg="errorToast.message"
+      :show="errorToast.show"
+      @toastClosed="errorToast.show = false"
+    ></toast>
     <procedure-form
       :bus="bus"
       :id="formId"
@@ -18,6 +24,10 @@ export default {
     return {
       bus: new Vue(),
       formId: "delete-procedure",
+      errorToast: {
+        message: "",
+        show: false,
+      },
     };
   },
   methods: {
@@ -27,13 +37,17 @@ export default {
         .then((response) => {
           if (response.data.success) {
             this.$emit("procedureDeleted");
-            this.$bvModal.hide(this.formId);
             this.bus.$emit("resetForm");
           } else {
-            this.errorToast.message =
-              "Atsprašome įvyko klaida, nepavyko pridėti procedūros";
+            if(response.data.errorMsg) {
+              this.errorToast.message = response.data.errorMsg;
+            } else {
+              this.errorToast.message =
+                "Atsprašome įvyko klaida, nepavyko pridėti procedūros";
+            }
             this.errorToast.show = true;
           }
+          this.$bvModal.hide(this.formId);
         });
     },
   },

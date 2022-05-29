@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Procedure;
-use App\Models\Appointment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Treatment;
 use Illuminate\Support\Facades\Schema;
 
 
@@ -131,14 +129,29 @@ class ProcedureController extends Controller
     {
         $procedure = Procedure::find($id);
         if ($procedure !== null) {
-            $procedure->delete();
-            return response()->json([
-                'success'   => true
-            ]);
+            if($this->validateDestroy($id)) {
+                $procedure->delete();
+                return response()->json([
+                    'success'   => true
+                ]);
+            } else {
+                return response()->json([
+                    'success'   => false,
+                    'errorMsg'  => 'Nepavyko ištrinti procedūros. Procedūra yra įtraukta į bent vieną paciento gydymo plano etapą'
+                ]);
+            }
         } else {
             return response()->json([
                 'success'   => false
             ]);
         }
+    }
+
+    private function validateDestroy(int $id): bool 
+    {
+        $treatmentStagesCount = Treatment::where('fk_procedure', '=', $id)
+            ->count();
+
+        return $treatmentStagesCount === 0;
     }
 }
