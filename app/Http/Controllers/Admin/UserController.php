@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Closure;
 use App\Models\User;
 use App\Models\Treatment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Password;
@@ -161,10 +162,17 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user !== null) {
-            $user->delete();
-            return response()->json([
-                'success'   => true
-            ]);
+            if($this->validateDestroy($id)) {
+                $user->delete();
+                return response()->json([
+                    'success'   => true
+                ]);
+            } else {
+                return response()->json([
+                    'success'   => false,
+                    'errorMsg'  => 'Nepavyko ištrinti naudotojo, naudotojas turi susietus duomenis'
+                ]);
+            }
         } else {
             return response()->json([
                 'success'   => false
@@ -196,5 +204,28 @@ class UserController extends Controller
             $treatments->orderBy('id');
         }
         return ['treatments' => $treatments];
+    }
+
+    private function validateDestroy(int $id) {
+        $appointmentCount = Appointment::where('fk_patient', '=', $id)
+            ->orWhere('fk_dentist', '=', $id)
+            ->count();
+        if($appointmentCount > 0) {
+            return false;
+        }
+
+        $scheduleCount = Schedule::where('fk_dentist', '=', $id)
+            ->count();
+        if($scheduleCount > 0) {
+            return false;
+        }
+
+        $treatmentsCount = Treatment::where('fk_patient', '=', $id)
+            ->count();
+        if($treatmentsCount > 0) {
+            return false;
+        }
+
+        return true;
     }
 }

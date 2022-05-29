@@ -1,5 +1,11 @@
 <template>
   <div class="w-100 mb-3 d-flex justify-content-end">
+    <toast
+      type="error"
+      :msg="errorToast.message"
+      :show="errorToast.show"
+      @toastClosed="errorToast.show = false"
+    ></toast>
     <user-form
       :bus="bus"
       :id="formId"
@@ -17,6 +23,10 @@ export default {
   data() {
     return {
       bus: new Vue(),
+      errorToast: {
+        message: "",
+        show: false,
+      },
       formId: "delete-user",
     };
   },
@@ -27,13 +37,17 @@ export default {
         .then((response) => {
           if (response.data.success) {
             this.$emit("userDeleted");
-            this.$bvModal.hide(this.formId);
             this.bus.$emit("resetForm");
           } else {
-            this.errorToast.message =
-              "Atsprašome įvyko klaida, nepavyko ištrinti gydytojo";
+            if(response.data.errorMsg) {
+              this.errorToast.message = response.data.errorMsg;
+            } else {
+              this.errorToast.message =
+                "Atsprašome įvyko klaida, nepavyko ištrinti gydytojo";
+            }
             this.errorToast.show = true;
           }
+          this.$bvModal.hide(this.formId);
         });
     },
   },

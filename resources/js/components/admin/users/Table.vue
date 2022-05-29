@@ -250,7 +250,7 @@ export default {
     userDeleted() {
       this.filter = "";
       this.currentPage = 1;
-      this.success.message = "Naudotojas paskyra ištrinta";
+      this.success.message = "Naudotojo paskyra ištrinta";
       this.success.show = true;
       this.fetchUsers();
     },
