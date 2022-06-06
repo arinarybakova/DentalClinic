@@ -271,7 +271,7 @@ export default {
             this.successToast.show = true;
           } else {
             this.errorToast.message =
-              "Atsiprašome įvyko klaida, nepavyko užrezervuoti vizito";
+              "Nepavyko užrezervuoti vizito. Nepasirinktas vizito laikas.";
             this.errorToast.show = true;
           }
           this.fetchAvailableTimes();
