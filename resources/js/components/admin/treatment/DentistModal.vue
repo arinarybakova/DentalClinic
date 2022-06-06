@@ -240,7 +240,7 @@ export default {
         this.fetchTreatments();
         if (!response.data.success) {
           this.errorToast.message =
-            "Nepavyko pridėti gydymo plano etapo. Nepasirinkta procedūr.";
+            "Nepavyko pridėti gydymo plano etapo. Nepasirinkta procedūra.";
           this.errorToast.show = true;
         } else {
           this.success.message = "Etapas sėkmingai pridėtas!";
