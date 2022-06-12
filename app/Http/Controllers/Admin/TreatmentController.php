@@ -55,7 +55,7 @@ class TreatmentController extends Controller
         return [
             'treatments' => $treatments,
             'total' => $total,
-            'totalPrice' => $totalPrice->totalPrice,
+            'totalPrice' => is_int($totalPrice) ? $totalPrice : $totalPrice->totalPrice,
             'isDentist' => $this->isDentist(),
         ];
     }

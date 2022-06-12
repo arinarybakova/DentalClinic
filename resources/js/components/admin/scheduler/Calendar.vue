@@ -90,8 +90,8 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     intervalHeight: 40,
-    maxDays: 5,
-    weekdays: [1, 2, 3, 4, 5],
+    maxDays: 7,
+    weekdays: [1,2,3,4,5, 6, 0],
   }),
   methods: {
     setToday() {
