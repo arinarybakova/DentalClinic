@@ -6,5 +6,6 @@
     "The :attribute must be at least :length characters and contain at least one uppercase character and one special character.": "Slaptažodis turi būti sudarytas iš mažiausiai :length simbolių ir turėti bent vieną didžiąją raidę ir specialų simbolį.",
     "The :attribute must be at least :length characters and contain at least one uppercase character, one number, and one special character.": "Slaptažodis turi būti sudarytas iš mažiausiai :length simbolių ir turėti bent vieną didžiąją raidę, skaičių ir specialų simbolį.",
     "The :attribute must be at least :length characters and contain at least one special character and one number.": "Slaptažodis turi būti sudarytas iš mažiausiai :length simbolių ir turėti bent vieną skaičių ir specialų simbolį.",
-    "The :attribute must be at least :length characters.": "Slaptažodis turi būti sudarytas iš mažiausiai :length simbolių."
+    "The :attribute must be at least :length characters.": "Slaptažodis turi būti sudarytas iš mažiausiai :length simbolių.",
+    "All rights reserved.": ""
 }
