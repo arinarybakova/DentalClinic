@@ -32,9 +32,11 @@ class AppointmentController extends Controller
                 ->where('fk_patient', '=', Auth::user()->id);
 
             if ($request->get('filter') !== null) {
-                $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                $appointments->where(function ($q) use ($request) {
+                    $q->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+                });
             }
             /** sort start */
             $columns = [
@@ -115,7 +117,6 @@ class AppointmentController extends Controller
         return ((int)$timeExploded[0] !== 23 ? (int)$timeExploded[0] + 1 : 0) . ":" . $timeExploded[1];
     }
 
-    /** @todo add validation with other appointments */
     protected function validateStore($post): bool
     {
         $requiredKeys = ['doctor', 'date', 'time'];

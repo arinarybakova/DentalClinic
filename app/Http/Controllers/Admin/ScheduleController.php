@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
-    /**
-     * @todo add schedule remove functionality
-     */
     public function index()
     {
         return view('admin.schedule');

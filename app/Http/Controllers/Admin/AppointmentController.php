@@ -39,11 +39,13 @@ class AppointmentController extends Controller
 
             /** @todo fix filter where clauses when user is dentist */
             if ($request->get('filter') !== null) {
-                $appointments->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
-                    ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+                $appointments->where(function ($q) use ($request) {
+                    $q->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere(DB::raw('CONCAT(patient.firstname, " ", patient.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
+                        ->orWhere('status', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%');
+                });
             }
             $columns = [
                 'id',
