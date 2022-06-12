@@ -36,7 +36,7 @@ class AppointmentController extends Controller
                     $q->where(DB::raw('CONCAT(dentist.firstname, " ", dentist.lastname)'), 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('time_from', 'LIKE', '%' . $this->escape_like($request->get('filter')) .  '%')
                     ->orWhere('status', 'LIKE',  '%' . $this->escape_like($request->get('filter')) .  '%');            
-                }
+                });
             }
                 
             /** sort start */
